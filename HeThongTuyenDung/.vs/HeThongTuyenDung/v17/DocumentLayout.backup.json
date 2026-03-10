@@ -1,0 +1,549 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "C:\\Users\\ADMIN\\OneDrive\\M\u00E1y t\u00EDnh\\HeThongTuyenDung\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{BD92CDD1-6CD1-4E2C-B1DE-C9DB59E29E67}|HeThongTuyenDung\\HeThongTuyenDung.csproj|c:\\users\\admin\\onedrive\\m\u00E1y t\u00EDnh\\hethongtuyendung\\hethongtuyendung\\controllers\\jobcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{BD92CDD1-6CD1-4E2C-B1DE-C9DB59E29E67}|HeThongTuyenDung\\HeThongTuyenDung.csproj|solutionrelative:hethongtuyendung\\controllers\\jobcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{BD92CDD1-6CD1-4E2C-B1DE-C9DB59E29E67}|HeThongTuyenDung\\HeThongTuyenDung.csproj|c:\\users\\admin\\onedrive\\m\u00E1y t\u00EDnh\\hethongtuyendung\\hethongtuyendung\\migrations\\tuyendungdbcontextmodelsnapshot.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{BD92CDD1-6CD1-4E2C-B1DE-C9DB59E29E67}|HeThongTuyenDung\\HeThongTuyenDung.csproj|solutionrelative:hethongtuyendung\\migrations\\tuyendungdbcontextmodelsnapshot.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{BD92CDD1-6CD1-4E2C-B1DE-C9DB59E29E67}|HeThongTuyenDung\\HeThongTuyenDung.csproj|c:\\users\\admin\\onedrive\\m\u00E1y t\u00EDnh\\hethongtuyendung\\hethongtuyendung\\controllers\\accountcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{BD92CDD1-6CD1-4E2C-B1DE-C9DB59E29E67}|HeThongTuyenDung\\HeThongTuyenDung.csproj|solutionrelative:hethongtuyendung\\controllers\\accountcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{BD92CDD1-6CD1-4E2C-B1DE-C9DB59E29E67}|HeThongTuyenDung\\HeThongTuyenDung.csproj|c:\\users\\admin\\onedrive\\m\u00E1y t\u00EDnh\\hethongtuyendung\\hethongtuyendung\\migrations\\20250621190344_initialcreate.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{BD92CDD1-6CD1-4E2C-B1DE-C9DB59E29E67}|HeThongTuyenDung\\HeThongTuyenDung.csproj|solutionrelative:hethongtuyendung\\migrations\\20250621190344_initialcreate.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{BD92CDD1-6CD1-4E2C-B1DE-C9DB59E29E67}|HeThongTuyenDung\\HeThongTuyenDung.csproj|c:\\users\\admin\\onedrive\\m\u00E1y t\u00EDnh\\hethongtuyendung\\hethongtuyendung\\views\\shared\\_layout.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{BD92CDD1-6CD1-4E2C-B1DE-C9DB59E29E67}|HeThongTuyenDung\\HeThongTuyenDung.csproj|solutionrelative:hethongtuyendung\\views\\shared\\_layout.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{BD92CDD1-6CD1-4E2C-B1DE-C9DB59E29E67}|HeThongTuyenDung\\HeThongTuyenDung.csproj|c:\\users\\admin\\onedrive\\m\u00E1y t\u00EDnh\\hethongtuyendung\\hethongtuyendung\\views\\account\\register.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{BD92CDD1-6CD1-4E2C-B1DE-C9DB59E29E67}|HeThongTuyenDung\\HeThongTuyenDung.csproj|solutionrelative:hethongtuyendung\\views\\account\\register.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{BD92CDD1-6CD1-4E2C-B1DE-C9DB59E29E67}|HeThongTuyenDung\\HeThongTuyenDung.csproj|c:\\users\\admin\\onedrive\\m\u00E1y t\u00EDnh\\hethongtuyendung\\hethongtuyendung\\views\\account\\profile.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{BD92CDD1-6CD1-4E2C-B1DE-C9DB59E29E67}|HeThongTuyenDung\\HeThongTuyenDung.csproj|solutionrelative:hethongtuyendung\\views\\account\\profile.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{BD92CDD1-6CD1-4E2C-B1DE-C9DB59E29E67}|HeThongTuyenDung\\HeThongTuyenDung.csproj|c:\\users\\admin\\onedrive\\m\u00E1y t\u00EDnh\\hethongtuyendung\\hethongtuyendung\\views\\account\\login.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{BD92CDD1-6CD1-4E2C-B1DE-C9DB59E29E67}|HeThongTuyenDung\\HeThongTuyenDung.csproj|solutionrelative:hethongtuyendung\\views\\account\\login.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{BD92CDD1-6CD1-4E2C-B1DE-C9DB59E29E67}|HeThongTuyenDung\\HeThongTuyenDung.csproj|c:\\users\\admin\\onedrive\\m\u00E1y t\u00EDnh\\hethongtuyendung\\hethongtuyendung\\controllers\\dashboardcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{BD92CDD1-6CD1-4E2C-B1DE-C9DB59E29E67}|HeThongTuyenDung\\HeThongTuyenDung.csproj|solutionrelative:hethongtuyendung\\controllers\\dashboardcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{BD92CDD1-6CD1-4E2C-B1DE-C9DB59E29E67}|HeThongTuyenDung\\HeThongTuyenDung.csproj|c:\\users\\admin\\onedrive\\m\u00E1y t\u00EDnh\\hethongtuyendung\\hethongtuyendung\\controllers\\homecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{BD92CDD1-6CD1-4E2C-B1DE-C9DB59E29E67}|HeThongTuyenDung\\HeThongTuyenDung.csproj|solutionrelative:hethongtuyendung\\controllers\\homecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{BD92CDD1-6CD1-4E2C-B1DE-C9DB59E29E67}|HeThongTuyenDung\\HeThongTuyenDung.csproj|c:\\users\\admin\\onedrive\\m\u00E1y t\u00EDnh\\hethongtuyendung\\hethongtuyendung\\views\\test\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{BD92CDD1-6CD1-4E2C-B1DE-C9DB59E29E67}|HeThongTuyenDung\\HeThongTuyenDung.csproj|solutionrelative:hethongtuyendung\\views\\test\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{BD92CDD1-6CD1-4E2C-B1DE-C9DB59E29E67}|HeThongTuyenDung\\HeThongTuyenDung.csproj|c:\\users\\admin\\onedrive\\m\u00E1y t\u00EDnh\\hethongtuyendung\\hethongtuyendung\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{BD92CDD1-6CD1-4E2C-B1DE-C9DB59E29E67}|HeThongTuyenDung\\HeThongTuyenDung.csproj|solutionrelative:hethongtuyendung\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{BD92CDD1-6CD1-4E2C-B1DE-C9DB59E29E67}|HeThongTuyenDung\\HeThongTuyenDung.csproj|c:\\users\\admin\\onedrive\\m\u00E1y t\u00EDnh\\hethongtuyendung\\hethongtuyendung\\controllers\\testcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{BD92CDD1-6CD1-4E2C-B1DE-C9DB59E29E67}|HeThongTuyenDung\\HeThongTuyenDung.csproj|solutionrelative:hethongtuyendung\\controllers\\testcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{BD92CDD1-6CD1-4E2C-B1DE-C9DB59E29E67}|HeThongTuyenDung\\HeThongTuyenDung.csproj|c:\\users\\admin\\onedrive\\m\u00E1y t\u00EDnh\\hethongtuyendung\\hethongtuyendung\\views\\dashboard\\_applicationdetails.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{BD92CDD1-6CD1-4E2C-B1DE-C9DB59E29E67}|HeThongTuyenDung\\HeThongTuyenDung.csproj|solutionrelative:hethongtuyendung\\views\\dashboard\\_applicationdetails.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{BD92CDD1-6CD1-4E2C-B1DE-C9DB59E29E67}|HeThongTuyenDung\\HeThongTuyenDung.csproj|c:\\users\\admin\\onedrive\\m\u00E1y t\u00EDnh\\hethongtuyendung\\hethongtuyendung\\views\\dashboard\\manageapplications.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{BD92CDD1-6CD1-4E2C-B1DE-C9DB59E29E67}|HeThongTuyenDung\\HeThongTuyenDung.csproj|solutionrelative:hethongtuyendung\\views\\dashboard\\manageapplications.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{BD92CDD1-6CD1-4E2C-B1DE-C9DB59E29E67}|HeThongTuyenDung\\HeThongTuyenDung.csproj|c:\\users\\admin\\onedrive\\m\u00E1y t\u00EDnh\\hethongtuyendung\\hethongtuyendung\\views\\job\\details.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{BD92CDD1-6CD1-4E2C-B1DE-C9DB59E29E67}|HeThongTuyenDung\\HeThongTuyenDung.csproj|solutionrelative:hethongtuyendung\\views\\job\\details.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{BD92CDD1-6CD1-4E2C-B1DE-C9DB59E29E67}|HeThongTuyenDung\\HeThongTuyenDung.csproj|c:\\users\\admin\\onedrive\\m\u00E1y t\u00EDnh\\hethongtuyendung\\hethongtuyendung\\views\\dashboard\\employerdashboard.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{BD92CDD1-6CD1-4E2C-B1DE-C9DB59E29E67}|HeThongTuyenDung\\HeThongTuyenDung.csproj|solutionrelative:hethongtuyendung\\views\\dashboard\\employerdashboard.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{BD92CDD1-6CD1-4E2C-B1DE-C9DB59E29E67}|HeThongTuyenDung\\HeThongTuyenDung.csproj|c:\\users\\admin\\onedrive\\m\u00E1y t\u00EDnh\\hethongtuyendung\\hethongtuyendung\\views\\job\\search.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{BD92CDD1-6CD1-4E2C-B1DE-C9DB59E29E67}|HeThongTuyenDung\\HeThongTuyenDung.csproj|solutionrelative:hethongtuyendung\\views\\job\\search.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{BD92CDD1-6CD1-4E2C-B1DE-C9DB59E29E67}|HeThongTuyenDung\\HeThongTuyenDung.csproj|c:\\users\\admin\\onedrive\\m\u00E1y t\u00EDnh\\hethongtuyendung\\hethongtuyendung\\views\\job\\savedjobs.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{BD92CDD1-6CD1-4E2C-B1DE-C9DB59E29E67}|HeThongTuyenDung\\HeThongTuyenDung.csproj|solutionrelative:hethongtuyendung\\views\\job\\savedjobs.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{BD92CDD1-6CD1-4E2C-B1DE-C9DB59E29E67}|HeThongTuyenDung\\HeThongTuyenDung.csproj|c:\\users\\admin\\onedrive\\m\u00E1y t\u00EDnh\\hethongtuyendung\\hethongtuyendung\\views\\job\\postjob.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{BD92CDD1-6CD1-4E2C-B1DE-C9DB59E29E67}|HeThongTuyenDung\\HeThongTuyenDung.csproj|solutionrelative:hethongtuyendung\\views\\job\\postjob.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{BD92CDD1-6CD1-4E2C-B1DE-C9DB59E29E67}|HeThongTuyenDung\\HeThongTuyenDung.csproj|c:\\users\\admin\\onedrive\\m\u00E1y t\u00EDnh\\hethongtuyendung\\hethongtuyendung\\views\\job\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{BD92CDD1-6CD1-4E2C-B1DE-C9DB59E29E67}|HeThongTuyenDung\\HeThongTuyenDung.csproj|solutionrelative:hethongtuyendung\\views\\job\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{BD92CDD1-6CD1-4E2C-B1DE-C9DB59E29E67}|HeThongTuyenDung\\HeThongTuyenDung.csproj|c:\\users\\admin\\onedrive\\m\u00E1y t\u00EDnh\\hethongtuyendung\\hethongtuyendung\\models\\tintuyendung.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{BD92CDD1-6CD1-4E2C-B1DE-C9DB59E29E67}|HeThongTuyenDung\\HeThongTuyenDung.csproj|solutionrelative:hethongtuyendung\\models\\tintuyendung.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{BD92CDD1-6CD1-4E2C-B1DE-C9DB59E29E67}|HeThongTuyenDung\\HeThongTuyenDung.csproj|c:\\users\\admin\\onedrive\\m\u00E1y t\u00EDnh\\hethongtuyendung\\hethongtuyendung\\properties\\launchsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
+      "RelativeMoniker": "D:0:0:{BD92CDD1-6CD1-4E2C-B1DE-C9DB59E29E67}|HeThongTuyenDung\\HeThongTuyenDung.csproj|solutionrelative:hethongtuyendung\\properties\\launchsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{BD92CDD1-6CD1-4E2C-B1DE-C9DB59E29E67}|HeThongTuyenDung\\HeThongTuyenDung.csproj|c:\\users\\admin\\onedrive\\m\u00E1y t\u00EDnh\\hethongtuyendung\\hethongtuyendung\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
+      "RelativeMoniker": "D:0:0:{BD92CDD1-6CD1-4E2C-B1DE-C9DB59E29E67}|HeThongTuyenDung\\HeThongTuyenDung.csproj|solutionrelative:hethongtuyendung\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Program Files\\Microsoft Visual Studio\\2022\\Preview\\MSBuild\\Current\\Bin\\amd64\\Microsoft.Common.CurrentVersion.targets||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{BD92CDD1-6CD1-4E2C-B1DE-C9DB59E29E67}|HeThongTuyenDung\\HeThongTuyenDung.csproj|c:\\users\\admin\\onedrive\\m\u00E1y t\u00EDnh\\hethongtuyendung\\hethongtuyendung\\data\\tuyendungdbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{BD92CDD1-6CD1-4E2C-B1DE-C9DB59E29E67}|HeThongTuyenDung\\HeThongTuyenDung.csproj|solutionrelative:hethongtuyendung\\data\\tuyendungdbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{BD92CDD1-6CD1-4E2C-B1DE-C9DB59E29E67}|HeThongTuyenDung\\HeThongTuyenDung.csproj|c:\\users\\admin\\onedrive\\m\u00E1y t\u00EDnh\\hethongtuyendung\\hethongtuyendung\\models\\congty.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{BD92CDD1-6CD1-4E2C-B1DE-C9DB59E29E67}|HeThongTuyenDung\\HeThongTuyenDung.csproj|solutionrelative:hethongtuyendung\\models\\congty.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{BD92CDD1-6CD1-4E2C-B1DE-C9DB59E29E67}|HeThongTuyenDung\\HeThongTuyenDung.csproj|c:\\users\\admin\\onedrive\\m\u00E1y t\u00EDnh\\hethongtuyendung\\hethongtuyendung\\appsettings.development.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
+      "RelativeMoniker": "D:0:0:{BD92CDD1-6CD1-4E2C-B1DE-C9DB59E29E67}|HeThongTuyenDung\\HeThongTuyenDung.csproj|solutionrelative:hethongtuyendung\\appsettings.development.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{BD92CDD1-6CD1-4E2C-B1DE-C9DB59E29E67}|HeThongTuyenDung\\HeThongTuyenDung.csproj|c:\\users\\admin\\onedrive\\m\u00E1y t\u00EDnh\\hethongtuyendung\\hethongtuyendung\\views\\home\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{BD92CDD1-6CD1-4E2C-B1DE-C9DB59E29E67}|HeThongTuyenDung\\HeThongTuyenDung.csproj|solutionrelative:hethongtuyendung\\views\\home\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{BD92CDD1-6CD1-4E2C-B1DE-C9DB59E29E67}|HeThongTuyenDung\\HeThongTuyenDung.csproj|c:\\users\\admin\\onedrive\\m\u00E1y t\u00EDnh\\hethongtuyendung\\hethongtuyendung\\views\\job\\myapplications.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{BD92CDD1-6CD1-4E2C-B1DE-C9DB59E29E67}|HeThongTuyenDung\\HeThongTuyenDung.csproj|solutionrelative:hethongtuyendung\\views\\job\\myapplications.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{BD92CDD1-6CD1-4E2C-B1DE-C9DB59E29E67}|HeThongTuyenDung\\HeThongTuyenDung.csproj|c:\\users\\admin\\onedrive\\m\u00E1y t\u00EDnh\\hethongtuyendung\\hethongtuyendung\\models\\donungtuyen.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{BD92CDD1-6CD1-4E2C-B1DE-C9DB59E29E67}|HeThongTuyenDung\\HeThongTuyenDung.csproj|solutionrelative:hethongtuyendung\\models\\donungtuyen.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\ADMIN\\source\\repos\\HeThongTuyenDung\\HeThongTuyenDung\\Migrations\\20250621114640_v2.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{BD92CDD1-6CD1-4E2C-B1DE-C9DB59E29E67}|HeThongTuyenDung\\HeThongTuyenDung.csproj|c:\\users\\admin\\onedrive\\m\u00E1y t\u00EDnh\\hethongtuyendung\\hethongtuyendung\\hethongtuyendung.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|",
+      "RelativeMoniker": "D:0:0:{BD92CDD1-6CD1-4E2C-B1DE-C9DB59E29E67}|HeThongTuyenDung\\HeThongTuyenDung.csproj|solutionrelative:hethongtuyendung\\hethongtuyendung.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 5,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "TuyenDungDbContextModelSnapshot.cs",
+              "DocumentMoniker": "C:\\Users\\ADMIN\\OneDrive\\M\u00E1y t\u00EDnh\\HeThongTuyenDung\\HeThongTuyenDung\\Migrations\\TuyenDungDbContextModelSnapshot.cs",
+              "RelativeDocumentMoniker": "HeThongTuyenDung\\Migrations\\TuyenDungDbContextModelSnapshot.cs",
+              "ToolTip": "C:\\Users\\ADMIN\\OneDrive\\M\u00E1y t\u00EDnh\\HeThongTuyenDung\\HeThongTuyenDung\\Migrations\\TuyenDungDbContextModelSnapshot.cs",
+              "RelativeToolTip": "HeThongTuyenDung\\Migrations\\TuyenDungDbContextModelSnapshot.cs",
+              "ViewState": "AgIAAHoAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-22T01:35:32.951Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "_Layout.cshtml",
+              "DocumentMoniker": "C:\\Users\\ADMIN\\OneDrive\\M\u00E1y t\u00EDnh\\HeThongTuyenDung\\HeThongTuyenDung\\Views\\Shared\\_Layout.cshtml",
+              "RelativeDocumentMoniker": "HeThongTuyenDung\\Views\\Shared\\_Layout.cshtml",
+              "ToolTip": "C:\\Users\\ADMIN\\OneDrive\\M\u00E1y t\u00EDnh\\HeThongTuyenDung\\HeThongTuyenDung\\Views\\Shared\\_Layout.cshtml",
+              "RelativeToolTip": "HeThongTuyenDung\\Views\\Shared\\_Layout.cshtml",
+              "ViewState": "AgIAAMwAAAAAAAAAAAAwwNMAAABLAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-06-22T01:27:49.941Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 14,
+              "Title": "ManageApplications.cshtml",
+              "DocumentMoniker": "C:\\Users\\ADMIN\\OneDrive\\M\u00E1y t\u00EDnh\\HeThongTuyenDung\\HeThongTuyenDung\\Views\\Dashboard\\ManageApplications.cshtml",
+              "RelativeDocumentMoniker": "HeThongTuyenDung\\Views\\Dashboard\\ManageApplications.cshtml",
+              "ToolTip": "C:\\Users\\ADMIN\\OneDrive\\M\u00E1y t\u00EDnh\\HeThongTuyenDung\\HeThongTuyenDung\\Views\\Dashboard\\ManageApplications.cshtml",
+              "RelativeToolTip": "HeThongTuyenDung\\Views\\Dashboard\\ManageApplications.cshtml",
+              "ViewState": "AgIAAG0CAAAAAAAAAAAvwH4CAAAhAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-06-21T22:43:11.603Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "AccountController.cs",
+              "DocumentMoniker": "C:\\Users\\ADMIN\\OneDrive\\M\u00E1y t\u00EDnh\\HeThongTuyenDung\\HeThongTuyenDung\\Controllers\\AccountController.cs",
+              "RelativeDocumentMoniker": "HeThongTuyenDung\\Controllers\\AccountController.cs",
+              "ToolTip": "C:\\Users\\ADMIN\\OneDrive\\M\u00E1y t\u00EDnh\\HeThongTuyenDung\\HeThongTuyenDung\\Controllers\\AccountController.cs",
+              "RelativeToolTip": "HeThongTuyenDung\\Controllers\\AccountController.cs",
+              "ViewState": "AgIAANEAAAAAAAAAAAAiwOsAAAACAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-21T21:21:07.655Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "Login.cshtml",
+              "DocumentMoniker": "C:\\Users\\ADMIN\\OneDrive\\M\u00E1y t\u00EDnh\\HeThongTuyenDung\\HeThongTuyenDung\\Views\\Account\\Login.cshtml",
+              "RelativeDocumentMoniker": "HeThongTuyenDung\\Views\\Account\\Login.cshtml",
+              "ToolTip": "C:\\Users\\ADMIN\\OneDrive\\M\u00E1y t\u00EDnh\\HeThongTuyenDung\\HeThongTuyenDung\\Views\\Account\\Login.cshtml",
+              "RelativeToolTip": "HeThongTuyenDung\\Views\\Account\\Login.cshtml",
+              "ViewState": "AgIAAFoBAAAAAAAAAAAwwHQBAAAjAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-06-21T18:20:55.624Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "JobController.cs",
+              "DocumentMoniker": "C:\\Users\\ADMIN\\OneDrive\\M\u00E1y t\u00EDnh\\HeThongTuyenDung\\HeThongTuyenDung\\Controllers\\JobController.cs",
+              "RelativeDocumentMoniker": "HeThongTuyenDung\\Controllers\\JobController.cs",
+              "ToolTip": "C:\\Users\\ADMIN\\OneDrive\\M\u00E1y t\u00EDnh\\HeThongTuyenDung\\HeThongTuyenDung\\Controllers\\JobController.cs",
+              "RelativeToolTip": "HeThongTuyenDung\\Controllers\\JobController.cs",
+              "ViewState": "AgIAAMkCAAAAAAAAAAAAAN8CAAAuAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-21T14:27:13.383Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "20250621190344_InitialCreate.cs",
+              "DocumentMoniker": "C:\\Users\\ADMIN\\OneDrive\\M\u00E1y t\u00EDnh\\HeThongTuyenDung\\HeThongTuyenDung\\Migrations\\20250621190344_InitialCreate.cs",
+              "RelativeDocumentMoniker": "HeThongTuyenDung\\Migrations\\20250621190344_InitialCreate.cs",
+              "ToolTip": "C:\\Users\\ADMIN\\OneDrive\\M\u00E1y t\u00EDnh\\HeThongTuyenDung\\HeThongTuyenDung\\Migrations\\20250621190344_InitialCreate.cs",
+              "RelativeToolTip": "HeThongTuyenDung\\Migrations\\20250621190344_InitialCreate.cs",
+              "ViewState": "AgIAAFgBAAAAAAAAAAAAACMBAABTAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-22T01:31:02.894Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 9,
+              "Title": "HomeController.cs",
+              "DocumentMoniker": "C:\\Users\\ADMIN\\OneDrive\\M\u00E1y t\u00EDnh\\HeThongTuyenDung\\HeThongTuyenDung\\Controllers\\HomeController.cs",
+              "RelativeDocumentMoniker": "HeThongTuyenDung\\Controllers\\HomeController.cs",
+              "ToolTip": "C:\\Users\\ADMIN\\OneDrive\\M\u00E1y t\u00EDnh\\HeThongTuyenDung\\HeThongTuyenDung\\Controllers\\HomeController.cs",
+              "RelativeToolTip": "HeThongTuyenDung\\Controllers\\HomeController.cs",
+              "ViewState": "AgIAAAcAAAAAAAAAAAAmwA4AAAAJAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-22T00:42:19.534Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 8,
+              "Title": "DashboardController.cs",
+              "DocumentMoniker": "C:\\Users\\ADMIN\\OneDrive\\M\u00E1y t\u00EDnh\\HeThongTuyenDung\\HeThongTuyenDung\\Controllers\\DashboardController.cs",
+              "RelativeDocumentMoniker": "HeThongTuyenDung\\Controllers\\DashboardController.cs",
+              "ToolTip": "C:\\Users\\ADMIN\\OneDrive\\M\u00E1y t\u00EDnh\\HeThongTuyenDung\\HeThongTuyenDung\\Controllers\\DashboardController.cs",
+              "RelativeToolTip": "HeThongTuyenDung\\Controllers\\DashboardController.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-22T00:42:18.047Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "Profile.cshtml",
+              "DocumentMoniker": "C:\\Users\\ADMIN\\OneDrive\\M\u00E1y t\u00EDnh\\HeThongTuyenDung\\HeThongTuyenDung\\Views\\Account\\Profile.cshtml",
+              "RelativeDocumentMoniker": "HeThongTuyenDung\\Views\\Account\\Profile.cshtml",
+              "ToolTip": "C:\\Users\\ADMIN\\OneDrive\\M\u00E1y t\u00EDnh\\HeThongTuyenDung\\HeThongTuyenDung\\Views\\Account\\Profile.cshtml",
+              "RelativeToolTip": "HeThongTuyenDung\\Views\\Account\\Profile.cshtml",
+              "ViewState": "AgIAAOgBAAAAAAAAAIAwwPEBAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-06-21T18:21:02.925Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "Register.cshtml",
+              "DocumentMoniker": "C:\\Users\\ADMIN\\OneDrive\\M\u00E1y t\u00EDnh\\HeThongTuyenDung\\HeThongTuyenDung\\Views\\Account\\Register.cshtml",
+              "RelativeDocumentMoniker": "HeThongTuyenDung\\Views\\Account\\Register.cshtml",
+              "ToolTip": "C:\\Users\\ADMIN\\OneDrive\\M\u00E1y t\u00EDnh\\HeThongTuyenDung\\HeThongTuyenDung\\Views\\Account\\Register.cshtml",
+              "RelativeToolTip": "HeThongTuyenDung\\Views\\Account\\Register.cshtml",
+              "ViewState": "AgIAAA8AAAAAAAAAAAAAAKoAAAAWAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-06-21T18:21:09.192Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 17,
+              "Title": "Search.cshtml",
+              "DocumentMoniker": "C:\\Users\\ADMIN\\OneDrive\\M\u00E1y t\u00EDnh\\HeThongTuyenDung\\HeThongTuyenDung\\Views\\Job\\Search.cshtml",
+              "RelativeDocumentMoniker": "HeThongTuyenDung\\Views\\Job\\Search.cshtml",
+              "ToolTip": "C:\\Users\\ADMIN\\OneDrive\\M\u00E1y t\u00EDnh\\HeThongTuyenDung\\HeThongTuyenDung\\Views\\Job\\Search.cshtml",
+              "RelativeToolTip": "HeThongTuyenDung\\Views\\Job\\Search.cshtml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-06-21T22:03:42.689Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 18,
+              "Title": "SavedJobs.cshtml",
+              "DocumentMoniker": "C:\\Users\\ADMIN\\OneDrive\\M\u00E1y t\u00EDnh\\HeThongTuyenDung\\HeThongTuyenDung\\Views\\Job\\SavedJobs.cshtml",
+              "RelativeDocumentMoniker": "HeThongTuyenDung\\Views\\Job\\SavedJobs.cshtml",
+              "ToolTip": "C:\\Users\\ADMIN\\OneDrive\\M\u00E1y t\u00EDnh\\HeThongTuyenDung\\HeThongTuyenDung\\Views\\Job\\SavedJobs.cshtml",
+              "RelativeToolTip": "HeThongTuyenDung\\Views\\Job\\SavedJobs.cshtml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-06-21T22:03:41.714Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 11,
+              "Title": "Program.cs",
+              "DocumentMoniker": "C:\\Users\\ADMIN\\OneDrive\\M\u00E1y t\u00EDnh\\HeThongTuyenDung\\HeThongTuyenDung\\Program.cs",
+              "RelativeDocumentMoniker": "HeThongTuyenDung\\Program.cs",
+              "ToolTip": "C:\\Users\\ADMIN\\OneDrive\\M\u00E1y t\u00EDnh\\HeThongTuyenDung\\HeThongTuyenDung\\Program.cs",
+              "RelativeToolTip": "HeThongTuyenDung\\Program.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAACIBAAAkAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-21T12:04:16.16Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 12,
+              "Title": "TestController.cs",
+              "DocumentMoniker": "C:\\Users\\ADMIN\\OneDrive\\M\u00E1y t\u00EDnh\\HeThongTuyenDung\\HeThongTuyenDung\\Controllers\\TestController.cs",
+              "RelativeDocumentMoniker": "HeThongTuyenDung\\Controllers\\TestController.cs",
+              "ToolTip": "C:\\Users\\ADMIN\\OneDrive\\M\u00E1y t\u00EDnh\\HeThongTuyenDung\\HeThongTuyenDung\\Controllers\\TestController.cs",
+              "RelativeToolTip": "HeThongTuyenDung\\Controllers\\TestController.cs",
+              "ViewState": "AgIAADUAAAAAAAAAAAAwwCIAAAANAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-22T00:42:21.046Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 10,
+              "Title": "Index.cshtml",
+              "DocumentMoniker": "C:\\Users\\ADMIN\\OneDrive\\M\u00E1y t\u00EDnh\\HeThongTuyenDung\\HeThongTuyenDung\\Views\\Test\\Index.cshtml",
+              "RelativeDocumentMoniker": "HeThongTuyenDung\\Views\\Test\\Index.cshtml",
+              "ToolTip": "C:\\Users\\ADMIN\\OneDrive\\M\u00E1y t\u00EDnh\\HeThongTuyenDung\\HeThongTuyenDung\\Views\\Test\\Index.cshtml",
+              "RelativeToolTip": "HeThongTuyenDung\\Views\\Test\\Index.cshtml",
+              "ViewState": "AgIAADECAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-06-22T00:48:33.13Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 19,
+              "Title": "PostJob.cshtml",
+              "DocumentMoniker": "C:\\Users\\ADMIN\\OneDrive\\M\u00E1y t\u00EDnh\\HeThongTuyenDung\\HeThongTuyenDung\\Views\\Job\\PostJob.cshtml",
+              "RelativeDocumentMoniker": "HeThongTuyenDung\\Views\\Job\\PostJob.cshtml",
+              "ToolTip": "C:\\Users\\ADMIN\\OneDrive\\M\u00E1y t\u00EDnh\\HeThongTuyenDung\\HeThongTuyenDung\\Views\\Job\\PostJob.cshtml",
+              "RelativeToolTip": "HeThongTuyenDung\\Views\\Job\\PostJob.cshtml",
+              "ViewState": "AgIAAEIAAAAAAAAAAIAwwFAAAAApAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-06-21T14:32:48.757Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 25,
+              "Title": "TuyenDungDbContext.cs",
+              "DocumentMoniker": "C:\\Users\\ADMIN\\OneDrive\\M\u00E1y t\u00EDnh\\HeThongTuyenDung\\HeThongTuyenDung\\Data\\TuyenDungDbContext.cs",
+              "RelativeDocumentMoniker": "HeThongTuyenDung\\Data\\TuyenDungDbContext.cs",
+              "ToolTip": "C:\\Users\\ADMIN\\OneDrive\\M\u00E1y t\u00EDnh\\HeThongTuyenDung\\HeThongTuyenDung\\Data\\TuyenDungDbContext.cs",
+              "RelativeToolTip": "HeThongTuyenDung\\Data\\TuyenDungDbContext.cs",
+              "ViewState": "AgIAADcAAAAAAAAAAADwvxcAAAAaAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-21T10:58:49.024Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 26,
+              "Title": "CongTy.cs",
+              "DocumentMoniker": "C:\\Users\\ADMIN\\OneDrive\\M\u00E1y t\u00EDnh\\HeThongTuyenDung\\HeThongTuyenDung\\Models\\CongTy.cs",
+              "RelativeDocumentMoniker": "HeThongTuyenDung\\Models\\CongTy.cs",
+              "ToolTip": "C:\\Users\\ADMIN\\OneDrive\\M\u00E1y t\u00EDnh\\HeThongTuyenDung\\HeThongTuyenDung\\Models\\CongTy.cs",
+              "RelativeToolTip": "HeThongTuyenDung\\Models\\CongTy.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-21T11:33:57.138Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 13,
+              "Title": "_ApplicationDetails.cshtml",
+              "DocumentMoniker": "C:\\Users\\ADMIN\\OneDrive\\M\u00E1y t\u00EDnh\\HeThongTuyenDung\\HeThongTuyenDung\\Views\\Dashboard\\_ApplicationDetails.cshtml",
+              "RelativeDocumentMoniker": "HeThongTuyenDung\\Views\\Dashboard\\_ApplicationDetails.cshtml",
+              "ToolTip": "C:\\Users\\ADMIN\\OneDrive\\M\u00E1y t\u00EDnh\\HeThongTuyenDung\\HeThongTuyenDung\\Views\\Dashboard\\_ApplicationDetails.cshtml",
+              "RelativeToolTip": "HeThongTuyenDung\\Views\\Dashboard\\_ApplicationDetails.cshtml",
+              "ViewState": "AgIAADQAAAAAAAAAAIAwwEIAAAAeAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-06-21T22:43:35.86Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 15,
+              "Title": "Details.cshtml",
+              "DocumentMoniker": "C:\\Users\\ADMIN\\OneDrive\\M\u00E1y t\u00EDnh\\HeThongTuyenDung\\HeThongTuyenDung\\Views\\Job\\Details.cshtml",
+              "RelativeDocumentMoniker": "HeThongTuyenDung\\Views\\Job\\Details.cshtml",
+              "ToolTip": "C:\\Users\\ADMIN\\OneDrive\\M\u00E1y t\u00EDnh\\HeThongTuyenDung\\HeThongTuyenDung\\Views\\Job\\Details.cshtml",
+              "RelativeToolTip": "HeThongTuyenDung\\Views\\Job\\Details.cshtml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABAAAAAlAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-06-21T22:03:37.266Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 16,
+              "Title": "EmployerDashboard.cshtml",
+              "DocumentMoniker": "C:\\Users\\ADMIN\\OneDrive\\M\u00E1y t\u00EDnh\\HeThongTuyenDung\\HeThongTuyenDung\\Views\\Dashboard\\EmployerDashboard.cshtml",
+              "RelativeDocumentMoniker": "HeThongTuyenDung\\Views\\Dashboard\\EmployerDashboard.cshtml",
+              "ToolTip": "C:\\Users\\ADMIN\\OneDrive\\M\u00E1y t\u00EDnh\\HeThongTuyenDung\\HeThongTuyenDung\\Views\\Dashboard\\EmployerDashboard.cshtml",
+              "RelativeToolTip": "HeThongTuyenDung\\Views\\Dashboard\\EmployerDashboard.cshtml",
+              "ViewState": "AgIAADYAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-06-21T22:04:08.732Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 20,
+              "Title": "Index.cshtml",
+              "DocumentMoniker": "C:\\Users\\ADMIN\\OneDrive\\M\u00E1y t\u00EDnh\\HeThongTuyenDung\\HeThongTuyenDung\\Views\\Job\\Index.cshtml",
+              "RelativeDocumentMoniker": "HeThongTuyenDung\\Views\\Job\\Index.cshtml",
+              "ToolTip": "C:\\Users\\ADMIN\\OneDrive\\M\u00E1y t\u00EDnh\\HeThongTuyenDung\\HeThongTuyenDung\\Views\\Job\\Index.cshtml",
+              "RelativeToolTip": "HeThongTuyenDung\\Views\\Job\\Index.cshtml",
+              "ViewState": "AgIAAHQCAAAAAAAAAAAAAHQCAAAJAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-06-21T12:23:29.756Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 27,
+              "Title": "appsettings.Development.json",
+              "DocumentMoniker": "C:\\Users\\ADMIN\\OneDrive\\M\u00E1y t\u00EDnh\\HeThongTuyenDung\\HeThongTuyenDung\\appsettings.Development.json",
+              "RelativeDocumentMoniker": "HeThongTuyenDung\\appsettings.Development.json",
+              "ToolTip": "C:\\Users\\ADMIN\\OneDrive\\M\u00E1y t\u00EDnh\\HeThongTuyenDung\\HeThongTuyenDung\\appsettings.Development.json",
+              "RelativeToolTip": "HeThongTuyenDung\\appsettings.Development.json",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
+              "WhenOpened": "2025-06-21T21:20:33.55Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 21,
+              "Title": "TinTuyenDung.cs",
+              "DocumentMoniker": "C:\\Users\\ADMIN\\OneDrive\\M\u00E1y t\u00EDnh\\HeThongTuyenDung\\HeThongTuyenDung\\Models\\TinTuyenDung.cs",
+              "RelativeDocumentMoniker": "HeThongTuyenDung\\Models\\TinTuyenDung.cs",
+              "ToolTip": "C:\\Users\\ADMIN\\OneDrive\\M\u00E1y t\u00EDnh\\HeThongTuyenDung\\HeThongTuyenDung\\Models\\TinTuyenDung.cs",
+              "RelativeToolTip": "HeThongTuyenDung\\Models\\TinTuyenDung.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA8AAAAbAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-21T14:38:40.765Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 22,
+              "Title": "launchSettings.json",
+              "DocumentMoniker": "C:\\Users\\ADMIN\\OneDrive\\M\u00E1y t\u00EDnh\\HeThongTuyenDung\\HeThongTuyenDung\\Properties\\launchSettings.json",
+              "RelativeDocumentMoniker": "HeThongTuyenDung\\Properties\\launchSettings.json",
+              "ToolTip": "C:\\Users\\ADMIN\\OneDrive\\M\u00E1y t\u00EDnh\\HeThongTuyenDung\\HeThongTuyenDung\\Properties\\launchSettings.json",
+              "RelativeToolTip": "HeThongTuyenDung\\Properties\\launchSettings.json",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAgAAAAFAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
+              "WhenOpened": "2025-06-21T21:21:29.562Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 24,
+              "Title": "Microsoft.Common.CurrentVersion.targets",
+              "DocumentMoniker": "C:\\Program Files\\Microsoft Visual Studio\\2022\\Preview\\MSBuild\\Current\\Bin\\amd64\\Microsoft.Common.CurrentVersion.targets",
+              "RelativeDocumentMoniker": "..\\..\\..\\..\\..\\Program Files\\Microsoft Visual Studio\\2022\\Preview\\MSBuild\\Current\\Bin\\amd64\\Microsoft.Common.CurrentVersion.targets",
+              "ToolTip": "C:\\Program Files\\Microsoft Visual Studio\\2022\\Preview\\MSBuild\\Current\\Bin\\amd64\\Microsoft.Common.CurrentVersion.targets",
+              "RelativeToolTip": "..\\..\\..\\..\\..\\Program Files\\Microsoft Visual Studio\\2022\\Preview\\MSBuild\\Current\\Bin\\amd64\\Microsoft.Common.CurrentVersion.targets",
+              "ViewState": "AgIAAOkUAAAAAAAAAAArwPYUAAALAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003801|",
+              "WhenOpened": "2025-06-21T11:25:41.922Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 23,
+              "Title": "appsettings.json",
+              "DocumentMoniker": "C:\\Users\\ADMIN\\OneDrive\\M\u00E1y t\u00EDnh\\HeThongTuyenDung\\HeThongTuyenDung\\appsettings.json",
+              "RelativeDocumentMoniker": "HeThongTuyenDung\\appsettings.json",
+              "ToolTip": "C:\\Users\\ADMIN\\OneDrive\\M\u00E1y t\u00EDnh\\HeThongTuyenDung\\HeThongTuyenDung\\appsettings.json",
+              "RelativeToolTip": "HeThongTuyenDung\\appsettings.json",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAsAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
+              "WhenOpened": "2025-06-21T10:52:35.631Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 28,
+              "Title": "Index.cshtml",
+              "DocumentMoniker": "C:\\Users\\ADMIN\\OneDrive\\M\u00E1y t\u00EDnh\\HeThongTuyenDung\\HeThongTuyenDung\\Views\\Home\\Index.cshtml",
+              "RelativeDocumentMoniker": "HeThongTuyenDung\\Views\\Home\\Index.cshtml",
+              "ToolTip": "C:\\Users\\ADMIN\\OneDrive\\M\u00E1y t\u00EDnh\\HeThongTuyenDung\\HeThongTuyenDung\\Views\\Home\\Index.cshtml",
+              "RelativeToolTip": "HeThongTuyenDung\\Views\\Home\\Index.cshtml",
+              "ViewState": "AgIAAJACAAAAAAAAAIAwwNICAAAFAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-06-21T20:40:57.183Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 29,
+              "Title": "MyApplications.cshtml",
+              "DocumentMoniker": "C:\\Users\\ADMIN\\OneDrive\\M\u00E1y t\u00EDnh\\HeThongTuyenDung\\HeThongTuyenDung\\Views\\Job\\MyApplications.cshtml",
+              "RelativeDocumentMoniker": "HeThongTuyenDung\\Views\\Job\\MyApplications.cshtml",
+              "ToolTip": "C:\\Users\\ADMIN\\OneDrive\\M\u00E1y t\u00EDnh\\HeThongTuyenDung\\HeThongTuyenDung\\Views\\Job\\MyApplications.cshtml",
+              "RelativeToolTip": "HeThongTuyenDung\\Views\\Job\\MyApplications.cshtml",
+              "ViewState": "AgIAAGAAAAAAAAAAAAAewG8AAAB8AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-06-21T14:30:46.383Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 30,
+              "Title": "DonUngTuyen.cs",
+              "DocumentMoniker": "C:\\Users\\ADMIN\\OneDrive\\M\u00E1y t\u00EDnh\\HeThongTuyenDung\\HeThongTuyenDung\\Models\\DonUngTuyen.cs",
+              "RelativeDocumentMoniker": "HeThongTuyenDung\\Models\\DonUngTuyen.cs",
+              "ToolTip": "C:\\Users\\ADMIN\\OneDrive\\M\u00E1y t\u00EDnh\\HeThongTuyenDung\\HeThongTuyenDung\\Models\\DonUngTuyen.cs",
+              "RelativeToolTip": "HeThongTuyenDung\\Models\\DonUngTuyen.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAUAAAAcAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-21T14:30:20.2Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 32,
+              "Title": "HeThongTuyenDung.csproj",
+              "DocumentMoniker": "C:\\Users\\ADMIN\\OneDrive\\M\u00E1y t\u00EDnh\\HeThongTuyenDung\\HeThongTuyenDung\\HeThongTuyenDung.csproj",
+              "RelativeDocumentMoniker": "HeThongTuyenDung\\HeThongTuyenDung.csproj",
+              "ToolTip": "C:\\Users\\ADMIN\\OneDrive\\M\u00E1y t\u00EDnh\\HeThongTuyenDung\\HeThongTuyenDung\\HeThongTuyenDung.csproj",
+              "RelativeToolTip": "HeThongTuyenDung\\HeThongTuyenDung.csproj",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAgAAAANAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000758|",
+              "WhenOpened": "2025-06-21T11:00:03.433Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 31,
+              "Title": "20250621114640_v2.cs",
+              "DocumentMoniker": "C:\\Users\\ADMIN\\source\\repos\\HeThongTuyenDung\\HeThongTuyenDung\\Migrations\\20250621114640_v2.cs",
+              "RelativeDocumentMoniker": "..\\..\\..\\source\\repos\\HeThongTuyenDung\\HeThongTuyenDung\\Migrations\\20250621114640_v2.cs",
+              "ToolTip": "C:\\Users\\ADMIN\\source\\repos\\HeThongTuyenDung\\HeThongTuyenDung\\Migrations\\20250621114640_v2.cs",
+              "RelativeToolTip": "..\\..\\..\\source\\repos\\HeThongTuyenDung\\HeThongTuyenDung\\Migrations\\20250621114640_v2.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-06-21T11:46:41.017Z"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

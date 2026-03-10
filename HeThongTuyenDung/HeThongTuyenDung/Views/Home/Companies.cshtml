@@ -1,0 +1,105 @@
+@model IEnumerable<HeThongTuyenDung.Models.CongTy>
+@{
+    ViewData["Title"] = "Danh sách công ty";
+}
+
+
+<!-- Spacer for fixed navbar -->
+<div style="height: 80px;"></div>
+
+<section class="py-5 bg-light">
+    <div class="container">
+        <div class="row mb-4">
+            <div class="col-12 text-center">
+                <h2 class="mb-3">
+                    <i class="fas fa-building text-primary me-2"></i>Các công ty nổi bật
+                </h2>
+                <p class="text-muted">
+                    Khám phá các doanh nghiệp đang tham gia tuyển dụng trên JOB NOW và tìm hiểu thêm về họ.
+                </p>
+            </div>
+        </div>
+
+        @if (Model != null && Model.Any())
+        {
+            <div class="row g-4">
+                @foreach (var company in Model)
+                {
+                    var jobsCount = company.TinTuyenDungs?.Count(t => t.TrangThai) ?? 0;
+                    <div class="col-md-6 col-lg-4">
+                        <div class="card h-100 shadow-sm border-0">
+                            <div class="card-body">
+                                <div class="d-flex align-items-center mb-3">
+                                    <div class="company-logo rounded-circle bg-primary text-white d-flex align-items-center justify-content-center me-3" style="width: 56px; height: 56px;">
+                                        <span class="fw-bold">
+                                            @(company.TenCongTy.Substring(0, Math.Min(2, company.TenCongTy.Length)).ToUpper())
+                                        </span>
+                                    </div>
+                                    <div>
+                                        <h5 class="card-title mb-1">@company.TenCongTy</h5>
+                                        <small class="text-muted">
+                                            <i class="fas fa-map-marker-alt me-1"></i>@(company.ThanhPho ?? "Không rõ địa điểm")
+                                        </small>
+                                    </div>
+                                </div>
+                                @if (!string.IsNullOrEmpty(company.MoTaNgan))
+                                {
+                                    <p class="card-text text-muted">@company.MoTaNgan</p>
+                                }
+                                else if (!string.IsNullOrEmpty(company.LinhVuc))
+                                {
+                                    <p class="card-text text-muted">Lĩnh vực: @company.LinhVuc</p>
+                                }
+
+                                <ul class="list-unstyled small text-muted mb-3">
+                                    @if (!string.IsNullOrEmpty(company.QuyMo))
+                                    {
+                                        <li class="mb-1">
+                                            <i class="fas fa-users me-1 text-primary"></i>Quy mô: @company.QuyMo
+                                        </li>
+                                    }
+                                    @if (!string.IsNullOrEmpty(company.Website))
+                                    {
+                                        <li class="mb-1">
+                                            <i class="fas fa-globe me-1 text-success"></i>Website:
+                                            <a href="@company.Website" target="_blank" class="text-decoration-none">@company.Website</a>
+                                        </li>
+                                    }
+                                    @if (!string.IsNullOrEmpty(company.Email))
+                                    {
+                                        <li class="mb-1">
+                                            <i class="fas fa-envelope me-1 text-info"></i>@company.Email
+                                        </li>
+                                    }
+                                </ul>
+                            </div>
+                            <div class="card-footer bg-white border-0 pt-0 pb-3 px-3">
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <small class="text-muted">
+                                        <i class="fas fa-briefcase me-1"></i>@jobsCount tin tuyển dụng
+                                    </small>
+                                    <a asp-controller="Job"
+                                       asp-action="Search"
+                                       asp-route-location="@company.ThanhPho"
+                                       class="btn btn-outline-primary btn-sm">
+                                        <i class="fas fa-search me-1"></i>Xem việc làm
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                }
+            </div>
+        }
+        else
+        {
+            <div class="text-center py-5">
+                <i class="fas fa-building fa-4x text-muted mb-3"></i>
+                <h4 class="text-muted">Chưa có công ty nào</h4>
+                <p class="text-muted">Các doanh nghiệp sẽ sớm xuất hiện tại đây.</p>
+            </div>
+        }
+    </div>
+    </section>
+
+

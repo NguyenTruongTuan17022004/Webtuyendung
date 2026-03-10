@@ -1,0 +1,775 @@
+@model IEnumerable<HeThongTuyenDung.Models.DonUngTuyen>
+
+@{
+    ViewData["Title"] = "Quản lý ứng viên";
+}
+
+<div class="container-fluid">
+    <!-- Header -->
+    <div class="row mb-4">
+        <div class="col-12">
+            <div class="d-flex justify-content-between align-items-center">
+                <div>
+                    <h2 class="mb-1">
+                        <i class="fas fa-users text-primary me-2"></i>
+                        Quản lý ứng viên
+                    </h2>
+                    <p class="text-muted mb-0">Quản lý các đơn ứng tuyển cho tin tuyển dụng của bạn</p>
+                </div>
+                <div class="d-flex gap-2">
+                    <a href="@Url.Action("EmployerDashboard", "Dashboard")" class="btn btn-outline-secondary">
+                        <i class="fas fa-arrow-left me-2"></i>
+                        Quay lại Dashboard
+                    </a>
+                    <a href="@Url.Action("PostJob", "Job")" class="btn btn-primary">
+                        <i class="fas fa-plus me-2"></i>
+                        Đăng tin mới
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    @if (TempData["Success"] != null)
+    {
+        <div class="alert alert-success alert-dismissible fade show" role="alert">
+            <i class="fas fa-check-circle me-2"></i>
+            @TempData["Success"]
+            <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+        </div>
+    }
+
+    @if (TempData["Error"] != null)
+    {
+        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+            <i class="fas fa-exclamation-circle me-2"></i>
+            @TempData["Error"]
+            <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+        </div>
+    }
+
+    <!-- Filters -->
+    <div class="card border-0 shadow-sm mb-4">
+        <div class="card-body">
+            <form method="get" class="row g-3">
+                <div class="col-md-4">
+                    <label for="jobId" class="form-label">Lọc theo tin tuyển dụng</label>
+                    <select class="form-select" id="jobId" name="jobId">
+                        <option value="">Tất cả tin tuyển dụng</option>
+                        @if (ViewBag.Jobs != null)
+                        {
+                            @foreach (var job in ViewBag.Jobs)
+                            {
+                                <option value="@job.MaTin" selected="@(ViewBag.SelectedJobId == job.MaTin)">
+                                    @job.TieuDe
+                                </option>
+                            }
+                        }
+                    </select>
+                </div>
+                <div class="col-md-3">
+                    <label for="status" class="form-label">Trạng thái</label>
+                    <select class="form-select" id="status" name="status">
+                        <option value="">Tất cả trạng thái</option>
+                        <option value="Chờ xử lý" selected="@(ViewBag.SelectedStatus == "Chờ xử lý")">Chờ xử lý</option>
+                        <option value="Chấp nhận" selected="@(ViewBag.SelectedStatus == "Chấp nhận")">Chấp nhận</option>
+                        <option value="Từ chối" selected="@(ViewBag.SelectedStatus == "Từ chối")">Từ chối</option>
+                        <option value="Phỏng vấn" selected="@(ViewBag.SelectedStatus == "Phỏng vấn")">Phỏng vấn</option>
+                    </select>
+                </div>
+                <div class="col-md-3">
+                    <label for="dateFrom" class="form-label">Từ ngày</label>
+                    <input type="date" class="form-control" id="dateFrom" name="dateFrom" value="@ViewBag.SelectedDateFrom">
+                </div>
+                <div class="col-md-2">
+                    <label class="form-label">&nbsp;</label>
+                    <div class="d-grid gap-2">
+                        <button type="submit" class="btn btn-primary">
+                            <i class="fas fa-search me-2"></i>
+                            Lọc
+                        </button>
+                        <a href="@Url.Action("ManageApplications", "Dashboard")" class="btn btn-outline-secondary">
+                            <i class="fas fa-times me-2"></i>
+                            Xóa bộ lọc
+                        </a>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Statistics -->
+    <div class="row g-4 mb-4">
+        <div class="col-xl-3 col-md-6">
+            <div class="card border-0 shadow-sm">
+                <div class="card-body">
+                    <div class="d-flex align-items-center">
+                        <div class="flex-shrink-0">
+                            <div class="bg-primary bg-opacity-10 rounded p-3">
+                                <i class="fas fa-users text-primary fa-2x"></i>
+                            </div>
+                        </div>
+                        <div class="flex-grow-1 ms-3">
+                            <h4 class="mb-1">@ViewBag.TotalApplications</h4>
+                            <p class="text-muted mb-0">Tổng đơn ứng tuyển</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-xl-3 col-md-6">
+            <div class="card border-0 shadow-sm">
+                <div class="card-body">
+                    <div class="d-flex align-items-center">
+                        <div class="flex-shrink-0">
+                            <div class="bg-warning bg-opacity-10 rounded p-3">
+                                <i class="fas fa-clock text-warning fa-2x"></i>
+                            </div>
+                        </div>
+                        <div class="flex-grow-1 ms-3">
+                            <h4 class="mb-1">@ViewBag.PendingApplications</h4>
+                            <p class="text-muted mb-0">Chờ xử lý</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-xl-3 col-md-6">
+            <div class="card border-0 shadow-sm">
+                <div class="card-body">
+                    <div class="d-flex align-items-center">
+                        <div class="flex-shrink-0">
+                            <div class="bg-info bg-opacity-10 rounded p-3">
+                                <i class="fas fa-envelope text-info fa-2x"></i>
+                            </div>
+                        </div>
+                        <div class="flex-grow-1 ms-3">
+                            <h4 class="mb-1">@ViewBag.UnreadApplications</h4>
+                            <p class="text-muted mb-0">Chưa xem</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-xl-3 col-md-6">
+            <div class="card border-0 shadow-sm">
+                <div class="card-body">
+                    <div class="d-flex align-items-center">
+                        <div class="flex-shrink-0">
+                            <div class="bg-success bg-opacity-10 rounded p-3">
+                                <i class="fas fa-check-circle text-success fa-2x"></i>
+                            </div>
+                        </div>
+                        <div class="flex-grow-1 ms-3">
+                            <h4 class="mb-1">@Model.Count(a => a.TrangThai == "Chấp nhận")</h4>
+                            <p class="text-muted mb-0">Được chấp nhận</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Applications List -->
+    <div class="card border-0 shadow-sm">
+        <div class="card-header bg-transparent border-0">
+            <div class="d-flex justify-content-between align-items-center">
+                <h5 class="mb-0">
+                    <i class="fas fa-list text-primary me-2"></i>
+                    Danh sách đơn ứng tuyển
+                </h5>
+                <div class="d-flex gap-2">
+                    <button class="btn btn-sm btn-outline-success" onclick="exportToExcel()">
+                        <i class="fas fa-file-excel me-2"></i>
+                        Xuất Excel
+                    </button>
+                    <button class="btn btn-sm btn-outline-info" onclick="printApplications()">
+                        <i class="fas fa-print me-2"></i>
+                        In danh sách
+                    </button>
+                </div>
+            </div>
+        </div>
+        <div class="card-body">
+            @if (Model.Any())
+            {
+                <div class="table-responsive">
+                    <table class="table table-hover" id="applicationsTable">
+                        <thead class="table-light">
+                            <tr>
+                                <th>
+                                    <input type="checkbox" class="form-check-input" id="selectAll">
+                                </th>
+                                <th>Ứng viên</th>
+                                <th>Vị trí ứng tuyển</th>
+                                <th>Ngày ứng tuyển</th>
+                                <th>Trạng thái</th>
+                                <th>CV</th>
+                                <th>Thao tác</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var application in Model)
+                            {
+                                <tr class="@(!application.DaXem ? "table-warning" : "")">
+                                    <td>
+                                        <input type="checkbox" class="form-check-input application-checkbox" value="@application.MaDon">
+                                    </td>
+                                    <td>
+                                        <div class="d-flex align-items-center">
+                                            <div class="avatar bg-primary bg-opacity-10 rounded-circle d-flex align-items-center justify-content-center me-3" style="width: 40px; height: 40px;">
+                                                <i class="fas fa-user text-primary"></i>
+                                            </div>
+                                            <div>
+                                                <h6 class="mb-0">
+                                                    @application.NguoiDung.HoTen
+                                                    @if (!application.DaXem)
+                                                    {
+                                                        <span class="badge bg-danger ms-2">Mới</span>
+                                                    }
+                                                    @if (ViewBag.MatchScores != null && ViewBag.MatchScores.ContainsKey(application.MaDon))
+                                                    {
+                                                        <span class="badge bg-success ms-2">
+                                                            <i class="fas fa-percentage me-1"></i>Phù hợp: @ViewBag.MatchScores[application.MaDon]%
+                                                        </span>
+                                                    }
+                                                </h6>
+                                                <small class="text-muted">@application.NguoiDung.Email</small>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div>
+                                            <h6 class="mb-1">
+                                                <a href="@Url.Action("Details", "Job", new { id = application.TinTuyenDung.MaTin })" class="text-decoration-none">
+                                                    @application.TinTuyenDung.TieuDe
+                                                </a>
+                                            </h6>
+                                            <small class="text-muted">@(application.TinTuyenDung.CongTy?.TenCongTy ?? "Không xác định")</small>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div>
+                                            <div class="fw-bold">@application.NgayUngTuyen.ToString("dd/MM/yyyy")</div>
+                                            <small class="text-muted">@GetTimeAgo(application.NgayUngTuyen)</small>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <span class="badge @GetStatusBadgeClass(application.TrangThai)">
+                                            @GetStatusText(application.TrangThai)
+                                        </span>
+                                    </td>
+                                    <td>
+                                        @if (!string.IsNullOrEmpty(application.DuongDanCV))
+                                        {
+                                            <a href="@Url.Content(application.DuongDanCV)" target="_blank" class="btn btn-sm btn-outline-primary">
+                                                <i class="fas fa-download me-1"></i>
+                                                Xem CV
+                                            </a>
+                                        }
+                                        else
+                                        {
+                                            <span class="text-muted">Không có CV</span>
+                                        }
+                                    </td>
+                                    <td>
+                                        <div class="btn-group" role="group">
+                                            <button type="button" class="btn btn-sm btn-outline-primary dropdown-toggle" data-bs-toggle="dropdown">
+                                                <i class="fas fa-cog"></i>
+                                            </button>
+                                            <ul class="dropdown-menu">
+                                                <li>
+                                                    <a class="dropdown-item" href="#" onclick="viewApplicationDetails(@application.MaDon)">
+                                                        <i class="fas fa-eye me-2"></i>
+                                                        Xem chi tiết
+                                                    </a>
+                                                </li>
+                                                @if (!application.DaXem)
+                                                {
+                                                    <li>
+                                                        <a class="dropdown-item text-info" href="#" onclick="markAsRead(@application.MaDon)">
+                                                            <i class="fas fa-check-double me-2"></i>
+                                                            Đánh dấu đã xem
+                                                        </a>
+                                                    </li>
+                                                }
+                                                @if (application.TrangThai == "Chờ xử lý")
+                                                {
+                                                    <li>
+                                                        <a class="dropdown-item text-success" href="#" onclick="updateStatus(@application.MaDon, 'Chấp nhận')">
+                                                            <i class="fas fa-check me-2"></i>
+                                                            Chấp nhận
+                                                        </a>
+                                                    </li>
+                                                    <li>
+                                                        <a class="dropdown-item text-danger" href="#" onclick="updateStatus(@application.MaDon, 'Từ chối')">
+                                                            <i class="fas fa-times me-2"></i>
+                                                            Từ chối
+                                                        </a>
+                                                    </li>
+                                                    <li>
+                                                        <a class="dropdown-item text-info" href="#" onclick="updateStatus(@application.MaDon, 'Phỏng vấn')">
+                                                            <i class="fas fa-calendar me-2"></i>
+                                                            Mời phỏng vấn
+                                                        </a>
+                                                    </li>
+                                                }
+                                                <li><hr class="dropdown-divider"></li>
+                                                <li>
+                                                    <a class="dropdown-item text-primary" href="#" onclick="sendMessage(@application.MaDon)">
+                                                        <i class="fas fa-envelope me-2"></i>
+                                                        Gửi tin nhắn
+                                                    </a>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+
+                <!-- Bulk Actions -->
+                <div class="mt-3 p-3 bg-light rounded">
+                    <div class="d-flex justify-content-between align-items-center">
+                        <div>
+                            <span class="text-muted">Đã chọn <span id="selectedCount">0</span> ứng viên</span>
+                        </div>
+                        <div class="d-flex gap-2">
+                            @if (ViewBag.UnreadApplications > 0)
+                            {
+                                <button class="btn btn-sm btn-info" onclick="markAllAsRead()">
+                                    <i class="fas fa-check-double me-2"></i>
+                                    Đánh dấu tất cả đã xem
+                                </button>
+                            }
+                            <button class="btn btn-sm btn-success" onclick="bulkUpdateStatus('Chấp nhận')" disabled id="bulkAcceptBtn">
+                                <i class="fas fa-check me-2"></i>
+                                Chấp nhận tất cả
+                            </button>
+                            <button class="btn btn-sm btn-danger" onclick="bulkUpdateStatus('Từ chối')" disabled id="bulkRejectBtn">
+                                <i class="fas fa-times me-2"></i>
+                                Từ chối tất cả
+                            </button>
+                            <button class="btn btn-sm btn-info" onclick="bulkUpdateStatus('Phỏng vấn')" disabled id="bulkInterviewBtn">
+                                <i class="fas fa-calendar me-2"></i>
+                                Mời phỏng vấn
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            }
+            else
+            {
+                <div class="text-center py-5">
+                    <i class="fas fa-users fa-3x text-muted mb-3"></i>
+                    <h4 class="text-muted">Chưa có đơn ứng tuyển nào</h4>
+                    <p class="text-muted mb-4">Hãy đăng tin tuyển dụng để nhận đơn ứng tuyển từ ứng viên!</p>
+                    <a href="@Url.Action("PostJob", "Job")" class="btn btn-primary">
+                        <i class="fas fa-plus me-2"></i>
+                        Đăng tin tuyển dụng
+                    </a>
+                </div>
+            }
+        </div>
+    </div>
+</div>
+
+<!-- Application Details Modal -->
+<div class="modal fade" id="applicationDetailsModal" tabindex="-1">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">
+                    <i class="fas fa-user text-primary me-2"></i>
+                    Chi tiết ứng viên
+                </h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+            <div class="modal-body" id="applicationDetailsContent">
+                <!-- Content will be loaded here -->
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Đóng</button>
+                <button type="button" class="btn btn-primary" onclick="scheduleInterview()">
+                    <i class="fas fa-calendar me-2"></i>
+                    Lên lịch phỏng vấn
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+// Select all functionality
+document.getElementById('selectAll').addEventListener('change', function() {
+    const checkboxes = document.querySelectorAll('.application-checkbox');
+    checkboxes.forEach(checkbox => {
+        checkbox.checked = this.checked;
+    });
+    updateSelectedCount();
+});
+
+// Update selected count
+document.querySelectorAll('.application-checkbox').forEach(checkbox => {
+    checkbox.addEventListener('change', updateSelectedCount);
+});
+
+function updateSelectedCount() {
+    const selectedCount = document.querySelectorAll('.application-checkbox:checked').length;
+    document.getElementById('selectedCount').textContent = selectedCount;
+    
+    const bulkButtons = ['bulkAcceptBtn', 'bulkRejectBtn', 'bulkInterviewBtn'];
+    bulkButtons.forEach(btnId => {
+        document.getElementById(btnId).disabled = selectedCount === 0;
+    });
+}
+
+// Update application status
+function updateStatus(applicationId, status) {
+    if (confirm(`Bạn có chắc chắn muốn ${GetStatusText(status).toLowerCase()} đơn ứng tuyển này?`)) {
+        const form = document.createElement('form');
+        form.method = 'POST';
+        form.action = '@Url.Action("UpdateApplicationStatus", "Dashboard")';
+        
+        const applicationIdInput = document.createElement('input');
+        applicationIdInput.type = 'hidden';
+        applicationIdInput.name = 'applicationId';
+        applicationIdInput.value = applicationId;
+        
+        const statusInput = document.createElement('input');
+        statusInput.type = 'hidden';
+        statusInput.name = 'status';
+        statusInput.value = status;
+        
+        const tokenInput = document.createElement('input');
+        tokenInput.type = 'hidden';
+        tokenInput.name = '__RequestVerificationToken';
+        tokenInput.value = document.querySelector('input[name="__RequestVerificationToken"]').value;
+        
+        form.appendChild(applicationIdInput);
+        form.appendChild(statusInput);
+        form.appendChild(tokenInput);
+        
+        document.body.appendChild(form);
+        form.submit();
+    }
+}
+
+// Bulk update status
+function bulkUpdateStatus(status) {
+    const selectedIds = Array.from(document.querySelectorAll('.application-checkbox:checked'))
+        .map(checkbox => checkbox.value);
+    
+    if (selectedIds.length === 0) {
+        alert('Vui lòng chọn ít nhất một ứng viên!');
+        return;
+    }
+    
+    if (confirm(`Bạn có chắc chắn muốn ${GetStatusText(status).toLowerCase()} ${selectedIds.length} đơn ứng tuyển đã chọn?`)) {
+        const form = document.createElement('form');
+        form.method = 'POST';
+        form.action = '@Url.Action("BulkUpdateStatus", "Dashboard")';
+        
+        const applicationIdsInput = document.createElement('input');
+        applicationIdsInput.type = 'hidden';
+        applicationIdsInput.name = 'applicationIds';
+        applicationIdsInput.value = selectedIds.join(',');
+        
+        const statusInput = document.createElement('input');
+        statusInput.type = 'hidden';
+        statusInput.name = 'status';
+        statusInput.value = status;
+        
+        const tokenInput = document.createElement('input');
+        tokenInput.type = 'hidden';
+        tokenInput.name = '__RequestVerificationToken';
+        tokenInput.value = document.querySelector('input[name="__RequestVerificationToken"]').value;
+        
+        form.appendChild(applicationIdsInput);
+        form.appendChild(statusInput);
+        form.appendChild(tokenInput);
+        
+        document.body.appendChild(form);
+        form.submit();
+    }
+}
+
+// View application details
+function viewApplicationDetails(applicationId) {
+    fetch(`@Url.Action("GetApplicationDetails", "Dashboard")/${applicationId}`)
+        .then(response => response.text())
+        .then(html => {
+            document.getElementById('applicationDetailsContent').innerHTML = html;
+            document.getElementById('applicationDetailsContent').setAttribute('data-application-id', applicationId);
+            new bootstrap.Modal(document.getElementById('applicationDetailsModal')).show();
+        })
+        .catch(error => {
+            console.error('Error:', error);
+            alert('Có lỗi xảy ra khi tải thông tin ứng viên');
+        });
+}
+
+// Mark as read
+function markAsRead(applicationId) {
+    if (confirm('Đánh dấu đã xem đơn ứng tuyển này?')) {
+        const form = document.createElement('form');
+        form.method = 'POST';
+        form.action = '@Url.Action("MarkAsRead", "Dashboard")';
+        
+        const applicationIdInput = document.createElement('input');
+        applicationIdInput.type = 'hidden';
+        applicationIdInput.name = 'applicationId';
+        applicationIdInput.value = applicationId;
+        
+        const tokenInput = document.createElement('input');
+        tokenInput.type = 'hidden';
+        tokenInput.name = '__RequestVerificationToken';
+        tokenInput.value = document.querySelector('input[name="__RequestVerificationToken"]').value;
+        
+        form.appendChild(applicationIdInput);
+        form.appendChild(tokenInput);
+        
+        document.body.appendChild(form);
+        form.submit();
+    }
+}
+
+// Mark all as read
+function markAllAsRead() {
+    if (confirm('Đánh dấu tất cả đơn ứng tuyển đã xem?')) {
+        const form = document.createElement('form');
+        form.method = 'POST';
+        form.action = '@Url.Action("MarkAllAsRead", "Dashboard")';
+        
+        const tokenInput = document.createElement('input');
+        tokenInput.type = 'hidden';
+        tokenInput.name = '__RequestVerificationToken';
+        tokenInput.value = document.querySelector('input[name="__RequestVerificationToken"]').value;
+        
+        form.appendChild(tokenInput);
+        
+        document.body.appendChild(form);
+        form.submit();
+    }
+}
+
+// Send message to candidate
+function sendMessage(applicationId) {
+    const message = prompt('Nhập nội dung tin nhắn:');
+    if (message && message.trim()) {
+        const form = document.createElement('form');
+        form.method = 'POST';
+        form.action = '@Url.Action("SendMessage", "Dashboard")';
+        
+        const applicationIdInput = document.createElement('input');
+        applicationIdInput.type = 'hidden';
+        applicationIdInput.name = 'applicationId';
+        applicationIdInput.value = applicationId;
+        
+        const messageInput = document.createElement('input');
+        messageInput.type = 'hidden';
+        messageInput.name = 'message';
+        messageInput.value = message;
+        
+        const tokenInput = document.createElement('input');
+        tokenInput.type = 'hidden';
+        tokenInput.name = '__RequestVerificationToken';
+        tokenInput.value = document.querySelector('input[name="__RequestVerificationToken"]').value;
+        
+        form.appendChild(applicationIdInput);
+        form.appendChild(messageInput);
+        form.appendChild(tokenInput);
+        
+        document.body.appendChild(form);
+        form.submit();
+    }
+}
+
+// Schedule interview
+function scheduleInterview() {
+    const interviewDate = prompt('Nhập ngày phỏng vấn (dd/MM/yyyy HH:mm):');
+    if (interviewDate) {
+        const location = prompt('Nhập địa điểm phỏng vấn:');
+        const notes = prompt('Nhập ghi chú (tùy chọn):');
+        
+        if (location) {
+            const form = document.createElement('form');
+            form.method = 'POST';
+            form.action = '@Url.Action("ScheduleInterview", "Dashboard")';
+            
+            const applicationIdInput = document.createElement('input');
+            applicationIdInput.type = 'hidden';
+            applicationIdInput.name = 'applicationId';
+            applicationIdInput.value = document.querySelector('#applicationDetailsContent').getAttribute('data-application-id');
+            
+            const interviewDateInput = document.createElement('input');
+            interviewDateInput.type = 'hidden';
+            interviewDateInput.name = 'interviewDate';
+            interviewDateInput.value = interviewDate;
+            
+            const locationInput = document.createElement('input');
+            locationInput.type = 'hidden';
+            locationInput.name = 'location';
+            locationInput.value = location;
+            
+            const notesInput = document.createElement('input');
+            notesInput.type = 'hidden';
+            notesInput.name = 'notes';
+            notesInput.value = notes || '';
+            
+            const tokenInput = document.createElement('input');
+            tokenInput.type = 'hidden';
+            tokenInput.name = '__RequestVerificationToken';
+            tokenInput.value = document.querySelector('input[name="__RequestVerificationToken"]').value;
+            
+            form.appendChild(applicationIdInput);
+            form.appendChild(interviewDateInput);
+            form.appendChild(locationInput);
+            form.appendChild(notesInput);
+            form.appendChild(tokenInput);
+            
+            document.body.appendChild(form);
+            form.submit();
+        }
+    }
+}
+
+// Export to Excel
+function exportToExcel() {
+    const jobId = document.getElementById('jobId').value;
+    const status = document.getElementById('status').value;
+    
+    let url = '@Url.Action("ExportApplications", "Dashboard")?';
+    if (jobId) url += `jobId=${jobId}&`;
+    if (status) url += `status=${status}`;
+    
+    window.location.href = url;
+}
+
+// Print applications
+function printApplications() {
+    window.print();
+}
+
+// Helper function to get status text
+function GetStatusText(status) {
+    const statusMap = {
+        'Chờ xử lý': 'Chờ xử lý',
+        'Chấp nhận': 'Được chấp nhận',
+        'Từ chối': 'Bị từ chối',
+        'Phỏng vấn': 'Mời phỏng vấn'
+    };
+    return statusMap[status] || status;
+}
+
+// Helper function to get time ago
+function getTimeAgo(dateTime) {
+    const now = new Date();
+    const diff = now - new Date(dateTime);
+    const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+    const hours = Math.floor(diff / (1000 * 60 * 60));
+    const minutes = Math.floor(diff / (1000 * 60));
+    
+    if (days > 0) {
+        return `${days} ngày trước`;
+    } else if (hours > 0) {
+        return `${hours} giờ trước`;
+    } else if (minutes > 0) {
+        return `${minutes} phút trước`;
+    } else {
+        return 'Vừa xong';
+    }
+}
+</script>
+
+<style>
+.avatar {
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.table th {
+    font-weight: 600;
+    background-color: #f8f9fa;
+}
+
+.application-checkbox:checked {
+    background-color: #0d6efd;
+    border-color: #0d6efd;
+}
+
+@@media print {
+    .btn, .dropdown, .card-header, .alert {
+        display: none !important;
+    }
+    
+    .card {
+        border: none !important;
+        box-shadow: none !important;
+    }
+}
+</style>
+
+@functions {
+    private string GetStatusBadgeClass(string status)
+    {
+        return status switch
+        {
+            "Chờ xử lý" => "bg-warning text-dark",
+            "Chấp nhận" => "bg-success",
+            "Từ chối" => "bg-danger",
+            "Phỏng vấn" => "bg-info",
+            _ => "bg-secondary"
+        };
+    }
+
+    private string GetStatusText(string status)
+    {
+        return status switch
+        {
+            "Chờ xử lý" => "Chờ xử lý",
+            "Chấp nhận" => "Được chấp nhận",
+            "Từ chối" => "Bị từ chối",
+            "Phỏng vấn" => "Mời phỏng vấn",
+            _ => status
+        };
+    }
+
+    private string GetTimeAgo(DateTime dateTime)
+    {
+        var timeSpan = DateTime.Now - dateTime;
+        
+        if (timeSpan.TotalDays >= 1)
+        {
+            var days = (int)timeSpan.TotalDays;
+            if (days == 1)
+                return "1 ngày trước";
+            else if (days < 7)
+                return $"{days} ngày trước";
+            else
+                return dateTime.ToString("dd/MM/yyyy");
+        }
+        else if (timeSpan.TotalHours >= 1)
+        {
+            var hours = (int)timeSpan.TotalHours;
+            return $"{hours} giờ trước";
+        }
+        else if (timeSpan.TotalMinutes >= 1)
+        {
+            var minutes = (int)timeSpan.TotalMinutes;
+            return $"{minutes} phút trước";
+        }
+        else
+        {
+            return "Vừa xong";
+        }
+    }
+} 

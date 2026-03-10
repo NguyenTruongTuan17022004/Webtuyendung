@@ -1,0 +1,452 @@
+@model HeThongTuyenDung.Models.HomeViewModel
+@{
+    ViewData["Title"] = "JOB NOW - Trang chủ";
+}
+
+<!-- Hero Section -->
+<section class="hero-section d-flex align-items-center position-relative" style="min-height: 85vh;">
+    <div class="hero-bg"></div>
+    <div class="hero-shape bg-primary" style="width: 500px; height: 500px; top: -100px; right: -100px; opacity: 0.1;"></div>
+    <div class="hero-shape bg-secondary" style="width: 300px; height: 300px; bottom: 50px; left: -50px; opacity: 0.1;"></div>
+    
+    <div class="container position-relative z-1">
+        <div class="row align-items-center">
+            <div class="col-lg-6 mb-5 mb-lg-0 animate-fade-in">
+                <div class="badge bg-primary bg-opacity-10 text-primary mb-3 px-3 py-2 rounded-pill fw-bold">
+                    <i class="fas fa-rocket me-2"></i>Nền tảng tuyển dụng #1 Việt Nam
+                </div>
+                <h1 class="display-3 fw-bold mb-4" style="line-height: 1.2;">
+                    Tìm kiếm <span class="text-gradient">công việc</span><br>
+                    mơ ước của bạn
+                </h1>
+                <p class="lead text-muted mb-5" style="font-size: 1.25rem;">
+                    Khám phá hàng nghìn cơ hội việc làm hấp dẫn từ các doanh nghiệp công nghệ hàng đầu. Kết nối, ứng tuyển và phát triển sự nghiệp.
+                </p>
+                
+                <div class="bg-white p-2 rounded-xl shadow-lg d-flex flex-wrap flex-md-nowrap align-items-center gap-2 mb-4 border">
+                    <div class="flex-grow-1 position-relative">
+                        <i class="fas fa-search position-absolute top-50 start-0 translate-middle-y ms-3 text-muted"></i>
+                        <input type="text" class="form-control border-0 bg-transparent ps-5" placeholder="Bạn đang tìm việc gì?" style="height: 50px;">
+                    </div>
+                    <div class="d-none d-md-block border-start h-50 mx-2"></div>
+                    <div class="flex-grow-1 position-relative">
+                         <i class="fas fa-map-marker-alt position-absolute top-50 start-0 translate-middle-y ms-3 text-muted"></i>
+                        <select class="form-control border-0 bg-transparent ps-5" style="height: 50px;">
+                            <option value="">Tất cả địa điểm</option>
+                            <option value="Hà Nội">Hà Nội</option>
+                            <option value="TP. Hồ Chí Minh">Hồ Chí Minh</option>
+                        </select>
+                    </div>
+                    <a href="@Url.Action("Search", "Job")" class="btn btn-primary btn-lg px-4 rounded-lg">
+                        Tìm kiếm
+                    </a>
+                </div>
+                
+                <div class="d-flex align-items-center gap-4 text-muted small fw-medium">
+                    <span><i class="fas fa-check-circle text-success me-2"></i>Đã kiểm duyệt</span>
+                    <span><i class="fas fa-check-circle text-success me-2"></i>Kết nối trực tiếp</span>
+                    <span><i class="fas fa-check-circle text-success me-2"></i>Phản hồi nhanh</span>
+                </div>
+            </div>
+            
+            <div class="col-lg-6 text-center position-relative">
+                 <div class="position-relative d-inline-block">
+                    <!-- Abstract Image representation using CSS/Icons since we can't use real images -->
+                    <div class="bg-white p-4 rounded-2xl shadow-premium position-relative z-2" style="border-radius: 2rem; transform: rotate(-2deg);">
+                        <div class="bg-light rounded-xl p-5 d-flex align-items-center justify-content-center" style="width: 400px; height: 300px;">
+                            <div class="text-center">
+                                <div class="bg-primary bg-opacity-10 p-4 rounded-circle d-inline-flex mb-4">
+                                    <i class="fas fa-briefcase fa-4x text-primary"></i>
+                                </div>
+                                <h4 class="fw-bold mb-2">3000+ Việc làm</h4>
+                                <p class="text-muted mb-0">Đang chờ bạn khám phá</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Floating Cards -->
+                    <div class="position-absolute top-0 end-0 translate-middle-y bg-white p-3 rounded-lg shadow-lg d-flex align-items-center gap-3 animate-fade-in" style="animation-delay: 0.2s;">
+                        <div class="bg-success bg-opacity-10 p-2 rounded-circle text-success">
+                            <i class="fas fa-check fa-lg"></i>
+                        </div>
+                        <div>
+                            <h6 class="mb-0 fw-bold">Đã ứng tuyển</h6>
+                            <small class="text-muted">Vừa xong</small>
+                        </div>
+                    </div>
+                    
+                     <div class="position-absolute bottom-0 start-0 translate-middle-x bg-white p-3 rounded-lg shadow-lg d-flex align-items-center gap-3 animate-fade-in" style="animation-delay: 0.4s;">
+                        <div class="bg-warning bg-opacity-10 p-2 rounded-circle text-warning">
+                            <i class="fas fa-star fa-lg"></i>
+                        </div>
+                        <div>
+                            <h6 class="mb-0 fw-bold">Công ty Hot</h6>
+                            <small class="text-muted">Đánh giá 5.0</small>
+                        </div>
+                    </div>
+                 </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Stats Section -->
+<section class="py-5 bg-white border-bottom">
+    <div class="container">
+        <div class="row align-items-center justify-content-center text-center gy-4">
+            <div class="col-md-3 col-6">
+                <h2 class="fw-bolder display-5 text-primary mb-1">@Model.TotalJobs.ToString("N0")</h2>
+                <p class="text-muted fw-medium">Việc làm đang tuyển</p>
+            </div>
+            <div class="col-md-3 col-6 border-start border-end-0 border-md-end-0">
+                 <h2 class="fw-bolder display-5 text-secondary mb-1">@Model.TotalCompanies.ToString("N0")</h2>
+                <p class="text-muted fw-medium">Doanh nghiệp</p>
+            </div>
+            <div class="col-md-3 col-6 border-end-0 border-md-start">
+                 <h2 class="fw-bolder display-5 text-danger mb-1">@Model.TotalCandidates.ToString("N0")</h2>
+                <p class="text-muted fw-medium">Ứng viên</p>
+            </div>
+             <div class="col-md-3 col-6 border-start">
+                 <h2 class="fw-bolder display-5 text-success mb-1">@Model.RecentJobsCount.ToString("N0")</h2>
+                <p class="text-muted fw-medium">Tin mới tuần này</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Latest Jobs Section -->
+<section class="latest-jobs py-5 bg-light position-relative">
+    <div class="container">
+        <div class="d-flex justify-content-between align-items-end mb-5">
+            <div>
+                <span class="badge bg-primary bg-opacity-10 text-primary mb-2">Mới nhất</span>
+                <h2 class="display-6 fw-bold">Việc làm <span class="text-primary">đang tuyển</span></h2>
+                <p class="text-muted mb-0">Cơ hội tốt nhất được cập nhật liên tục 24/7</p>
+            </div>
+            <div class="d-none d-md-block">
+                <a href="@Url.Action("Index", "Job")" class="btn btn-outline-primary btn-sm rounded-pill px-4">
+                    Xem tất cả <i class="fas fa-arrow-right ms-2"></i>
+                </a>
+            </div>
+        </div>
+
+        @if (Model.LatestJobs.Any())
+        {
+            <div class="row g-4">
+                @foreach (var job in Model.LatestJobs)
+                {
+                    <div class="col-lg-6 col-xl-4">
+                        <div class="card h-100 border-0 shadow-sm hover-lift job-card">
+                            <div class="card-body p-4">
+                                <div class="d-flex justify-content-between align-items-start mb-3">
+                                    <div class="company-logo bg-light rounded text-primary fw-bold d-flex align-items-center justify-content-center" style="width: 50px; height: 50px; font-size: 1.2rem;">
+                                        @(job.CongTy?.TenCongTy?.Substring(0, Math.Min(2, job.CongTy.TenCongTy.Length)) ?? "CT")
+                                    </div>
+                                    <div class="job-badge">
+                                        @if (job.NoiBat)
+                                        {
+                                            <span class="badge bg-warning bg-opacity-10 text-warning border border-warning rounded-pill">
+                                                <i class="fas fa-star me-1"></i>Hot
+                                            </span>
+                                        }
+                                        else if((DateTime.Now - job.NgayTao).TotalHours < 24)
+                                        {
+                                            <span class="badge bg-primary bg-opacity-10 text-primary border border-primary rounded-pill">
+                                                <i class="fas fa-bolt me-1"></i>Mới
+                                            </span>
+                                        }
+                                    </div>
+                                </div>
+                                
+                                <h5 class="fw-bold mb-1">
+                                    <a href="@Url.Action("Details", "Job", new { id = job.MaTin })" class="text-dark text-decoration-none stretched-link">
+                                        @job.TieuDe
+                                    </a>
+                                </h5>
+                                <p class="text-muted small mb-3">
+                                    <i class="fas fa-building me-1"></i> @(job.CongTy?.TenCongTy ?? "Công ty ẩn danh")
+                                </p>
+                                
+                                <div class="d-flex flex-wrap gap-2 mb-4">
+                                    <span class="badge bg-light text-muted fw-normal rounded-pill px-3 py-2">
+                                        <i class="fas fa-map-marker-alt me-1 text-danger"></i> @(job.DiaDiem ?? "Toàn quốc")
+                                    </span>
+                                    <span class="badge bg-light text-muted fw-normal rounded-pill px-3 py-2">
+                                        <i class="fas fa-money-bill-wave me-1 text-success"></i> 
+                                        @if (job.HienThiLuong && job.LuongTu.HasValue)
+                                        {
+                                            @($"{job.LuongTu:N0} - {job.LuongDen:N0} {job.DonViTien}")
+                                        }
+                                        else
+                                        {
+                                            @("Thỏa thuận")
+                                        }
+                                    </span>
+                                </div>
+                                
+                                <div class="d-flex justify-content-between align-items-center pt-3 border-top">
+                                    <small class="text-muted">
+                                        <i class="fas fa-clock me-1"></i> @GetTimeAgo(job.NgayTao)
+                                    </small>
+                                    <button class="btn btn-primary btn-sm rounded-pill px-4 position-relative z-2">
+                                        Ứng tuyển
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                }
+            </div>
+            
+            <div class="text-center mt-5">
+                 <button type="button" class="btn btn-light rounded-pill px-4 py-2 shadow-sm text-primary fw-bold" onclick="refreshJobs()">
+                    <i class="fas fa-sync-alt me-2"></i>Làm mới danh sách
+                </button>
+            </div>
+        }
+        else
+        {
+            <div class="text-center py-5">
+                <div class="bg-light rounded-circle d-inline-flex p-4 mb-3">
+                    <i class="fas fa-search fa-3x text-muted"></i>
+                </div>
+                <h4 class="text-muted">Chưa có việc làm nào</h4>
+                <p class="text-muted">Hãy quay lại sau hoặc đăng ký nhận tin mới.</p>
+                <a href="@Url.Action("PostJob", "Job")" class="btn btn-primary rounded-pill px-4 mt-2">
+                    <i class="fas fa-plus me-2"></i>Đăng tin ngay
+                </a>
+            </div>
+        }
+    </div>
+</section>
+
+<!-- Featured Jobs Section -->
+@if (Model.FeaturedJobs.Any())
+{
+    <section class="featured-jobs py-5 bg-white">
+        <div class="container">
+            <div class="text-center mb-5">
+                <span class="badge bg-warning bg-opacity-10 text-warning mb-2">Nổi bật</span>
+                <h2 class="display-6 fw-bold">Top Cơ Hội <span class="text-gradient">Hấp Dẫn</span></h2>
+            </div>
+
+            <div class="row g-4">
+                @foreach (var job in Model.FeaturedJobs)
+                {
+                    <div class="col-lg-6 col-xl-4">
+                        <div class="card h-100 border-0 shadow-sm hover-lift job-card">
+                            <div class="card-body p-4">
+                                <div class="d-flex justify-content-between align-items-center mb-3">
+                                     <div class="company-logo bg-primary bg-opacity-10 rounded text-primary fw-bold d-flex align-items-center justify-content-center" style="width: 50px; height: 50px; font-size: 1.2rem;">
+                                        @(job.CongTy?.TenCongTy?.Substring(0, Math.Min(2, job.CongTy.TenCongTy.Length)) ?? "CT")
+                                    </div>
+                                    <span class="badge bg-warning text-dark rounded-pill">
+                                        <i class="fas fa-crown me-1"></i>VIP
+                                    </span>
+                                </div>
+                                <h5 class="fw-bold mb-1">
+                                    <a href="@Url.Action("Details", "Job", new { id = job.MaTin })" class="text-dark text-decoration-none stretched-link">
+                                        @job.TieuDe
+                                    </a>
+                                </h5>
+                                <p class="text-muted mb-3"><small>@(job.CongTy?.TenCongTy ?? "Công ty")</small></p>
+                                <div class="d-flex align-items-center text-muted small">
+                                    <i class="fas fa-map-marker-alt me-2"></i> @(job.DiaDiem ?? "Toàn quốc")
+                                    <span class="mx-2">•</span>
+                                    <span class="text-success fw-bold">
+                                         @if (job.HienThiLuong && job.LuongTu.HasValue) { @($"{job.LuongTu:N0} {job.DonViTien}") } else { @("Thỏa thuận") }
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+    </section>
+}
+
+<!-- CTA Section -->
+<section class="cta-section py-5 position-relative overflow-hidden bg-primary">
+    <div class="position-absolute top-0 start-0 w-100 h-100" style="background: linear-gradient(135deg, rgba(255,255,255,0.1) 0%, rgba(255,255,255,0) 100%);"></div>
+    <div class="container position-relative z-1 text-center py-5">
+        <h2 class="display-5 fw-bold text-white mb-4">Sẵn sàng cho bước tiến mới?</h2>
+        <p class="lead text-white text-opacity-75 mb-5" style="max-width: 600px; margin: 0 auto;">
+            Hàng nghìn doanh nghiệp đang tìm kiếm nhân tài như bạn. Đừng bỏ lỡ cơ hội phát triển sự nghiệp.
+        </p>
+        <div class="d-flex justify-content-center gap-3">
+            <a href="@Url.Action("Register", "Account")" class="btn btn-light btn-lg rounded-pill px-5 fw-bold text-primary shadow-lg">
+                <i class="fas fa-user-plus me-2"></i>Tạo hồ sơ ngay
+            </a>
+             <a href="@Url.Action("Search", "Job")" class="btn btn-outline-light btn-lg rounded-pill px-5 fw-bold">
+                Tìm việc làm
+            </a>
+        </div>
+    </div>
+</section>
+
+@functions {
+    public string GetTimeAgo(DateTime dateTime)
+    {
+        var timeSpan = DateTime.Now - dateTime;
+        if (timeSpan.TotalDays >= 1) return dateTime.ToString("dd/MM/yyyy");
+        if (timeSpan.TotalHours >= 1) return $"{(int)timeSpan.TotalHours} giờ trước";
+        return $"{(int)timeSpan.TotalMinutes} phút trước";
+    }
+}
+
+<script>
+// Cập nhật phần hiển thị tin tuyển dụng mới nhất
+function updateLatestJobsSection(jobs) {
+    const container = document.querySelector('.latest-jobs .row.g-4');
+    if (!container) return;
+    
+    // Lưu IDs hiện tại để check tin mới
+    const currentJobIds = Array.from(container.querySelectorAll('.job-card a[href*="/Job/Details/"]'))
+        .map(link => link.href.split('/').pop());
+    
+    container.innerHTML = '';
+    
+    if (jobs.length === 0) {
+        container.innerHTML = `<div class="col-12 text-center py-5 text-muted">Chưa có tin mới</div>`;
+        return;
+    }
+    
+    jobs.forEach((job, index) => {
+        const jobCard = createJobCard(job);
+        const isNewJob = !currentJobIds.includes(job.maTin.toString());
+        
+        if (isNewJob) {
+            jobCard.querySelector('.card').classList.add('animate-fade-in');
+            jobCard.querySelector('.card').style.animationDelay = `${index * 0.1}s`;
+        }
+        
+        container.appendChild(jobCard);
+    });
+}
+
+// Tạo job card HTML mới khớp với thiết kế Premium
+function createJobCard(job) {
+    const div = document.createElement('div');
+    div.className = 'col-lg-6 col-xl-4';
+    
+    const timeAgo = getTimeAgo(new Date(job.ngayTao));
+    const isNew = (new Date() - new Date(job.ngayTao)) < 24 * 60 * 60 * 1000;
+    
+    const badgeHtml = job.noiBat 
+        ? `<span class="badge bg-warning bg-opacity-10 text-warning border border-warning rounded-pill"><i class="fas fa-star me-1"></i>Hot</span>` 
+        : (isNew ? `<span class="badge bg-primary bg-opacity-10 text-primary border border-primary rounded-pill"><i class="fas fa-bolt me-1"></i>Mới</span>` : '');
+
+    const salary = (job.hienThiLuong && job.luongTu)
+        ? `${job.luongTu.toLocaleString()} - ${job.luongDen? job.luongDen.toLocaleString() : 'Thỏa thuận'} ${job.donViTien}`
+        : 'Thỏa thuận';
+        
+    const companyInitial = job.companyName ? job.companyName.substring(0,2) : "CT";
+
+    div.innerHTML = `
+        <div class="card h-100 border-0 shadow-sm hover-lift job-card">
+            <div class="card-body p-4">
+                <div class="d-flex justify-content-between align-items-start mb-3">
+                    <div class="company-logo bg-light rounded text-primary fw-bold d-flex align-items-center justify-content-center" style="width: 50px; height: 50px; font-size: 1.2rem;">
+                        ${companyInitial}
+                    </div>
+                    <div class="job-badge">${badgeHtml}</div>
+                </div>
+                
+                <h5 class="fw-bold mb-1">
+                    <a href="/Job/Details/${job.maTin}" class="text-dark text-decoration-none stretched-link">
+                        ${job.tieuDe}
+                    </a>
+                </h5>
+                <p class="text-muted small mb-3">
+                    <i class="fas fa-building me-1"></i> ${job.companyName}
+                </p>
+                
+                <div class="d-flex flex-wrap gap-2 mb-4">
+                    <span class="badge bg-light text-muted fw-normal rounded-pill px-3 py-2">
+                        <i class="fas fa-map-marker-alt me-1 text-danger"></i> ${job.diaDiem || 'Toàn quốc'}
+                    </span>
+                    <span class="badge bg-light text-muted fw-normal rounded-pill px-3 py-2">
+                        <i class="fas fa-money-bill-wave me-1 text-success"></i> ${salary}
+                    </span>
+                </div>
+                
+                <div class="d-flex justify-content-between align-items-center pt-3 border-top">
+                    <small class="text-muted">
+                        <i class="fas fa-clock me-1"></i> ${timeAgo}
+                    </small>
+                    <button class="btn btn-primary btn-sm rounded-pill px-4 position-relative z-2" onclick="window.location.href='/Job/Apply/${job.maTin}'">
+                        Ứng tuyển
+                    </button>
+                </div>
+            </div>
+        </div>
+    `;
+    
+    return div;
+}
+
+function getTimeAgo(dateTime) {
+    const timeSpan = new Date() - dateTime;
+    if (timeSpan >= 24 * 3600 * 1000) return new Date(dateTime).toLocaleDateString('vi-VN');
+    if (timeSpan >= 3600 * 1000) return `${Math.floor(timeSpan / 3600000)} giờ trước`;
+    return `${Math.floor(timeSpan / 60000)} phút trước`;
+}
+
+// Logic thông báo và auto-refresh cũ
+function showNotification(message, type) {
+    const div = document.createElement('div');
+    div.className = `alert alert-${type==='success'?'success':'danger'} position-fixed shadow-lg fade show`;
+    div.style.cssText = 'top: 80px; right: 20px; z-index: 9999; border-radius: 10px;';
+    div.innerHTML = `<i class="fas fa-info-circle me-2"></i>${message}`;
+    document.body.appendChild(div);
+    setTimeout(() => div.remove(), 3000);
+}
+
+let lastJobCount = 0;
+
+function refreshJobs() {
+    const btn = document.querySelector('button[onclick="refreshJobs()"]');
+    if(btn) {
+        btn.disabled = true;
+        btn.innerHTML = '<i class="fas fa-spinner fa-spin me-2"></i>Đang tải...';
+    }
+    
+    fetch('/Home/GetLatestJobs')
+        .then(r => r.json())
+        .then(data => {
+            if(data.success) {
+                updateLatestJobsSection(data.jobs);
+                showNotification('Đã cập nhật dữ liệu mới nhất', 'success');
+                lastJobCount = data.jobs.length;
+            }
+        })
+        .finally(() => {
+            if(btn) {
+                btn.disabled = false;
+                btn.innerHTML = '<i class="fas fa-sync-alt me-2"></i>Làm mới danh sách';
+            }
+        });
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+    lastJobCount = document.querySelectorAll('.job-card').length;
+    // Auto refresh logic 30s
+    setInterval(() => {
+        if(window.location.pathname === '/' || window.location.pathname === '/Home') {
+            refreshJobs(); // Reuse refresh logic purely for demo
+        }
+    }, 30000);
+});
+</script>
+
+<style>
+/* Custom animations for Home only */
+.hover-lift {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+.hover-lift:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--shadow-xl) !important;
+}
+</style>

@@ -1,0 +1,258 @@
+@model HeThongTuyenDung.Models.DonUngTuyen
+
+<div class="row">
+    <!-- Thông tin cơ bản -->
+    <div class="col-md-6">
+        <div class="card border-0 shadow-sm mb-3">
+            <div class="card-header bg-primary text-white">
+                <h6 class="mb-0">
+                    <i class="fas fa-user me-2"></i>
+                    Thông tin ứng viên
+                </h6>
+            </div>
+            <div class="card-body">
+                <div class="text-center mb-3">
+                    <div class="avatar bg-primary bg-opacity-10 rounded-circle d-inline-flex align-items-center justify-content-center" style="width: 80px; height: 80px;">
+                        <i class="fas fa-user text-primary fa-3x"></i>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-12 mb-2">
+                        <strong>Họ tên:</strong> @Model.NguoiDung.HoTen
+                    </div>
+                    <div class="col-12 mb-2">
+                        <strong>Email:</strong> @Model.NguoiDung.Email
+                    </div>
+                    <div class="col-12 mb-2">
+                        <strong>Số điện thoại:</strong> @(Model.NguoiDung.SoDienThoai ?? "Chưa cập nhật")
+                    </div>
+                    <div class="col-12 mb-2">
+                        <strong>Ngày tạo tài khoản:</strong> @Model.NguoiDung.NgayTao.ToString("dd/MM/yyyy")
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Thông tin ứng tuyển -->
+    <div class="col-md-6">
+        <div class="card border-0 shadow-sm mb-3">
+            <div class="card-header bg-success text-white">
+                <h6 class="mb-0">
+                    <i class="fas fa-briefcase me-2"></i>
+                    Thông tin ứng tuyển
+                </h6>
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-12 mb-2">
+                        <strong>Vị trí:</strong> @Model.TinTuyenDung.TieuDe
+                    </div>
+                    <div class="col-12 mb-2">
+                        <strong>Công ty:</strong> @(Model.TinTuyenDung.CongTy?.TenCongTy ?? "Không xác định")
+                    </div>
+                    <div class="col-12 mb-2">
+                        <strong>Ngày ứng tuyển:</strong> @Model.NgayUngTuyen.ToString("dd/MM/yyyy HH:mm")
+                    </div>
+                    <div class="col-12 mb-2">
+                        <strong>Trạng thái:</strong>
+                        <span class="badge @GetStatusBadgeClass(Model.TrangThai)">
+                            @GetStatusText(Model.TrangThai)
+                        </span>
+                    </div>
+                    @if (Model.NgayCapNhat != null)
+                    {
+                        <div class="col-12 mb-2">
+                            <strong>Cập nhật lần cuối:</strong> @Model.NgayCapNhat.ToString("dd/MM/yyyy HH:mm")
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Hồ sơ ứng viên -->
+@if (Model.NguoiDung.HoSoUngVien != null)
+{
+    <div class="row">
+        <div class="col-12">
+            <div class="card border-0 shadow-sm mb-3">
+                <div class="card-header bg-info text-white">
+                    <h6 class="mb-0">
+                        <i class="fas fa-file-alt me-2"></i>
+                        Hồ sơ ứng viên
+                    </h6>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <h6 class="text-primary mb-3">
+                                <i class="fas fa-graduation-cap me-2"></i>
+                                Học vấn
+                            </h6>
+                            @if (Model.NguoiDung.HoSoUngVien.HocVans != null && Model.NguoiDung.HoSoUngVien.HocVans.Any())
+                            {
+                                <ul class="list-unstyled">
+                                    @foreach (var hocVan in Model.NguoiDung.HoSoUngVien.HocVans.OrderByDescending(h => h.NgayKetThuc))
+                                    {
+                                        <li class="mb-2 p-2 bg-light rounded">
+                                            <strong>@hocVan.TenTruong</strong><br>
+                                            <small class="text-muted">
+                                                @hocVan.ChuyenNganh - @(hocVan.NgayKetThuc?.ToString("yyyy") ?? "Đang học")
+                                            </small>
+                                        </li>
+                                    }
+                                </ul>
+                            }
+                            else
+                            {
+                                <p class="text-muted">Chưa cập nhật thông tin học vấn</p>
+                            }
+                        </div>
+                        <div class="col-md-6">
+                            <h6 class="text-primary mb-3">
+                                <i class="fas fa-briefcase me-2"></i>
+                                Kinh nghiệm
+                            </h6>
+                            @if (Model.NguoiDung.HoSoUngVien.KinhNghiems != null && Model.NguoiDung.HoSoUngVien.KinhNghiems.Any())
+                            {
+                                <ul class="list-unstyled">
+                                    @foreach (var kinhNghiem in Model.NguoiDung.HoSoUngVien.KinhNghiems.OrderByDescending(k => k.NgayKetThuc))
+                                    {
+                                        <li class="mb-2 p-2 bg-light rounded">
+                                            <strong>@kinhNghiem.ChucVu</strong><br>
+                                            <small class="text-muted">
+                                                @kinhNghiem.TenCongTy - @(kinhNghiem.NgayBatDau?.ToString("yyyy") ?? "") - @(kinhNghiem.NgayKetThuc?.ToString("yyyy") ?? "Hiện tại")
+                                            </small>
+                                        </li>
+                                    }
+                                </ul>
+                            }
+                            else
+                            {
+                                <p class="text-muted">Chưa cập nhật thông tin kinh nghiệm</p>
+                            }
+                        </div>
+                    </div>
+
+                    <!-- Kỹ năng -->
+                    <div class="row mt-3">
+                        <div class="col-12">
+                            <h6 class="text-primary mb-3">
+                                <i class="fas fa-tools me-2"></i>
+                                Kỹ năng
+                            </h6>
+                            @if (Model.NguoiDung.HoSoUngVien.KyNangUngViens != null && Model.NguoiDung.HoSoUngVien.KyNangUngViens.Any())
+                            {
+                                <div class="d-flex flex-wrap gap-2">
+                                    @foreach (var kyNang in Model.NguoiDung.HoSoUngVien.KyNangUngViens)
+                                    {
+                                        <span class="badge bg-primary">
+                                            @kyNang.KyNang.TenKyNang
+                                            <span class="ms-1">(Cấp độ @kyNang.CapDo)</span>
+                                        </span>
+                                    }
+                                </div>
+                            }
+                            else
+                            {
+                                <p class="text-muted">Chưa cập nhật thông tin kỹ năng</p>
+                            }
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+
+<!-- CV và tài liệu -->
+<div class="row">
+    <div class="col-12">
+        <div class="card border-0 shadow-sm">
+            <div class="card-header bg-warning text-dark">
+                <h6 class="mb-0">
+                    <i class="fas fa-download me-2"></i>
+                    Tài liệu đính kèm
+                </h6>
+            </div>
+            <div class="card-body">
+                @if (!string.IsNullOrEmpty(Model.DuongDanCV))
+                {
+                    <div class="d-flex align-items-center p-3 bg-light rounded">
+                        <i class="fas fa-file-pdf text-danger fa-2x me-3"></i>
+                        <div class="flex-grow-1">
+                            <h6 class="mb-1">CV của ứng viên</h6>
+                            <small class="text-muted">Tải xuống để xem chi tiết</small>
+                        </div>
+                        <a href="@Url.Content(Model.DuongDanCV)" target="_blank" class="btn btn-primary btn-sm">
+                            <i class="fas fa-download me-2"></i>
+                            Tải CV
+                        </a>
+                    </div>
+                }
+                else
+                {
+                    <p class="text-muted text-center py-3">
+                        <i class="fas fa-file-alt fa-2x mb-2"></i><br>
+                        Ứng viên chưa đính kèm CV
+                    </p>
+                }
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Thao tác -->
+<div class="row mt-3">
+    <div class="col-12">
+        <div class="d-flex justify-content-center gap-2">
+            @if (Model.TrangThai == "Chờ xử lý")
+            {
+                <button class="btn btn-success" onclick="updateStatus(@Model.MaDon, 'Chấp nhận')">
+                    <i class="fas fa-check me-2"></i>
+                    Chấp nhận
+                </button>
+                <button class="btn btn-danger" onclick="updateStatus(@Model.MaDon, 'Từ chối')">
+                    <i class="fas fa-times me-2"></i>
+                    Từ chối
+                </button>
+                <button class="btn btn-info" onclick="updateStatus(@Model.MaDon, 'Phỏng vấn')">
+                    <i class="fas fa-calendar me-2"></i>
+                    Mời phỏng vấn
+                </button>
+            }
+            <button class="btn btn-primary" onclick="sendMessage(@Model.MaDon)">
+                <i class="fas fa-envelope me-2"></i>
+                Gửi tin nhắn
+            </button>
+        </div>
+    </div>
+</div>
+
+@functions {
+    private string GetStatusBadgeClass(string status)
+    {
+        return status switch
+        {
+            "Chờ xử lý" => "bg-warning text-dark",
+            "Chấp nhận" => "bg-success",
+            "Từ chối" => "bg-danger",
+            "Phỏng vấn" => "bg-info",
+            _ => "bg-secondary"
+        };
+    }
+
+    private string GetStatusText(string status)
+    {
+        return status switch
+        {
+            "Chờ xử lý" => "Chờ xử lý",
+            "Chấp nhận" => "Được chấp nhận",
+            "Từ chối" => "Bị từ chối",
+            "Phỏng vấn" => "Mời phỏng vấn",
+            _ => status
+        };
+    }
+} 

@@ -1,0 +1,127 @@
+is_global = true
+build_property.TargetFramework = net8.0
+build_property.TargetFrameworkIdentifier = .NETCoreApp
+build_property.TargetFrameworkVersion = v8.0
+build_property.TargetPlatformMinVersion = 
+build_property.UsingMicrosoftNETSdkWeb = true
+build_property.ProjectTypeGuids = 
+build_property.InvariantGlobalization = 
+build_property.PlatformNeutralAssembly = 
+build_property.EnforceExtendedAnalyzerRules = 
+build_property._SupportedPlatformList = Linux,macOS,Windows
+build_property.RootNamespace = HeThongTuyenDung
+build_property.RootNamespace = HeThongTuyenDung
+build_property.ProjectDir = C:\Users\tuans\Downloads\HeThongTuyenDung\HeThongTuyenDung\HeThongTuyenDung\
+build_property.EnableComHosting = 
+build_property.EnableGeneratedComInterfaceComImportInterop = 
+build_property.RazorLangVersion = 8.0
+build_property.SupportLocalizedComponentNames = 
+build_property.GenerateRazorMetadataSourceChecksumAttributes = 
+build_property.MSBuildProjectDirectory = C:\Users\tuans\Downloads\HeThongTuyenDung\HeThongTuyenDung\HeThongTuyenDung
+build_property._RazorSourceGeneratorDebug = 
+build_property.EffectiveAnalysisLevelStyle = 8.0
+build_property.EnableCodeStyleSeverity = 
+
+[C:/Users/tuans/Downloads/HeThongTuyenDung/HeThongTuyenDung/HeThongTuyenDung/Views/Account/Login.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWNjb3VudFxMb2dpbi5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/tuans/Downloads/HeThongTuyenDung/HeThongTuyenDung/HeThongTuyenDung/Views/Account/Profile.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWNjb3VudFxQcm9maWxlLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/tuans/Downloads/HeThongTuyenDung/HeThongTuyenDung/HeThongTuyenDung/Views/Account/Register.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWNjb3VudFxSZWdpc3Rlci5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/tuans/Downloads/HeThongTuyenDung/HeThongTuyenDung/HeThongTuyenDung/Views/Account/RoleInfo.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWNjb3VudFxSb2xlSW5mby5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/tuans/Downloads/HeThongTuyenDung/HeThongTuyenDung/HeThongTuyenDung/Views/Dashboard/CandidateDashboard.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRGFzaGJvYXJkXENhbmRpZGF0ZURhc2hib2FyZC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/tuans/Downloads/HeThongTuyenDung/HeThongTuyenDung/HeThongTuyenDung/Views/Dashboard/EmployerDashboard.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRGFzaGJvYXJkXEVtcGxveWVyRGFzaGJvYXJkLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/tuans/Downloads/HeThongTuyenDung/HeThongTuyenDung/HeThongTuyenDung/Views/Dashboard/ManageApplications.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRGFzaGJvYXJkXE1hbmFnZUFwcGxpY2F0aW9ucy5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/tuans/Downloads/HeThongTuyenDung/HeThongTuyenDung/HeThongTuyenDung/Views/Dashboard/_ApplicationDetails.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRGFzaGJvYXJkXF9BcHBsaWNhdGlvbkRldGFpbHMuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/tuans/Downloads/HeThongTuyenDung/HeThongTuyenDung/HeThongTuyenDung/Views/Home/Companies.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxDb21wYW5pZXMuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/tuans/Downloads/HeThongTuyenDung/HeThongTuyenDung/HeThongTuyenDung/Views/Home/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxJbmRleC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/tuans/Downloads/HeThongTuyenDung/HeThongTuyenDung/HeThongTuyenDung/Views/Home/News.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxOZXdzLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/tuans/Downloads/HeThongTuyenDung/HeThongTuyenDung/HeThongTuyenDung/Views/Home/Privacy.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxQcml2YWN5LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/tuans/Downloads/HeThongTuyenDung/HeThongTuyenDung/HeThongTuyenDung/Views/Job/Apply.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSm9iXEFwcGx5LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/tuans/Downloads/HeThongTuyenDung/HeThongTuyenDung/HeThongTuyenDung/Views/Job/Details.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSm9iXERldGFpbHMuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/tuans/Downloads/HeThongTuyenDung/HeThongTuyenDung/HeThongTuyenDung/Views/Job/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSm9iXEluZGV4LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/tuans/Downloads/HeThongTuyenDung/HeThongTuyenDung/HeThongTuyenDung/Views/Job/MyApplications.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSm9iXE15QXBwbGljYXRpb25zLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/tuans/Downloads/HeThongTuyenDung/HeThongTuyenDung/HeThongTuyenDung/Views/Job/PostJob.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSm9iXFBvc3RKb2IuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/tuans/Downloads/HeThongTuyenDung/HeThongTuyenDung/HeThongTuyenDung/Views/Job/SavedJobs.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSm9iXFNhdmVkSm9icy5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/tuans/Downloads/HeThongTuyenDung/HeThongTuyenDung/HeThongTuyenDung/Views/Job/Search.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSm9iXFNlYXJjaC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/tuans/Downloads/HeThongTuyenDung/HeThongTuyenDung/HeThongTuyenDung/Views/Shared/AccessDenied.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXEFjY2Vzc0RlbmllZC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/tuans/Downloads/HeThongTuyenDung/HeThongTuyenDung/HeThongTuyenDung/Views/Shared/Error.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXEVycm9yLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/tuans/Downloads/HeThongTuyenDung/HeThongTuyenDung/HeThongTuyenDung/Views/Shared/_ValidationScriptsPartial.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9WYWxpZGF0aW9uU2NyaXB0c1BhcnRpYWwuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/tuans/Downloads/HeThongTuyenDung/HeThongTuyenDung/HeThongTuyenDung/Views/Test/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVGVzdFxJbmRleC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/tuans/Downloads/HeThongTuyenDung/HeThongTuyenDung/HeThongTuyenDung/Views/_ViewImports.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcX1ZpZXdJbXBvcnRzLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/tuans/Downloads/HeThongTuyenDung/HeThongTuyenDung/HeThongTuyenDung/Views/_ViewStart.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcX1ZpZXdTdGFydC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/tuans/Downloads/HeThongTuyenDung/HeThongTuyenDung/HeThongTuyenDung/Views/Shared/_Layout.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9MYXlvdXQuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = b-0td2wrphdd

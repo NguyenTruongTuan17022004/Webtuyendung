@@ -1,0 +1,326 @@
+@model IEnumerable<HeThongTuyenDung.Models.TinTuyenDung>
+
+@{
+    ViewData["Title"] = "Tìm việc làm";
+}
+
+<!-- Hero Search Section -->
+<div class="hero-section position-relative bg-primary overflow-hidden" style="padding: 6rem 0 8rem;">
+    <div class="hero-bg" style="background: linear-gradient(135deg, var(--primary-dark) 0%, var(--primary-color) 100%); position: absolute; inset: 0; z-index: 0;"></div>
+    <div class="hero-shape bg-white" style="width: 600px; height: 600px; top: -200px; right: -100px; opacity: 0.05; border-radius: 50%;"></div>
+    <div class="hero-shape bg-secondary" style="width: 300px; height: 300px; bottom: 50px; left: -50px; opacity: 0.1; border-radius: 50%;"></div>
+    
+    <div class="container position-relative z-1">
+        <div class="row justify-content-center text-center mb-5">
+            <div class="col-lg-8 animate-fade-in">
+                <h1 class="display-4 fw-bold text-white mb-3">Khám phá cơ hội nghề nghiệp</h1>
+                <p class="lead text-white text-opacity-75">Hàng nghìn việc làm từ các công ty hàng đầu đang chờ đón bạn.</p>
+            </div>
+        </div>
+
+        <div class="row justify-content-center">
+            <div class="col-lg-10">
+                <div class="bg-white p-3 rounded-xl shadow-lg animate-fade-in" style="animation-delay: 0.1s;">
+                    <form action="@Url.Action("Search", "Job")" method="get">
+                        <div class="row g-2 align-items-center">
+                            <div class="col-md-5 position-relative">
+                                <i class="fas fa-search position-absolute top-50 start-0 translate-middle-y ms-3 text-muted"></i>
+                                <input type="text" name="keyword" class="form-control border-0 bg-light ps-5 py-3" placeholder="Từ khóa, chức danh, kỹ năng..." value="@ViewBag.Keyword">
+                            </div>
+                            <div class="col-md-4 position-relative border-start-md">
+                                <i class="fas fa-map-marker-alt position-absolute top-50 start-0 translate-middle-y ms-3 text-muted"></i>
+                                <input type="text" name="location" class="form-control border-0 bg-light ps-5 py-3" placeholder="Địa điểm..." value="@ViewBag.Location">
+                            </div>
+                            <div class="col-md-3">
+                                <button type="submit" class="btn btn-primary w-100 py-3 fw-bold rounded-lg shadow-sm">
+                                    Tìm kiếm
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                
+                @if (TempData["Success"] != null)
+                {
+                    <div class="alert alert-success alert-dismissible fade show mt-4 shadow-sm border-0" role="alert">
+                        <i class="fas fa-check-circle me-2"></i> @TempData["Success"]
+                        <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Jobs List Section -->
+<div class="container" style="margin-top: -4rem; position: relative; z-index: 2;">
+    <div class="bg-surface rounded-xl shadow-sm border p-4 mb-5 bg-white">
+        <div class="d-flex flex-column flex-md-row justify-content-between align-items-center mb-4 pb-3 border-bottom">
+            <div class="mb-3 mb-md-0">
+                <h2 class="h4 fw-bold mb-1">
+                    <i class="fas fa-briefcase text-primary me-2"></i>Việc làm mới nhất
+                </h2>
+                <p class="text-muted small mb-0">
+                    Hiển thị <strong>@Model.Count()</strong> tin tuyển dụng
+                    <span class="badge bg-success bg-opacity-10 text-success ms-2 rounded-pill"><i class="fas fa-sync-alt me-1"></i>Real-time</span>
+                </p>
+            </div>
+            <div class="d-flex gap-2">
+                <button type="button" class="btn btn-outline-light text-primary border-0 fw-bold" onclick="refreshJobs()">
+                    <i class="fas fa-sync-alt me-2"></i>Làm mới
+                </button>
+                <div class="vr mx-2 bg-secondary opacity-25"></div>
+                <a href="@Url.Action("PostJob", "Job")" class="btn btn-success text-white fw-bold shadow-sm rounded-pill px-4">
+                    <i class="fas fa-plus me-2"></i>Đăng tin
+                </a>
+            </div>
+        </div>
+
+        @if (Model.Any())
+        {
+            <div class="row g-4" id="jobListContainer">
+                @foreach (var job in Model)
+                {
+                    <div class="col-lg-4 col-md-6">
+                        <div class="card h-100 border-0 shadow-sm hover-lift job-card">
+                            <div class="card-body p-4">
+                                <div class="d-flex justify-content-between align-items-start mb-3">
+                                    <div class="company-logo bg-light rounded text-primary fw-bold d-flex align-items-center justify-content-center" style="width: 50px; height: 50px; font-size: 1.2rem;">
+                                        @(job.CongTy?.TenCongTy?.Substring(0, Math.Min(2, job.CongTy.TenCongTy.Length)) ?? "CT")
+                                    </div>
+                                    <div class="text-end">
+                                        @if (job.NoiBat)
+                                        {
+                                            <span class="badge bg-warning bg-opacity-10 text-warning border border-warning rounded-pill mb-1 d-block">
+                                                <i class="fas fa-star me-1"></i>Hot
+                                            </span>
+                                        }
+                                        @if (job.GapTuyen)
+                                        {
+                                            <span class="badge bg-danger bg-opacity-10 text-danger border border-danger rounded-pill d-block">
+                                                <i class="fas fa-fire me-1"></i>Gấp
+                                            </span>
+                                        }
+                                    </div>
+                                </div>
+                                
+                                <h5 class="fw-bold mb-1">
+                                    <a href="@Url.Action("Details", "Job", new { id = job.MaTin })" class="text-dark text-decoration-none stretched-link">
+                                        @job.TieuDe
+                                    </a>
+                                </h5>
+                                <p class="text-muted small mb-3">
+                                    <i class="fas fa-building me-1"></i> @(job.CongTy?.TenCongTy ?? "Công ty ẩn danh")
+                                </p>
+                                
+                                <div class="d-flex flex-wrap gap-2 mb-4">
+                                    <span class="badge bg-light text-muted fw-normal rounded-pill px-3 py-2">
+                                        <i class="fas fa-map-marker-alt me-1 text-danger"></i> @(job.DiaDiem ?? "Toàn quốc")
+                                    </span>
+                                    <span class="badge bg-light text-muted fw-normal rounded-pill px-3 py-2">
+                                        <i class="fas fa-briefcase me-1 text-info"></i> @(job.CapBacCongViec?.TenCapBac ?? "N/A")
+                                    </span>
+                                </div>
+                                
+                                <div class="border-top pt-3 mt-auto">
+                                   @if (job.HienThiLuong && job.LuongTu.HasValue)
+                                    {
+                                        <p class="text-success fw-bold mb-2">
+                                            <i class="fas fa-money-bill-wave me-2"></i>
+                                            @job.LuongTu.Value.ToString("N0") - @(job.LuongDen?.ToString("N0") ?? "Thỏa thuận") @job.DonViTien
+                                        </p>
+                                    }
+                                    <div class="d-flex justify-content-between align-items-center text-muted small mt-2">
+                                        <span><i class="fas fa-clock me-1"></i> @GetTimeAgo(job.NgayTao)</span>
+                                        <span><i class="fas fa-eye me-1"></i> @job.LuotXem</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                }
+            </div>
+            
+            <div class="text-center mt-5 mb-3">
+                <button class="btn btn-outline-primary rounded-pill px-4 py-2" onclick="refreshJobs()">
+                    Xem thêm việc làm
+                </button>
+            </div>
+        }
+        else
+        {
+            <div class="text-center py-5">
+                <div class="bg-light rounded-circle d-inline-flex p-4 mb-3">
+                    <i class="fas fa-search fa-3x text-muted"></i>
+                </div>
+                <h4 class="text-muted">Không tìm thấy việc làm nào</h4>
+                <p class="text-muted">Thử thay đổi từ khóa hoặc bộ lọc tìm kiếm.</p>
+            </div>
+        }
+    </div>
+</div>
+
+<!-- Floating Action Button -->
+<div class="position-fixed" style="bottom: 30px; right: 30px; z-index: 1000;">
+    <a href="@Url.Action("PostJob", "Job")" class="btn btn-success btn-lg rounded-circle shadow-lg d-flex align-items-center justify-content-center" style="width: 60px; height: 60px;" title="Đăng tin tuyển dụng">
+        <i class="fas fa-plus fa-lg"></i>
+    </a>
+</div>
+
+<!-- Features Section -->
+<div class="container mb-5">
+    <div class="row g-4 text-center">
+        <div class="col-md-4">
+            <div class="p-4 bg-white rounded-xl shadow-sm border h-100">
+                <div class="bg-primary bg-opacity-10 text-primary rounded-circle d-inline-flex p-3 mb-3">
+                    <i class="fas fa-rocket fa-2x"></i>
+                </div>
+                <h5 class="fw-bold">Tốc độ nhanh</h5>
+                <p class="text-muted small mb-0">Việc làm được cập nhật liên tục mỗi giây</p>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="p-4 bg-white rounded-xl shadow-sm border h-100">
+                <div class="bg-success bg-opacity-10 text-success rounded-circle d-inline-flex p-3 mb-3">
+                    <i class="fas fa-shield-alt fa-2x"></i>
+                </div>
+                <h5 class="fw-bold">Tin cậy cao</h5>
+                <p class="text-muted small mb-0">Thông tin được xác thực bởi đội ngũ kiểm duyệt</p>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="p-4 bg-white rounded-xl shadow-sm border h-100">
+                <div class="bg-info bg-opacity-10 text-info rounded-circle d-inline-flex p-3 mb-3">
+                    <i class="fas fa-handshake fa-2x"></i>
+                </div>
+                <h5 class="fw-bold">Kết nối dễ dàng</h5>
+                <p class="text-muted small mb-0">Ứng tuyển trực tiếp và chat với nhà tuyển dụng</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+.hover-lift {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+.hover-lift:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 .5rem 1rem rgba(0,0,0,.15)!important;
+}
+</style>
+
+@functions {
+    public string GetTimeAgo(DateTime dateTime)
+    {
+        var timeSpan = DateTime.Now - dateTime;
+        if (timeSpan.TotalDays >= 1) return dateTime.ToString("dd/MM/yyyy");
+        if (timeSpan.TotalHours >= 1) return $"{(int)timeSpan.TotalHours} giờ trước";
+        return $"{(int)timeSpan.TotalMinutes} phút trước";
+    }
+}
+
+<script>
+function refreshJobs() {
+    const btn = document.querySelector('button[onclick="refreshJobs()"]');
+    if(btn) {
+        btn.disabled = true;
+        btn.innerHTML = '<i class="fas fa-spinner fa-spin me-2"></i>Đang tải...';
+    }
+    
+    fetch('/Job/GetLatestJobs')
+        .then(response => response.json())
+        .then(data => {
+            if (data.success) {
+                updateJobsSection(data.jobs);
+                showNotification('Đã làm mới danh sách!', 'success');
+            }
+        })
+        .finally(() => {
+            if(btn) {
+                btn.disabled = false;
+                btn.innerHTML = '<i class="fas fa-sync-alt me-2"></i>Làm mới';
+            }
+        });
+}
+
+function updateJobsSection(jobs) {
+    const container = document.querySelector('#jobListContainer');
+    if (!container) return;
+    
+    // Clear and rebuild
+    container.innerHTML = '';
+    jobs.forEach(job => {
+        container.appendChild(createJobCard(job));
+    });
+}
+
+function createJobCard(job) {
+    const div = document.createElement('div');
+    div.className = 'col-lg-4 col-md-6';
+    
+    const salary = job.hienThiLuong && job.luongTu ? 
+        `<p class="text-success fw-bold mb-2">
+            <i class="fas fa-money-bill-wave me-2"></i>
+            ${job.luongTu.toLocaleString()} - ${job.luongDen ? job.luongDen.toLocaleString() : 'Thỏa thuận'} ${job.donViTien}
+        </p>` : '';
+        
+    const companyInitial = job.companyName ? job.companyName.substring(0,2) : "CT";
+    const timeAgo = getTimeAgoClient(new Date(job.ngayTao));
+
+    div.innerHTML = `
+        <div class="card h-100 border-0 shadow-sm hover-lift job-card animate-fade-in">
+            <div class="card-body p-4">
+                <div class="d-flex justify-content-between align-items-start mb-3">
+                    <div class="company-logo bg-light rounded text-primary fw-bold d-flex align-items-center justify-content-center" style="width: 50px; height: 50px; font-size: 1.2rem;">
+                        ${companyInitial}
+                    </div>
+                </div>
+                
+                <h5 class="fw-bold mb-1">
+                    <a href="/Job/Details/${job.maTin}" class="text-dark text-decoration-none stretched-link">
+                        ${job.tieuDe}
+                    </a>
+                </h5>
+                <p class="text-muted small mb-3">
+                    <i class="fas fa-building me-1"></i> ${job.companyName}
+                </p>
+                
+                <div class="d-flex flex-wrap gap-2 mb-4">
+                    <span class="badge bg-light text-muted fw-normal rounded-pill px-3 py-2">
+                        <i class="fas fa-map-marker-alt me-1 text-danger"></i> ${job.diaDiem || 'Toàn quốc'}
+                    </span>
+                    <span class="badge bg-light text-muted fw-normal rounded-pill px-3 py-2">
+                         <i class="fas fa-briefcase me-1 text-info"></i> ${job.levelName || 'N/A'}
+                    </span>
+                </div>
+                
+                <div class="border-top pt-3 mt-auto">
+                    ${salary}
+                    <div class="d-flex justify-content-between align-items-center text-muted small mt-2">
+                        <span><i class="fas fa-clock me-1"></i> ${timeAgo}</span>
+                        <span><i class="fas fa-eye me-1"></i> ${job.luotXem}</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    `;
+    return div;
+}
+
+function getTimeAgoClient(dateTime) {
+    const timeSpan = new Date() - dateTime;
+    if (timeSpan >= 24 * 3600 * 1000) return new Date(dateTime).toLocaleDateString('vi-VN');
+    if (timeSpan >= 3600 * 1000) return `${Math.floor(timeSpan / 3600000)} giờ trước`;
+    return `${Math.floor(timeSpan / 60000)} phút trước`;
+}
+
+function showNotification(msg, type='success') {
+    const div = document.createElement('div');
+    div.className = `alert alert-${type} position-fixed shadow-lg fade show`;
+    div.style.cssText = 'top: 20px; right: 20px; z-index: 9999;';
+    div.innerText = msg;
+    document.body.appendChild(div);
+    setTimeout(() => div.remove(), 3000);
+}
+</script>

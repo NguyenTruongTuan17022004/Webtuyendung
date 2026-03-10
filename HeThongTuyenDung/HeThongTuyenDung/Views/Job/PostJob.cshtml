@@ -1,0 +1,452 @@
+@model HeThongTuyenDung.Models.TinTuyenDung
+
+@{
+    ViewData["Title"] = "Đăng tin tuyển dụng";
+}
+
+
+<!-- Spacer for fixed navbar -->
+<div style="height: 100px;"></div>
+
+<div class="container my-5">
+
+    <div class="row justify-content-center">
+        <div class="col-lg-10">
+            <!-- Thông báo hướng dẫn -->
+            <div class="alert alert-info alert-dismissible fade show mb-4" role="alert">
+                <div class="d-flex align-items-center">
+                    <i class="fas fa-info-circle fa-2x me-3 text-primary"></i>
+                    <div>
+                        <h5 class="alert-heading mb-1">Tin tuyển dụng sẽ được hiển thị ngay lập tức!</h5>
+                        <p class="mb-0">Sau khi đăng tin thành công, tin tuyển dụng của bạn sẽ xuất hiện trên trang chủ và trang danh sách việc làm để ứng viên có thể xem và ứng tuyển ngay lập tức.</p>
+                    </div>
+                </div>
+                <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+            </div>
+
+            <div class="card border-0 shadow">
+                <div class="card-header bg-primary text-white">
+                    <h3 class="mb-0">
+                        <i class="fas fa-plus me-2"></i>
+                        Đăng tin tuyển dụng mới
+                    </h3>
+                </div>
+                <div class="card-body p-4">
+                    @if (TempData["Error"] != null)
+                    {
+                        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                            <i class="fas fa-exclamation-circle me-2"></i>
+                            @TempData["Error"]
+                            <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+                        </div>
+                    }
+
+                    <!-- Debug Information -->
+                    @if (!ViewData.ModelState.IsValid)
+                    {
+                        <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                            <i class="fas fa-exclamation-triangle me-2"></i>
+                            <strong>Có lỗi validation:</strong>
+                            <div asp-validation-summary="All" class="text-danger mt-2"></div>
+                            <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+                        </div>
+                    }
+
+                    <form asp-action="PostJob" method="post" enctype="multipart/form-data" id="postJobForm">
+                        <!-- Hidden field for DuongDan -->
+                        <input type="hidden" asp-for="DuongDan" value="" />
+                        
+                        <div class="row">
+                            <!-- Thông tin cơ bản -->
+                            <div class="col-12 mb-4">
+                                <h5 class="text-primary mb-3">
+                                    <i class="fas fa-info-circle me-2"></i>
+                                    Thông tin cơ bản
+                                </h5>
+                            </div>
+
+                            <div class="col-md-8 mb-3">
+                                <label asp-for="TieuDe" class="form-label fw-bold">Tiêu đề tin tuyển dụng *</label>
+                                <input asp-for="TieuDe" class="form-control" placeholder="Nhập tiêu đề tin tuyển dụng..." required>
+                                <div class="form-text">
+                                    <i class="fas fa-lightbulb text-warning me-1"></i>
+                                    Viết tiêu đề hấp dẫn để thu hút ứng viên
+                                </div>
+                                <span asp-validation-for="TieuDe" class="text-danger"></span>
+                            </div>
+
+                            <div class="col-md-4 mb-3">
+                                <label asp-for="MaDanhMuc" class="form-label fw-bold">Danh mục công việc *</label>
+                                <select asp-for="MaDanhMuc" class="form-select" required>
+                                    <option value="">Chọn danh mục...</option>
+                                    @foreach (var category in ViewBag.DanhMucCongViecs)
+                                    {
+                                        <option value="@category.MaDanhMuc">@category.TenDanhMuc</option>
+                                    }
+                                </select>
+                                <span asp-validation-for="MaDanhMuc" class="text-danger"></span>
+                            </div>
+
+                            <div class="col-md-6 mb-3">
+                                <label asp-for="MaCapBac" class="form-label fw-bold">Cấp bậc công việc</label>
+                                <select asp-for="MaCapBac" class="form-select">
+                                    <option value="">Chọn cấp bậc...</option>
+                                    @foreach (var level in ViewBag.CapBacCongViecs)
+                                    {
+                                        <option value="@level.MaCapBac">@level.TenCapBac</option>
+                                    }
+                                </select>
+                            </div>
+
+                            <div class="col-md-6 mb-3">
+                                <label asp-for="MaLoai" class="form-label fw-bold">Loại công việc</label>
+                                <select asp-for="MaLoai" class="form-select">
+                                    <option value="">Chọn loại công việc...</option>
+                                    @foreach (var type in ViewBag.LoaiCongViecs)
+                                    {
+                                        <option value="@type.MaLoai">@type.TenLoai</option>
+                                    }
+                                </select>
+                            </div>
+
+                            <!-- Thông tin địa điểm và lương -->
+                            <div class="col-12 mb-4">
+                                <h5 class="text-primary mb-3">
+                                    <i class="fas fa-map-marker-alt me-2"></i>
+                                    Địa điểm và lương
+                                </h5>
+                            </div>
+
+                            <div class="col-md-6 mb-3">
+                                <label asp-for="DiaDiem" class="form-label fw-bold">Địa điểm làm việc *</label>
+                                <input asp-for="DiaDiem" class="form-control" placeholder="Ví dụ: Hà Nội, TP.HCM..." required>
+                                <span asp-validation-for="DiaDiem" class="text-danger"></span>
+                            </div>
+
+                            <div class="col-md-6 mb-3">
+                                <label asp-for="ThanhPho" class="form-label fw-bold">Thành phố</label>
+                                <input asp-for="ThanhPho" class="form-control" placeholder="Thành phố...">
+                            </div>
+
+                            <div class="col-md-6 mb-3">
+                                <label asp-for="DiaChiLamViec" class="form-label fw-bold">Địa chỉ làm việc chi tiết</label>
+                                <input asp-for="DiaChiLamViec" class="form-control" placeholder="Số nhà, đường, quận/huyện...">
+                            </div>
+
+                            <div class="col-md-6 mb-3">
+                                <label asp-for="SoLuong" class="form-label fw-bold">Số lượng tuyển dụng *</label>
+                                <input asp-for="SoLuong" type="number" class="form-control" min="1" value="1" required>
+                                <span asp-validation-for="SoLuong" class="text-danger"></span>
+                            </div>
+
+                            <div class="col-md-4 mb-3">
+                                <label asp-for="HienThiLuong" class="form-label fw-bold">Hiển thị lương</label>
+                                <div class="form-check form-switch">
+                                    <input asp-for="HienThiLuong" class="form-check-input" type="checkbox" id="showSalary">
+                                    <label class="form-check-label" for="showSalary">Hiển thị mức lương</label>
+                                </div>
+                                <div class="form-text">
+                                    <i class="fas fa-eye text-info me-1"></i>
+                                    Hiển thị lương giúp thu hút ứng viên hơn
+                                </div>
+                            </div>
+
+                            <div class="col-md-4 mb-3" id="salaryFromGroup">
+                                <label asp-for="LuongTu" class="form-label fw-bold">Lương từ</label>
+                                <input asp-for="LuongTu" type="number" class="form-control" placeholder="0">
+                            </div>
+
+                            <div class="col-md-4 mb-3" id="salaryToGroup">
+                                <label asp-for="LuongDen" class="form-label fw-bold">Lương đến</label>
+                                <input asp-for="LuongDen" type="number" class="form-control" placeholder="0">
+                            </div>
+
+                            <div class="col-md-6 mb-3" id="salaryUnitGroup">
+                                <label asp-for="DonViTien" class="form-label fw-bold">Đơn vị tiền</label>
+                                <select asp-for="DonViTien" class="form-select">
+                                    <option value="VND">VND</option>
+                                    <option value="USD">USD</option>
+                                    <option value="EUR">EUR</option>
+                                </select>
+                            </div>
+
+                            <div class="col-md-6 mb-3">
+                                <label asp-for="HanNop" class="form-label fw-bold">Hạn nộp hồ sơ</label>
+                                <input asp-for="HanNop" type="date" class="form-control">
+                                <div class="form-text">
+                                    <i class="fas fa-calendar text-info me-1"></i>
+                                    Để trống nếu không có hạn cụ thể
+                                </div>
+                            </div>
+
+                            <!-- Mô tả và yêu cầu -->
+                            <div class="col-12 mb-4">
+                                <h5 class="text-primary mb-3">
+                                    <i class="fas fa-file-alt me-2"></i>
+                                    Mô tả và yêu cầu
+                                </h5>
+                            </div>
+
+                            <div class="col-12 mb-3">
+                                <label asp-for="MoTa" class="form-label fw-bold">Mô tả công việc *</label>
+                                <textarea asp-for="MoTa" class="form-control" rows="6" placeholder="Mô tả chi tiết về công việc, trách nhiệm..." required></textarea>
+                                <div class="form-text">
+                                    <i class="fas fa-edit text-info me-1"></i>
+                                    Mô tả rõ ràng về công việc, trách nhiệm và môi trường làm việc
+                                </div>
+                                <span asp-validation-for="MoTa" class="text-danger"></span>
+                            </div>
+
+                            <div class="col-12 mb-3">
+                                <label asp-for="YeuCau" class="form-label fw-bold">Yêu cầu công việc</label>
+                                <textarea asp-for="YeuCau" class="form-control" rows="6" placeholder="Yêu cầu về kinh nghiệm, kỹ năng, bằng cấp..."></textarea>
+                                <div class="form-text">
+                                    <i class="fas fa-list-check text-info me-1"></i>
+                                    Liệt kê các yêu cầu về kinh nghiệm, kỹ năng, bằng cấp cần thiết
+                                </div>
+                            </div>
+
+                            <div class="col-12 mb-3">
+                                <label asp-for="QuyenLoi" class="form-label fw-bold">Quyền lợi</label>
+                                <textarea asp-for="QuyenLoi" class="form-control" rows="4" placeholder="Quyền lợi, phúc lợi khi làm việc..."></textarea>
+                                <div class="form-text">
+                                    <i class="fas fa-gift text-info me-1"></i>
+                                    Mô tả các quyền lợi, phúc lợi để thu hút ứng viên
+                                </div>
+                            </div>
+
+                            <!-- Kỹ năng yêu cầu -->
+                            <div class="col-12 mb-4">
+                                <h5 class="text-primary mb-3">
+                                    <i class="fas fa-tools me-2"></i>
+                                    Kỹ năng yêu cầu
+                                </h5>
+                                <div class="row">
+                                    @foreach (var skill in ViewBag.KyNangs)
+                                    {
+                                        <div class="col-md-4 mb-2">
+                                            <div class="form-check">
+                                                <input class="form-check-input" type="checkbox" name="skillIds" value="@skill.MaKyNang" id="skill_@skill.MaKyNang">
+                                                <label class="form-check-label" for="skill_@skill.MaKyNang">
+                                                    @skill.TenKyNang
+                                                </label>
+                                            </div>
+                                        </div>
+                                    }
+                                </div>
+                            </div>
+
+                            <!-- Tùy chọn khác -->
+                            <div class="col-12 mb-4">
+                                <h5 class="text-primary mb-3">
+                                    <i class="fas fa-cog me-2"></i>
+                                    Tùy chọn khác
+                                </h5>
+                            </div>
+
+                            <div class="col-md-6 mb-3">
+                                <div class="form-check form-switch">
+                                    <input asp-for="NoiBat" class="form-check-input" type="checkbox" id="featured">
+                                    <label class="form-check-label fw-bold" for="featured">
+                                        <i class="fas fa-star text-warning me-1"></i>Tin nổi bật
+                                    </label>
+                                </div>
+                                <div class="form-text">
+                                    Tin nổi bật sẽ được hiển thị ở vị trí ưu tiên
+                                </div>
+                            </div>
+
+                            <div class="col-md-6 mb-3">
+                                <div class="form-check form-switch">
+                                    <input asp-for="GapTuyen" class="form-check-input" type="checkbox" id="urgent">
+                                    <label class="form-check-label fw-bold" for="urgent">
+                                        <i class="fas fa-exclamation-triangle text-danger me-1"></i>Gấp tuyển
+                                    </label>
+                                </div>
+                                <div class="form-text">
+                                    Đánh dấu tin gấp tuyển để thu hút sự chú ý
+                                </div>
+                            </div>
+
+                            <!-- Nút submit -->
+                            <div class="col-12 text-center mt-4">
+                                <button type="submit" class="btn btn-primary btn-lg me-3">
+                                    <i class="fas fa-paper-plane me-2"></i>
+                                    Đăng tin tuyển dụng
+                                </button>
+                                <a href="@Url.Action("Index", "Job")" class="btn btn-outline-secondary btn-lg">
+                                    <i class="fas fa-times me-2"></i>
+                                    Hủy
+                                </a>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+            <!-- Thông tin bổ sung -->
+            <div class="card border-0 shadow mt-4">
+                <div class="card-header bg-light">
+                    <h5 class="mb-0">
+                        <i class="fas fa-lightbulb text-warning me-2"></i>
+                        Lưu ý khi đăng tin tuyển dụng
+                    </h5>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <h6 class="text-primary">
+                                <i class="fas fa-check-circle me-2"></i>
+                                Những điều nên làm:
+                            </h6>
+                            <ul class="list-unstyled">
+                                <li><i class="fas fa-arrow-right text-success me-2"></i>Viết tiêu đề rõ ràng, hấp dẫn</li>
+                                <li><i class="fas fa-arrow-right text-success me-2"></i>Mô tả công việc chi tiết</li>
+                                <li><i class="fas fa-arrow-right text-success me-2"></i>Liệt kê yêu cầu cụ thể</li>
+                                <li><i class="fas fa-arrow-right text-success me-2"></i>Nêu rõ quyền lợi, phúc lợi</li>
+                                <li><i class="fas fa-arrow-right text-success me-2"></i>Hiển thị mức lương phù hợp</li>
+                            </ul>
+                        </div>
+                        <div class="col-md-6">
+                            <h6 class="text-primary">
+                                <i class="fas fa-exclamation-triangle me-2"></i>
+                                Những điều cần tránh:
+                            </h6>
+                            <ul class="list-unstyled">
+                                <li><i class="fas fa-times text-danger me-2"></i>Thông tin mơ hồ, không rõ ràng</li>
+                                <li><i class="fas fa-times text-danger me-2"></i>Yêu cầu quá cao so với lương</li>
+                                <li><i class="fas fa-times text-danger me-2"></i>Thiếu thông tin liên hệ</li>
+                                <li><i class="fas fa-times text-danger me-2"></i>Mô tả công việc sơ sài</li>
+                                <li><i class="fas fa-times text-danger me-2"></i>Không cập nhật trạng thái tin</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const showSalaryCheckbox = document.getElementById('showSalary');
+    const salaryFromGroup = document.getElementById('salaryFromGroup');
+    const salaryToGroup = document.getElementById('salaryToGroup');
+    const salaryUnitGroup = document.getElementById('salaryUnitGroup');
+    const postJobForm = document.getElementById('postJobForm');
+
+    // Toggle salary fields visibility
+    function toggleSalaryFields() {
+        const isVisible = showSalaryCheckbox.checked;
+        salaryFromGroup.style.display = isVisible ? 'block' : 'none';
+        salaryToGroup.style.display = isVisible ? 'block' : 'none';
+        salaryUnitGroup.style.display = isVisible ? 'block' : 'none';
+    }
+
+    showSalaryCheckbox.addEventListener('change', toggleSalaryFields);
+    toggleSalaryFields(); // Initial state
+
+    // Debug form submission
+    postJobForm.addEventListener('submit', function(e) {
+        console.log('=== FORM SUBMISSION DEBUG ===');
+        
+        const formData = new FormData(postJobForm);
+        console.log('Form data:');
+        for (let [key, value] of formData.entries()) {
+            console.log(`${key}: ${value}`);
+        }
+        
+        // Check required fields
+        const requiredFields = ['TieuDe', 'MaDanhMuc', 'DiaDiem', 'SoLuong', 'MoTa'];
+        const missingFields = [];
+        
+        requiredFields.forEach(field => {
+            const value = formData.get(field);
+            if (!value || value.trim() === '') {
+                missingFields.push(field);
+            }
+        });
+        
+        if (missingFields.length > 0) {
+            console.warn('Missing required fields:', missingFields);
+            alert('Vui lòng điền đầy đủ các trường bắt buộc: ' + missingFields.join(', '));
+            e.preventDefault();
+            return false;
+        }
+        
+        // Auto-generate DuongDan if empty
+        const tieuDe = formData.get('TieuDe');
+        const duongDan = formData.get('DuongDan');
+        
+        if (tieuDe && (!duongDan || duongDan.trim() === '')) {
+            const generatedDuongDan = generateDuongDan(tieuDe);
+            document.querySelector('input[name="DuongDan"]').value = generatedDuongDan;
+            console.log('Auto-generated DuongDan:', generatedDuongDan);
+        }
+        
+        console.log('Form validation passed, submitting...');
+    });
+
+    // Auto-generate DuongDan when title changes
+    const tieuDeInput = document.querySelector('input[name="TieuDe"]');
+    const duongDanInput = document.querySelector('input[name="DuongDan"]');
+    
+    if (tieuDeInput && duongDanInput) {
+        tieuDeInput.addEventListener('input', function() {
+            if (!duongDanInput.value || duongDanInput.value.trim() === '') {
+                const generatedDuongDan = generateDuongDan(this.value);
+                duongDanInput.value = generatedDuongDan;
+            }
+        });
+    }
+
+    // Function to generate DuongDan from title
+    function generateDuongDan(title) {
+        if (!title) return '';
+        
+        let duongDan = title.toLowerCase()
+            .replace(/à|á|ả|ã|ạ|ă|ằ|ắ|ẳ|ẵ|ặ|â|ầ|ấ|ẩ|ẫ|ậ/g, 'a')
+            .replace(/è|é|ẻ|ẽ|ẹ|ê|ề|ế|ể|ễ|ệ/g, 'e')
+            .replace(/ì|í|ỉ|ĩ|ị/g, 'i')
+            .replace(/ò|ó|ỏ|õ|ọ|ô|ồ|ố|ổ|ỗ|ộ|ơ|ờ|ớ|ở|ỡ|ợ/g, 'o')
+            .replace(/ù|ú|ủ|ũ|ụ|ư|ừ|ứ|ử|ữ|ự/g, 'u')
+            .replace(/ỳ|ý|ỷ|ỹ|ỵ/g, 'y')
+            .replace(/đ/g, 'd')
+            .replace(/[^a-z0-9\s-]/g, '')
+            .replace(/\s+/g, '-')
+            .replace(/-+/g, '-')
+            .trim('-');
+        
+        // Limit length
+        if (duongDan.length > 255) {
+            duongDan = duongDan.substring(0, 255).replace(/-+$/, '');
+        }
+        
+        return duongDan || `tin-tuyen-dung-${Date.now()}`;
+    }
+});
+</script>
+
+<style>
+.form-label {
+    color: #495057;
+}
+
+.form-control:focus, .form-select:focus {
+    border-color: #007bff;
+    box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+}
+
+.card {
+    border-radius: 15px;
+}
+
+.card-header {
+    border-radius: 15px 15px 0 0 !important;
+}
+
+.form-text {
+    font-size: 0.875rem;
+    color: #6c757d;
+}
+</style> 

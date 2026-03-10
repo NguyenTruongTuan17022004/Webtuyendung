@@ -1,0 +1,583 @@
+@model HeThongTuyenDung.Models.NguoiDung
+
+@{
+    ViewData["Title"] = "Thông tin cá nhân";
+}
+
+<div class="profile-container">
+    <div class="container mt-4">
+        <div class="row">
+            <!-- Profile Header -->
+            <div class="col-12 mb-4">
+                <div class="profile-header">
+                    <div class="profile-avatar">
+                        <i class="fas fa-user-circle fa-4x text-primary"></i>
+                    </div>
+                    <div class="profile-info">
+                        <h2 class="profile-name">@Model.HoTen</h2>
+                        <p class="profile-role">
+                            <span class="badge @(Model.VaiTro.TenVaiTro == "Doanh nghiệp" ? "bg-success" : "bg-primary")">
+                                <i class="fas @(Model.VaiTro.TenVaiTro == "Doanh nghiệp" ? "fa-building" : "fa-user-graduate") me-1"></i>
+                                @Model.VaiTro.TenVaiTro
+                            </span>
+                        </p>
+                        <p class="profile-email">
+                            <i class="fas fa-envelope me-2"></i>@Model.Email
+                        </p>
+                        @if (!string.IsNullOrEmpty(Model.SoDienThoai))
+                        {
+                            <p class="profile-phone">
+                                <i class="fas fa-phone me-2"></i>@Model.SoDienThoai
+                            </p>
+                        }
+                    </div>
+                    <div class="profile-actions">
+                        <button class="btn btn-outline-primary" onclick="editProfile()">
+                            <i class="fas fa-edit me-2"></i>Chỉnh sửa
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Profile Content -->
+            <div class="col-lg-8">
+                <!-- Account Information -->
+                <div class="profile-section">
+                    <div class="section-header">
+                        <h4><i class="fas fa-user me-2"></i>Thông tin tài khoản</h4>
+                    </div>
+                    <div class="section-content">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="info-item">
+                                    <label class="info-label">Tên đăng nhập</label>
+                                    <div class="info-value">@Model.TenDangNhap</div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="info-item">
+                                    <label class="info-label">Email</label>
+                                    <div class="info-value">@Model.Email</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="info-item">
+                                    <label class="info-label">Họ tên</label>
+                                    <div class="info-value">@Model.HoTen</div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="info-item">
+                                    <label class="info-label">Số điện thoại</label>
+                                    <div class="info-value">@(string.IsNullOrEmpty(Model.SoDienThoai) ? "Chưa cập nhật" : Model.SoDienThoai)</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Account Status -->
+                <div class="profile-section">
+                    <div class="section-header">
+                        <h4><i class="fas fa-shield-alt me-2"></i>Trạng thái tài khoản</h4>
+                    </div>
+                    <div class="section-content">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="info-item">
+                                    <label class="info-label">Trạng thái</label>
+                                    <div class="info-value">
+                                        <span class="badge @(Model.TrangThai ? "bg-success" : "bg-danger")">
+                                            <i class="fas @(Model.TrangThai ? "fa-check-circle" : "fa-times-circle") me-1"></i>
+                                            @(Model.TrangThai ? "Hoạt động" : "Bị khóa")
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="info-item">
+                                    <label class="info-label">Vai trò</label>
+                                    <div class="info-value">
+                                        <span class="badge @(Model.VaiTro.TenVaiTro == "Doanh nghiệp" ? "bg-success" : "bg-primary")">
+                                            <i class="fas @(Model.VaiTro.TenVaiTro == "Doanh nghiệp" ? "fa-building" : "fa-user-graduate") me-1"></i>
+                                            @Model.VaiTro.TenVaiTro
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Account Activity -->
+                <div class="profile-section">
+                    <div class="section-header">
+                        <h4><i class="fas fa-clock me-2"></i>Hoạt động tài khoản</h4>
+                    </div>
+                    <div class="section-content">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="info-item">
+                                    <label class="info-label">Ngày tạo tài khoản</label>
+                                    <div class="info-value">@Model.NgayTao.ToString("dd/MM/yyyy HH:mm")</div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="info-item">
+                                    <label class="info-label">Cập nhật lần cuối</label>
+                                    <div class="info-value">@Model.NgayCapNhat.ToString("dd/MM/yyyy HH:mm")</div>
+                                </div>
+                            </div>
+                        </div>
+                        @if (Model.LanDangNhapCuoi.HasValue)
+                        {
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="info-item">
+                                        <label class="info-label">Lần đăng nhập cuối</label>
+                                        <div class="info-value">@Model.LanDangNhapCuoi.Value.ToString("dd/MM/yyyy HH:mm")</div>
+                                    </div>
+                                </div>
+                            </div>
+                        }
+                    </div>
+                </div>
+            </div>
+
+            <!-- Sidebar -->
+            <div class="col-lg-4">
+                <!-- Quick Stats -->
+                <div class="profile-section">
+                    <div class="section-header">
+                        <h4><i class="fas fa-chart-bar me-2"></i>Thống kê nhanh</h4>
+                    </div>
+                    <div class="section-content">
+                        <div class="stats-grid">
+                            <div class="stat-item">
+                                <div class="stat-icon">
+                                    <i class="fas fa-file-alt text-primary"></i>
+                                </div>
+                                <div class="stat-content">
+                                    <div class="stat-number">0</div>
+                                    <div class="stat-label">Đơn ứng tuyển</div>
+                                </div>
+                            </div>
+                            <div class="stat-item">
+                                <div class="stat-icon">
+                                    <i class="fas fa-heart text-danger"></i>
+                                </div>
+                                <div class="stat-content">
+                                    <div class="stat-number">0</div>
+                                    <div class="stat-label">Việc làm đã lưu</div>
+                                </div>
+                            </div>
+                            @if (Model.VaiTro.TenVaiTro == "Doanh nghiệp")
+                            {
+                                <div class="stat-item">
+                                    <div class="stat-icon">
+                                        <i class="fas fa-briefcase text-success"></i>
+                                    </div>
+                                    <div class="stat-content">
+                                        <div class="stat-number">0</div>
+                                        <div class="stat-label">Tin tuyển dụng</div>
+                                    </div>
+                                </div>
+                                <div class="stat-item">
+                                    <div class="stat-icon">
+                                        <i class="fas fa-users text-info"></i>
+                                    </div>
+                                    <div class="stat-content">
+                                        <div class="stat-number">0</div>
+                                        <div class="stat-label">Ứng viên</div>
+                                    </div>
+                                </div>
+                            }
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Quick Actions -->
+                <div class="profile-section">
+                    <div class="section-header">
+                        <h4><i class="fas fa-bolt me-2"></i>Thao tác nhanh</h4>
+                    </div>
+                    <div class="section-content">
+                        <div class="quick-actions">
+                            @if (Model.VaiTro.TenVaiTro == "Ứng viên")
+                            {
+                                <a href="#" class="quick-action-item">
+                                    <i class="fas fa-search text-primary"></i>
+                                    <span>Tìm việc làm</span>
+                                </a>
+                                <a href="#" class="quick-action-item">
+                                    <i class="fas fa-file-alt text-success"></i>
+                                    <span>Hồ sơ ứng tuyển</span>
+                                </a>
+                                <a href="#" class="quick-action-item">
+                                    <i class="fas fa-heart text-danger"></i>
+                                    <span>Việc làm đã lưu</span>
+                                </a>
+                            }
+                            else
+                            {
+                                <a href="#" class="quick-action-item">
+                                    <i class="fas fa-plus text-success"></i>
+                                    <span>Đăng tin tuyển dụng</span>
+                                </a>
+                                <a href="#" class="quick-action-item">
+                                    <i class="fas fa-users text-info"></i>
+                                    <span>Quản lý ứng viên</span>
+                                </a>
+                                <a href="#" class="quick-action-item">
+                                    <i class="fas fa-chart-line text-warning"></i>
+                                    <span>Thống kê</span>
+                                </a>
+                            }
+                            <a href="#" class="quick-action-item">
+                                <i class="fas fa-cog text-secondary"></i>
+                                <span>Cài đặt</span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Security -->
+                <div class="profile-section">
+                    <div class="section-header">
+                        <h4><i class="fas fa-lock me-2"></i>Bảo mật</h4>
+                    </div>
+                    <div class="section-content">
+                        <div class="security-items">
+                            <div class="security-item">
+                                <div class="security-icon">
+                                    <i class="fas fa-key text-warning"></i>
+                                </div>
+                                <div class="security-content">
+                                    <div class="security-title">Đổi mật khẩu</div>
+                                    <div class="security-desc">Cập nhật mật khẩu mới</div>
+                                </div>
+                                <button class="btn btn-sm btn-outline-warning" data-bs-toggle="modal" data-bs-target="#changePasswordModal">Thay đổi</button>
+                            </div>
+                            <div class="security-item">
+                                <div class="security-icon">
+                                    <i class="fas fa-shield-alt text-info"></i>
+                                </div>
+                                <div class="security-content">
+                                    <div class="security-title">Bảo mật 2 lớp</div>
+                                    <div class="security-desc">Tăng cường bảo mật</div>
+                                </div>
+                                <button class="btn btn-sm btn-outline-info">Bật</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Edit Profile Modal -->
+<div class="modal fade" id="editProfileModal" tabindex="-1">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <form asp-action="UpdateProfile" asp-controller="Account" method="post">
+                <div class="modal-header">
+                    <h5 class="modal-title"><i class="fas fa-edit me-2"></i>Chỉnh sửa hồ sơ</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="mb-3">
+                        <label class="form-label">Email</label>
+                        <input type="email" class="form-control" value="@Model.Email" disabled>
+                        <small class="text-muted">Email dùng để đăng nhập, không thể thay đổi.</small>
+                    </div>
+                    <div class="mb-3">
+                        <label for="hoTen" class="form-label">Họ tên <span class="text-danger">*</span></label>
+                        <input type="text" class="form-control" id="hoTen" name="hoTen" value="@Model.HoTen" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="soDienThoai" class="form-label">Số điện thoại</label>
+                        <input type="text" class="form-control" id="soDienThoai" name="soDienThoai" value="@Model.SoDienThoai">
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Hủy</button>
+                    <button type="submit" class="btn btn-primary">Lưu thay đổi</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<!-- Change Password Modal -->
+<div class="modal fade" id="changePasswordModal" tabindex="-1">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <form asp-action="ChangePassword" asp-controller="Account" method="post">
+                <div class="modal-header">
+                    <h5 class="modal-title"><i class="fas fa-key me-2"></i>Đổi mật khẩu</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="mb-3">
+                        <label for="currentPassword" class="form-label">Mật khẩu hiện tại <span class="text-danger">*</span></label>
+                        <input type="password" class="form-control" id="currentPassword" name="currentPassword" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="newPassword" class="form-label">Mật khẩu mới <span class="text-danger">*</span></label>
+                        <input type="password" class="form-control" id="newPassword" name="newPassword" required minlength="6">
+                        <small class="text-muted">Tối thiểu 6 ký tự</small>
+                    </div>
+                    <div class="mb-3">
+                        <label for="confirmPassword" class="form-label">Nhập lại mật khẩu mới <span class="text-danger">*</span></label>
+                        <input type="password" class="form-control" id="confirmPassword" name="confirmPassword" required minlength="6">
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Hủy</button>
+                    <button type="submit" class="btn btn-warning">Đổi mật khẩu</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<style>
+.profile-container {
+    background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+    min-height: 100vh;
+    padding: 2rem 0;
+}
+
+.profile-header {
+    background: white;
+    border-radius: 20px;
+    padding: 2rem;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+    margin-bottom: 2rem;
+}
+
+.profile-avatar {
+    flex-shrink: 0;
+}
+
+.profile-info {
+    flex-grow: 1;
+}
+
+.profile-name {
+    font-size: 2rem;
+    font-weight: 700;
+    color: #333;
+    margin-bottom: 0.5rem;
+}
+
+.profile-role {
+    margin-bottom: 0.5rem;
+}
+
+.profile-email, .profile-phone {
+    color: #666;
+    margin-bottom: 0.25rem;
+    font-size: 0.95rem;
+}
+
+.profile-actions {
+    flex-shrink: 0;
+}
+
+.profile-section {
+    background: white;
+    border-radius: 20px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    margin-bottom: 2rem;
+    overflow: hidden;
+}
+
+.section-header {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    padding: 1.5rem;
+}
+
+.section-header h4 {
+    margin: 0;
+    font-weight: 600;
+}
+
+.section-content {
+    padding: 2rem;
+}
+
+.info-item {
+    margin-bottom: 1.5rem;
+}
+
+.info-label {
+    font-weight: 600;
+    color: #333;
+    margin-bottom: 0.5rem;
+    display: block;
+    font-size: 0.9rem;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.info-value {
+    color: #555;
+    font-size: 1rem;
+    padding: 0.5rem 0;
+}
+
+.stats-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+}
+
+.stat-item {
+    background: #f8f9fa;
+    border-radius: 15px;
+    padding: 1.5rem;
+    text-align: center;
+    transition: all 0.3s ease;
+}
+
+.stat-item:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+}
+
+.stat-icon {
+    font-size: 2rem;
+    margin-bottom: 1rem;
+}
+
+.stat-number {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: #333;
+    margin-bottom: 0.25rem;
+}
+
+.stat-label {
+    font-size: 0.85rem;
+    color: #666;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.quick-actions {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+}
+
+.quick-action-item {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 1rem;
+    background: #f8f9fa;
+    border-radius: 10px;
+    text-decoration: none;
+    color: #333;
+    transition: all 0.3s ease;
+}
+
+.quick-action-item:hover {
+    background: #e9ecef;
+    transform: translateX(5px);
+    color: #333;
+    text-decoration: none;
+}
+
+.quick-action-item i {
+    font-size: 1.2rem;
+    width: 20px;
+    text-align: center;
+}
+
+.security-items {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.security-item {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 1rem;
+    background: #f8f9fa;
+    border-radius: 10px;
+}
+
+.security-icon {
+    font-size: 1.5rem;
+    width: 40px;
+    text-align: center;
+}
+
+.security-content {
+    flex-grow: 1;
+}
+
+.security-title {
+    font-weight: 600;
+    color: #333;
+    margin-bottom: 0.25rem;
+}
+
+.security-desc {
+    font-size: 0.85rem;
+    color: #666;
+}
+
+.btn {
+    border-radius: 10px;
+    font-weight: 600;
+    transition: all 0.3s ease;
+}
+
+.btn:hover {
+    transform: translateY(-2px);
+}
+
+.btn-outline-primary {
+    border-radius: 10px;
+    padding: 12px 24px;
+    font-weight: 600;
+    transition: all 0.3s ease;
+}
+
+.btn-outline-primary:hover {
+    transform: translateY(-2px);
+}
+</style>
+
+<script>
+function editProfile() {
+    var editModal = new bootstrap.Modal(document.getElementById('editProfileModal'));
+    editModal.show();
+}
+
+// Ensure error and success alerts appear properly
+@if(TempData["Error"] != null)
+{
+    <text>
+    alert('@Html.Raw(TempData["Error"])');
+    </text>
+}
+@if(TempData["Success"] != null)
+{
+    <text>
+    alert('@Html.Raw(TempData["Success"])');
+    </text>
+}
+</script> 

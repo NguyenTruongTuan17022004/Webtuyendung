@@ -1,0 +1,633 @@
+@{
+    ViewData["Title"] = "Test Page";
+}
+
+<div class="container my-5">
+    @if (TempData["Success"] != null)
+    {
+        <div class="alert alert-success alert-dismissible fade show" role="alert">
+            <i class="fas fa-check-circle me-2"></i>
+            @TempData["Success"]
+            <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+        </div>
+    }
+
+    @if (TempData["Error"] != null)
+    {
+        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+            <i class="fas fa-exclamation-circle me-2"></i>
+            @TempData["Error"]
+            <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+        </div>
+    }
+
+    <div class="row">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-header bg-primary text-white">
+                    <h1 class="display-4 text-primary mb-4">
+                        <i class="fas fa-cogs me-3"></i>
+                        Trang Test - JOB NOW
+                    </h1>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="card mb-3">
+                                <div class="card-header">
+                                    <h5 class="mb-0">
+                                        <i class="fas fa-database me-2"></i>
+                                        Trạng thái kết nối
+                                    </h5>
+                                </div>
+                                <div class="card-body">
+                                    <p class="text-success">
+                                        <i class="fas fa-check-circle me-2"></i>
+                                        @ViewBag.ConnectionStatus
+                                    </p>
+                                    
+                                    <div class="row">
+                                        <div class="col-6">
+                                            <p><strong>Vai trò:</strong> @ViewBag.VaiTroCount</p>
+                                            <p><strong>Người dùng:</strong> @ViewBag.NguoiDungCount</p>
+                                        </div>
+                                        <div class="col-6">
+                                            <p><strong>Công ty:</strong> @ViewBag.CongTyCount</p>
+                                            <p><strong>Tin tuyển dụng:</strong> @ViewBag.TinTuyenDungCount</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="col-md-6">
+                            <div class="card mb-3">
+                                <div class="card-header">
+                                    <h5 class="mb-0">
+                                        <i class="fas fa-tools me-2"></i>
+                                        Công cụ Test
+                                    </h5>
+                                </div>
+                                <div class="card-body">
+                                    <div class="d-grid gap-2">
+                                        <a href="@Url.Action("CreateBasicData", "Test")" class="btn btn-primary">
+                                            <i class="fas fa-database me-2"></i>
+                                            Tạo dữ liệu cơ bản
+                                        </a>
+                                        
+                                        <a href="@Url.Action("CreateSampleJob", "Test")" class="btn btn-success">
+                                            <i class="fas fa-plus me-2"></i>
+                                            Tạo tin tuyển dụng mẫu
+                                        </a>
+                                        
+                                        <a href="@Url.Action("ResetData", "Test")" class="btn btn-warning" 
+                                           onclick="return confirm('Bạn có chắc muốn xóa tất cả dữ liệu cũ và tạo lại?')">
+                                            <i class="fas fa-refresh me-2"></i>
+                                            Reset dữ liệu
+                                        </a>
+                                        
+                                        <button type="button" class="btn btn-info" onclick="checkData()">
+                                            <i class="fas fa-search me-2"></i>
+                                            Kiểm tra dữ liệu
+                                        </button>
+                                        
+                                        <button type="button" class="btn btn-secondary" onclick="testJobCreation()">
+                                            <i class="fas fa-rocket me-2"></i>
+                                            Test tạo tin tuyển dụng
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row mt-4">
+                        <div class="col-12">
+                            <div class="card">
+                                <div class="card-header">
+                                    <h5 class="mb-0">
+                                        <i class="fas fa-chart-bar me-2"></i>
+                                        Kết quả kiểm tra dữ liệu
+                                    </h5>
+                                </div>
+                                <div class="card-body">
+                                    <div id="dataResult" class="d-none">
+                                        <div class="row">
+                                            <div class="col-md-3">
+                                                <div class="text-center p-3 bg-primary text-white rounded">
+                                                    <h4 id="totalJobs">0</h4>
+                                                    <p class="mb-0">Tổng tin tuyển dụng</p>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-3">
+                                                <div class="text-center p-3 bg-success text-white rounded">
+                                                    <h4 id="activeJobs">0</h4>
+                                                    <p class="mb-0">Tin đang hoạt động</p>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-3">
+                                                <div class="text-center p-3 bg-warning text-dark rounded">
+                                                    <h4 id="featuredJobs">0</h4>
+                                                    <p class="mb-0">Tin nổi bật</p>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-3">
+                                                <div class="text-center p-3 bg-info text-white rounded">
+                                                    <h4 id="recentJobs">0</h4>
+                                                    <p class="mb-0">Tin mới (7 ngày)</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        
+                                        <div class="mt-4">
+                                            <h6>Tin tuyển dụng mới nhất:</h6>
+                                            <div id="latestJobsList" class="list-group">
+                                                <!-- Dữ liệu sẽ được load ở đây -->
+                                            </div>
+                                        </div>
+                                    </div>
+                                    
+                                    <div id="loadingData" class="text-center d-none">
+                                        <div class="spinner-border text-primary" role="status">
+                                            <span class="visually-hidden">Loading...</span>
+                                        </div>
+                                        <p class="mt-2">Đang kiểm tra dữ liệu...</p>
+                                    </div>
+                                    
+                                    <div id="noData" class="text-center">
+                                        <p class="text-muted">Nhấn "Kiểm tra dữ liệu" để xem thống kê</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row mt-4">
+                        <div class="col-12">
+                            <div class="card">
+                                <div class="card-header">
+                                    <h5 class="mb-0">
+                                        <i class="fas fa-link me-2"></i>
+                                        Liên kết nhanh
+                                    </h5>
+                                </div>
+                                <div class="card-body">
+                                    <div class="row">
+                                        <div class="col-md-4">
+                                            <a href="/" class="btn btn-outline-primary w-100 mb-2">
+                                                <i class="fas fa-home me-2"></i>
+                                                Trang chủ
+                                            </a>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <a href="/Job" class="btn btn-outline-success w-100 mb-2">
+                                                <i class="fas fa-briefcase me-2"></i>
+                                                Danh sách việc làm
+                                            </a>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <a href="/Job/PostJob" class="btn btn-outline-warning w-100 mb-2">
+                                                <i class="fas fa-plus me-2"></i>
+                                                Đăng tin tuyển dụng
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-6">
+                        <div class="card">
+                            <div class="card-header">
+                                <h5 class="card-title mb-0">
+                                    <i class="fas fa-database text-info me-2"></i>
+                                    Test API GetLatestJobs
+                                </h5>
+                            </div>
+                            <div class="card-body">
+                                <p class="card-text">Kiểm tra API lấy việc làm mới nhất</p>
+                                <button type="button" class="btn btn-info" onclick="testGetLatestJobs()">
+                                    <i class="fas fa-play me-2"></i>
+                                    Test API
+                                </button>
+                                <div id="apiResult" class="mt-3"></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-6">
+                        <div class="card">
+                            <div class="card-header">
+                                <h5 class="card-title mb-0">
+                                    <i class="fas fa-plus text-success me-2"></i>
+                                    Test Tạo Tin Tuyển Dụng
+                                </h5>
+                            </div>
+                            <div class="card-body">
+                                <p class="card-text">Tạo tin tuyển dụng test để kiểm tra database</p>
+                                <button type="button" class="btn btn-success" onclick="testCreateJob()">
+                                    <i class="fas fa-plus me-2"></i>
+                                    Tạo Tin Test
+                                </button>
+                                <div id="createJobResult" class="mt-3"></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-6 mb-4">
+                        <div class="card h-100">
+                            <div class="card-header bg-info text-white">
+                                <h5 class="mb-0">
+                                    <i class="fas fa-database me-2"></i>
+                                    Kiểm tra Database
+                                </h5>
+                            </div>
+                            <div class="card-body">
+                                <p class="card-text">Kiểm tra dữ liệu trong database và tạo dữ liệu test.</p>
+                                <div class="d-grid gap-2">
+                                    <button class="btn btn-outline-info" onclick="checkDatabase()">
+                                        <i class="fas fa-search me-2"></i>
+                                        Kiểm tra Database
+                                    </button>
+                                    <button class="btn btn-outline-success" onclick="createTestData()">
+                                        <i class="fas fa-plus me-2"></i>
+                                        Tạo dữ liệu test
+                                    </button>
+                                    <button class="btn btn-outline-warning" onclick="checkJobs()">
+                                        <i class="fas fa-briefcase me-2"></i>
+                                        Kiểm tra tin tuyển dụng
+                                    </button>
+                                    <button class="btn btn-outline-primary" onclick="createTestJob()">
+                                        <i class="fas fa-plus-circle me-2"></i>
+                                        Tạo tin tuyển dụng test
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-6">
+                        <div class="card shadow-sm mb-4">
+                            <div class="card-header">
+                                <h5 class="mb-0">
+                                    <i class="fas fa-user-check me-2"></i>
+                                    Kiểm tra vai trò người dùng
+                                </h5>
+                            </div>
+                            <div class="card-body">
+                                <button class="btn btn-primary" onclick="checkUserRole()">
+                                    <i class="fas fa-search me-2"></i>
+                                    Kiểm tra vai trò
+                                </button>
+                                <div id="userRoleResult" class="mt-3"></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-6">
+                        <div class="card shadow-sm mb-4">
+                            <div class="card-header">
+                                <h5 class="mb-0">
+                                    <i class="fas fa-briefcase me-2"></i>
+                                    Test nút đăng tin
+                                </h5>
+                            </div>
+                            <div class="card-body">
+                                <div class="d-flex gap-2">
+                                    <a href="/Job/PostJob" class="btn btn-success">
+                                        <i class="fas fa-plus me-2"></i>
+                                        Đăng tin mới (Direct Link)
+                                    </a>
+                                    <button class="btn btn-info" onclick="testPostJob()">
+                                        <i class="fas fa-play me-2"></i>
+                                        Test PostJob Action
+                                    </button>
+                                </div>
+                                <div id="postJobResult" class="mt-3"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+function checkData() {
+    document.getElementById('loadingData').classList.remove('d-none');
+    document.getElementById('dataResult').classList.add('d-none');
+    document.getElementById('noData').classList.add('d-none');
+    
+    fetch('/Test/CheckData')
+        .then(response => response.json())
+        .then(data => {
+            document.getElementById('totalJobs').textContent = data.totalJobs;
+            document.getElementById('activeJobs').textContent = data.activeJobs;
+            document.getElementById('featuredJobs').textContent = data.featuredJobs;
+            document.getElementById('recentJobs').textContent = data.recentJobs;
+            
+            const latestJobsList = document.getElementById('latestJobsList');
+            latestJobsList.innerHTML = '';
+            
+            if (data.latestJobs && data.latestJobs.length > 0) {
+                data.latestJobs.forEach(job => {
+                    const jobItem = document.createElement('div');
+                    jobItem.className = 'list-group-item';
+                    jobItem.innerHTML = `
+                        <div class="d-flex justify-content-between align-items-center">
+                            <div>
+                                <h6 class="mb-1">${job.tieuDe}</h6>
+                                <small class="text-muted">
+                                    Công ty: ${job.companyName} | Danh mục: ${job.categoryName}
+                                </small>
+                            </div>
+                            <div class="text-end">
+                                <small class="text-muted">${new Date(job.ngayTao).toLocaleDateString('vi-VN')}</small>
+                                <br>
+                                <span class="badge ${job.trangThai ? 'bg-success' : 'bg-secondary'}">${job.trangThai ? 'Hoạt động' : 'Không hoạt động'}</span>
+                                ${job.noiBat ? '<span class="badge bg-warning text-dark ms-1">Nổi bật</span>' : ''}
+                            </div>
+                        </div>
+                    `;
+                    latestJobsList.appendChild(jobItem);
+                });
+            } else {
+                latestJobsList.innerHTML = '<div class="list-group-item text-center text-muted">Không có tin tuyển dụng nào</div>';
+            }
+            
+            document.getElementById('loadingData').classList.add('d-none');
+            document.getElementById('dataResult').classList.remove('d-none');
+        })
+        .catch(error => {
+            console.error('Error:', error);
+            document.getElementById('loadingData').classList.add('d-none');
+            document.getElementById('noData').classList.remove('d-none');
+            alert('Có lỗi xảy ra khi kiểm tra dữ liệu');
+        });
+}
+
+function testJobCreation() {
+    if (!confirm('Bạn có muốn tạo tin tuyển dụng test để kiểm tra hiển thị trên trang chủ?')) {
+        return;
+    }
+    
+    fetch('/Test/TestJobCreation')
+        .then(response => response.json())
+        .then(data => {
+            if (data.success) {
+                alert(`✅ ${data.message}\n\nTổng tin tuyển dụng: ${data.totalJobs}\n\nTin mới nhất:\n${data.latestJobs.map(job => `- ${job.tieuDe} (${job.companyName})`).join('\n')}`);
+                
+                // Tự động kiểm tra dữ liệu sau khi tạo
+                setTimeout(() => {
+                    checkData();
+                }, 1000);
+            } else {
+                alert(`❌ ${data.message}`);
+            }
+        })
+        .catch(error => {
+            console.error('Error:', error);
+            alert('Có lỗi xảy ra khi test tạo tin tuyển dụng');
+        });
+}
+
+// Test API GetLatestJobs
+function testGetLatestJobs() {
+    const resultDiv = document.getElementById('apiResult');
+    resultDiv.innerHTML = '<div class="alert alert-info">Đang test API...</div>';
+    
+    fetch('/Test/TestGetLatestJobs')
+        .then(response => response.json())
+        .then(data => {
+            if (data.error) {
+                resultDiv.innerHTML = `<div class="alert alert-danger">
+                    <h6>Lỗi:</h6>
+                    <p>${data.error}</p>
+                    <pre>${data.stackTrace}</pre>
+                </div>`;
+            } else {
+                resultDiv.innerHTML = `
+                    <div class="alert alert-success">
+                        <h6>Kết quả API Test:</h6>
+                        <p><strong>Tổng số việc làm:</strong> ${data.TotalJobs}</p>
+                        <p><strong>Việc làm đang hoạt động:</strong> ${data.ActiveJobs}</p>
+                        <p><strong>Việc làm mới nhất (9 tin):</strong> ${data.LatestJobs.length}</p>
+                        
+                        <h6 class="mt-3">Chi tiết việc làm mới nhất:</h6>
+                        <div class="table-responsive">
+                            <table class="table table-sm">
+                                <thead>
+                                    <tr>
+                                        <th>ID</th>
+                                        <th>Tiêu đề</th>
+                                        <th>Công ty</th>
+                                        <th>Trạng thái</th>
+                                        <th>Ngày tạo</th>
+                                        <th>Nổi bật</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    ${data.LatestJobs.map(job => `
+                                        <tr>
+                                            <td>${job.ID}</td>
+                                            <td>${job.Title}</td>
+                                            <td>${job.Company}</td>
+                                            <td><span class="badge ${job.Status ? 'bg-success' : 'bg-danger'}">${job.Status ? 'Hoạt động' : 'Không hoạt động'}</span></td>
+                                            <td>${new Date(job.Created).toLocaleString('vi-VN')}</td>
+                                            <td><span class="badge ${job.Featured ? 'bg-warning' : 'bg-secondary'}">${job.Featured ? 'Có' : 'Không'}</span></td>
+                                        </tr>
+                                    `).join('')}
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                `;
+            }
+        })
+        .catch(error => {
+            resultDiv.innerHTML = `<div class="alert alert-danger">
+                <h6>Lỗi kết nối:</h6>
+                <p>${error.message}</p>
+            </div>`;
+        });
+}
+
+// Test tạo tin tuyển dụng
+function testCreateJob() {
+    const resultDiv = document.getElementById('createJobResult');
+    resultDiv.innerHTML = '<div class="alert alert-info">Đang tạo tin tuyển dụng test...</div>';
+    
+    fetch('/Test/TestCreateJob', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        }
+    })
+    .then(response => response.json())
+    .then(data => {
+        if (data.success) {
+            resultDiv.innerHTML = `
+                <div class="alert alert-success">
+                    <h6>✅ Tạo tin tuyển dụng thành công!</h6>
+                    <p><strong>ID:</strong> ${data.jobId}</p>
+                    <p><strong>Tiêu đề:</strong> ${data.jobTitle}</p>
+                    <p><strong>Thời gian tạo:</strong> ${new Date(data.createdAt).toLocaleString('vi-VN')}</p>
+                    <p class="mb-0"><strong>Message:</strong> ${data.message}</p>
+                </div>
+            `;
+        } else {
+            resultDiv.innerHTML = `
+                <div class="alert alert-danger">
+                    <h6>❌ Lỗi khi tạo tin tuyển dụng:</h6>
+                    <p><strong>Error:</strong> ${data.error}</p>
+                    <pre class="mt-2">${data.stackTrace}</pre>
+                </div>
+            `;
+        }
+    })
+    .catch(error => {
+        resultDiv.innerHTML = `
+            <div class="alert alert-danger">
+                <h6>❌ Lỗi kết nối:</h6>
+                <p>${error.message}</p>
+            </div>
+        `;
+    });
+}
+
+// Kiểm tra tin tuyển dụng trong database
+function checkJobs() {
+    fetch('/Test/CheckJobs')
+        .then(response => response.json())
+        .then(data => {
+            if (data.error) {
+                showResult('Lỗi: ' + data.error, 'danger');
+            } else {
+                let result = `
+                    <h6>Thống kê tin tuyển dụng:</h6>
+                    <ul>
+                        <li>Tổng số tin: ${data.totalJobs}</li>
+                        <li>Tin đang hoạt động: ${data.activeJobs}</li>
+                        <li>Tin không hoạt động: ${data.inactiveJobs}</li>
+                    </ul>
+                    <h6>5 tin mới nhất:</h6>
+                    <ul>
+                `;
+                
+                data.latestJobs.forEach(job => {
+                    result += `
+                        <li>
+                            <strong>ID: ${job.id}</strong> - ${job.title}<br>
+                            <small>Công ty: ${job.company} | Danh mục: ${job.category}</small><br>
+                            <small>Trạng thái: ${job.status ? 'Hoạt động' : 'Không hoạt động'} | Tạo: ${new Date(job.created).toLocaleString()}</small>
+                        </li>
+                    `;
+                });
+                
+                result += '</ul>';
+                showResult(result, 'info');
+            }
+        })
+        .catch(error => {
+            showResult('Lỗi kết nối: ' + error.message, 'danger');
+        });
+}
+
+// Tạo tin tuyển dụng test
+function createTestJob() {
+    fetch('/Test/CreateTestJob', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        }
+    })
+    .then(response => response.json())
+    .then(data => {
+        if (data.success) {
+            showResult(`
+                <h6>Đã tạo tin test thành công!</h6>
+                <ul>
+                    <li>ID: ${data.jobId}</li>
+                    <li>Tiêu đề: ${data.title}</li>
+                </ul>
+                <p>Bây giờ hãy kiểm tra trang <a href="/Job" target="_blank">Job Index</a> để xem tin có hiển thị không.</p>
+            `, 'success');
+        } else {
+            showResult('Lỗi: ' + data.message, 'danger');
+        }
+    })
+    .catch(error => {
+        showResult('Lỗi kết nối: ' + error.message, 'danger');
+    });
+}
+
+function checkUserRole() {
+    fetch('/Test/CheckUserRole')
+        .then(response => response.json())
+        .then(data => {
+            const resultDiv = document.getElementById('userRoleResult');
+            resultDiv.innerHTML = `
+                <div class="alert alert-info">
+                    <h6>Thông tin người dùng:</h6>
+                    <ul class="mb-0">
+                        <li><strong>Đã đăng nhập:</strong> ${data.isLoggedIn ? 'Có' : 'Không'}</li>
+                        <li><strong>Vai trò:</strong> ${data.userRole || 'Chưa đăng nhập'}</li>
+                        <li><strong>User ID:</strong> ${data.userId || 'N/A'}</li>
+                        <li><strong>Có thể đăng tin:</strong> ${data.canPostJob ? 'Có' : 'Không'}</li>
+                        <li><strong>Là doanh nghiệp:</strong> ${data.isEmployer ? 'Có' : 'Không'}</li>
+                        <li><strong>Là ứng viên:</strong> ${data.isCandidate ? 'Có' : 'Không'}</li>
+                        <li><strong>Là admin:</strong> ${data.isAdmin ? 'Có' : 'Không'}</li>
+                    </ul>
+                </div>
+            `;
+        })
+        .catch(error => {
+            console.error('Error:', error);
+            document.getElementById('userRoleResult').innerHTML = `
+                <div class="alert alert-danger">
+                    Lỗi khi kiểm tra vai trò: ${error.message}
+                </div>
+            `;
+        });
+}
+
+function testPostJob() {
+    const resultDiv = document.getElementById('postJobResult');
+    resultDiv.innerHTML = '<div class="alert alert-info">Đang kiểm tra...</div>';
+    
+    fetch('/Job/PostJob')
+        .then(response => {
+            if (response.redirected) {
+                resultDiv.innerHTML = `
+                    <div class="alert alert-warning">
+                        <strong>Bị chuyển hướng!</strong><br>
+                        URL đích: ${response.url}<br>
+                        Status: ${response.status}
+                    </div>
+                `;
+            } else if (response.ok) {
+                resultDiv.innerHTML = `
+                    <div class="alert alert-success">
+                        <strong>Thành công!</strong> Có thể truy cập trang đăng tin.
+                    </div>
+                `;
+            } else {
+                resultDiv.innerHTML = `
+                    <div class="alert alert-danger">
+                        <strong>Lỗi!</strong> Status: ${response.status}
+                    </div>
+                `;
+            }
+        })
+        .catch(error => {
+            console.error('Error:', error);
+            resultDiv.innerHTML = `
+                <div class="alert alert-danger">
+                    Lỗi khi test: ${error.message}
+                </div>
+            `;
+        });
+}
+</script> 

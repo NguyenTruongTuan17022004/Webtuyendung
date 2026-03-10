@@ -1,0 +1,298 @@
+@model HeThongTuyenDung.Models.HomeViewModel
+
+@{
+    ViewData["Title"] = "Dashboard Ứng viên";
+}
+
+
+<!-- Spacer for fixed navbar -->
+<div style="height: 100px;"></div>
+
+<div class="container-fluid">
+    <!-- Header -->
+    <div class="row mb-4">
+        <div class="col-12">
+            <div class="d-flex justify-content-between align-items-center">
+                <div>
+                    <h2 class="mb-1">
+                        <i class="fas fa-user-graduate text-primary me-2"></i>
+                        Dashboard Ứng viên
+                    </h2>
+                    <p class="text-muted mb-0">Chào mừng @Context.Session.GetString("UserName")!</p>
+                </div>
+                <div class="d-flex gap-2">
+                    <a href="@Url.Action("Index", "Job")" class="btn btn-primary">
+                        <i class="fas fa-search me-2"></i>
+                        Tìm việc làm
+                    </a>
+                    <a href="@Url.Action("MyApplications", "Job")" class="btn btn-outline-primary">
+                        <i class="fas fa-file-alt me-2"></i>
+                        Đơn ứng tuyển
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Statistics Cards -->
+    <div class="row g-4 mb-4">
+        <div class="col-xl-3 col-md-6">
+            <div class="card border-0 shadow-sm">
+                <div class="card-body">
+                    <div class="d-flex align-items-center">
+                        <div class="flex-shrink-0">
+                            <div class="bg-primary bg-opacity-10 rounded p-3">
+                                <i class="fas fa-file-alt text-primary fa-2x"></i>
+                            </div>
+                        </div>
+                        <div class="flex-grow-1 ms-3">
+                            <h4 class="mb-1">@Model.TotalApplications</h4>
+                            <p class="text-muted mb-0">Tổng đơn ứng tuyển</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-xl-3 col-md-6">
+            <div class="card border-0 shadow-sm">
+                <div class="card-body">
+                    <div class="d-flex align-items-center">
+                        <div class="flex-shrink-0">
+                            <div class="bg-warning bg-opacity-10 rounded p-3">
+                                <i class="fas fa-clock text-warning fa-2x"></i>
+                            </div>
+                        </div>
+                        <div class="flex-grow-1 ms-3">
+                            <h4 class="mb-1">@Model.PendingApplications</h4>
+                            <p class="text-muted mb-0">Đang chờ xử lý</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-xl-3 col-md-6">
+            <div class="card border-0 shadow-sm">
+                <div class="card-body">
+                    <div class="d-flex align-items-center">
+                        <div class="flex-shrink-0">
+                            <div class="bg-success bg-opacity-10 rounded p-3">
+                                <i class="fas fa-check-circle text-success fa-2x"></i>
+                            </div>
+                        </div>
+                        <div class="flex-grow-1 ms-3">
+                            <h4 class="mb-1">@Model.AcceptedApplications</h4>
+                            <p class="text-muted mb-0">Được chấp nhận</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-xl-3 col-md-6">
+            <div class="card border-0 shadow-sm">
+                <div class="card-body">
+                    <div class="d-flex align-items-center">
+                        <div class="flex-shrink-0">
+                            <div class="bg-danger bg-opacity-10 rounded p-3">
+                                <i class="fas fa-times-circle text-danger fa-2x"></i>
+                            </div>
+                        </div>
+                        <div class="flex-grow-1 ms-3">
+                            <h4 class="mb-1">@Model.RejectedApplications</h4>
+                            <p class="text-muted mb-0">Bị từ chối</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <div class="row g-4">
+        <!-- Recent Applications -->
+        <div class="col-lg-8">
+            <div class="card border-0 shadow-sm">
+                <div class="card-header bg-transparent border-0">
+                    <div class="d-flex justify-content-between align-items-center">
+                        <h5 class="mb-0">
+                            <i class="fas fa-history text-primary me-2"></i>
+                            Đơn ứng tuyển gần đây
+                        </h5>
+                        <a href="@Url.Action("MyApplications", "Job")" class="btn btn-sm btn-outline-primary">
+                            Xem tất cả
+                        </a>
+                    </div>
+                </div>
+                <div class="card-body">
+                    @if (Model.RecentApplications != null && Model.RecentApplications.Any())
+                    {
+                        <div class="table-responsive">
+                            <table class="table table-hover">
+                                <thead>
+                                    <tr>
+                                        <th>Vị trí</th>
+                                        <th>Công ty</th>
+                                        <th>Ngày ứng tuyển</th>
+                                        <th>Trạng thái</th>
+                                        <th>Thao tác</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach (var application in Model.RecentApplications.Take(5))
+                                    {
+                                        <tr>
+                                            <td>
+                                                <a href="@Url.Action("Details", "Job", new { id = application.TinTuyenDung.MaTin })" class="text-decoration-none">
+                                                    @application.TinTuyenDung.TieuDe
+                                                </a>
+                                            </td>
+                                            <td>@(application.TinTuyenDung?.CongTy?.TenCongTy ?? "Không xác định")</td>
+                                            <td>@application.NgayUngTuyen.ToString("dd/MM/yyyy")</td>
+                                            <td>
+                                                <span class="badge @GetStatusBadgeClass(application.TrangThai)">
+                                                    @GetStatusText(application.TrangThai)
+                                                </span>
+                                            </td>
+                                            <td>
+                                                <a href="@Url.Action("Details", "Job", new { id = application.TinTuyenDung.MaTin })" class="btn btn-sm btn-outline-primary">
+                                                    <i class="fas fa-eye"></i>
+                                                </a>
+                                            </td>
+                                        </tr>
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
+                    }
+                    else
+                    {
+                        <div class="text-center py-4">
+                            <i class="fas fa-file-alt fa-2x text-muted mb-3"></i>
+                            <p class="text-muted">Chưa có đơn ứng tuyển nào</p>
+                            <a href="@Url.Action("Index", "Job")" class="btn btn-primary">
+                                <i class="fas fa-search me-2"></i>
+                                Tìm việc làm
+                            </a>
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+
+        <!-- Quick Actions & Stats -->
+        <div class="col-lg-4">
+            <!-- Quick Actions -->
+            <div class="card border-0 shadow-sm mb-4">
+                <div class="card-header bg-transparent border-0">
+                    <h5 class="mb-0">
+                        <i class="fas fa-bolt text-warning me-2"></i>
+                        Thao tác nhanh
+                    </h5>
+                </div>
+                <div class="card-body">
+                    <div class="d-grid gap-2">
+                        <a href="@Url.Action("Index", "Job")" class="btn btn-primary">
+                            <i class="fas fa-search me-2"></i>
+                            Tìm việc làm mới
+                        </a>
+                        <a href="@Url.Action("MyApplications", "Job")" class="btn btn-outline-primary">
+                            <i class="fas fa-file-alt me-2"></i>
+                            Xem đơn ứng tuyển
+                        </a>
+                        <a href="@Url.Action("SavedJobs", "Job")" class="btn btn-outline-secondary">
+                            <i class="fas fa-bookmark me-2"></i>
+                            Việc làm đã lưu
+                        </a>
+                        <a href="@Url.Action("Profile", "Account")" class="btn btn-outline-info">
+                            <i class="fas fa-user-edit me-2"></i>
+                            Cập nhật hồ sơ
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Application Progress -->
+            <div class="card border-0 shadow-sm">
+                <div class="card-header bg-transparent border-0">
+                    <h5 class="mb-0">
+                        <i class="fas fa-chart-pie text-success me-2"></i>
+                        Tiến độ ứng tuyển
+                    </h5>
+                </div>
+                <div class="card-body">
+                    @if (Model.TotalApplications > 0)
+                    {
+                        var pendingPercent = (double)Model.PendingApplications / Model.TotalApplications * 100;
+                        var acceptedPercent = (double)Model.AcceptedApplications / Model.TotalApplications * 100;
+                        var rejectedPercent = (double)Model.RejectedApplications / Model.TotalApplications * 100;
+
+                        <div class="mb-3">
+                            <div class="d-flex justify-content-between mb-1">
+                                <span class="small">Chờ xử lý</span>
+                                <span class="small">@pendingPercent.ToString("F1")%</span>
+                            </div>
+                            <div class="progress" style="height: 8px;">
+                                <div class="progress-bar bg-warning" style="width: @pendingPercent%"></div>
+                            </div>
+                        </div>
+
+                        <div class="mb-3">
+                            <div class="d-flex justify-content-between mb-1">
+                                <span class="small">Được chấp nhận</span>
+                                <span class="small">@acceptedPercent.ToString("F1")%</span>
+                            </div>
+                            <div class="progress" style="height: 8px;">
+                                <div class="progress-bar bg-success" style="width: @acceptedPercent%"></div>
+                            </div>
+                        </div>
+
+                        <div class="mb-3">
+                            <div class="d-flex justify-content-between mb-1">
+                                <span class="small">Bị từ chối</span>
+                                <span class="small">@rejectedPercent.ToString("F1")%</span>
+                            </div>
+                            <div class="progress" style="height: 8px;">
+                                <div class="progress-bar bg-danger" style="width: @rejectedPercent%"></div>
+                            </div>
+                        </div>
+                    }
+                    else
+                    {
+                        <div class="text-center py-3">
+                            <i class="fas fa-chart-pie fa-2x text-muted mb-2"></i>
+                            <p class="text-muted small mb-0">Chưa có dữ liệu</p>
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@functions {
+    public string GetStatusBadgeClass(string status)
+    {
+        return status switch
+        {
+            "Chờ xử lý" => "bg-warning text-dark",
+            "Chấp nhận" => "bg-success",
+            "Từ chối" => "bg-danger",
+            "Phỏng vấn" => "bg-info",
+            _ => "bg-secondary"
+        };
+    }
+
+    public string GetStatusText(string status)
+    {
+        return status switch
+        {
+            "Chờ xử lý" => "Chờ xử lý",
+            "Chấp nhận" => "Được chấp nhận",
+            "Từ chối" => "Bị từ chối",
+            "Phỏng vấn" => "Phỏng vấn",
+            _ => status
+        };
+    }
+} 

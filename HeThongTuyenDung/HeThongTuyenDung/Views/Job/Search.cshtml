@@ -1,0 +1,384 @@
+@model IEnumerable<HeThongTuyenDung.Models.TinTuyenDung>
+
+@{
+    ViewData["Title"] = "Tìm kiếm việc làm";
+}
+
+<div class="container my-5">
+    <!-- Search Header -->
+    <div class="row mb-4">
+        <div class="col-12">
+            <h1 class="h2 mb-3">
+                <i class="fas fa-search text-primary me-2"></i>
+                Tìm kiếm việc làm
+            </h1>
+            
+            <!-- Search Form -->
+            <div class="card border-0 shadow-sm">
+                <div class="card-body">
+                    <form action="@Url.Action("Search", "Job")" method="get">
+                        <div class="row g-3">
+                            <div class="col-md-4">
+                                <label for="keyword" class="form-label">Từ khóa</label>
+                                <input type="text" id="keyword" name="keyword" class="form-control" 
+                                       placeholder="Từ khóa, chức danh, công ty..." value="@ViewBag.Keyword">
+                            </div>
+                            <div class="col-md-3">
+                                <label for="location" class="form-label">Địa điểm</label>
+                                <input type="text" id="location" name="location" class="form-control" 
+                                       placeholder="Thành phố, quận/huyện..." value="@ViewBag.Location">
+                            </div>
+                            <div class="col-md-3">
+                                <label for="category" class="form-label">Danh mục</label>
+                                <select id="category" name="category" class="form-select">
+                                    <option value="">Tất cả danh mục</option>
+                                    @if (ViewBag.Categories != null)
+                                    {
+                                        foreach (var category in ViewBag.Categories)
+                                        {
+                                            var selected = "";
+                                            if (ViewBag.Category != null && ViewBag.Category.ToString() == category.MaDanhMuc.ToString())
+                                            {
+                                                selected = "selected";
+                                            }
+                                            <option value="@category.MaDanhMuc" selected="@(selected == "selected")">@category.TenDanhMuc</option>
+                                        }
+                                    }
+                                </select>
+                            </div>
+                            <div class="col-md-2">
+                                <label class="form-label">&nbsp;</label>
+                                <button type="submit" class="btn btn-primary w-100">
+                                    <i class="fas fa-search me-2"></i>Tìm kiếm
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Search Results -->
+    <div class="row">
+        <div class="col-12">
+            @if (!string.IsNullOrEmpty(ViewBag.Keyword) || !string.IsNullOrEmpty(ViewBag.Location) || ViewBag.Category != null)
+            {
+                <div class="d-flex justify-content-between align-items-center mb-4">
+                    <h4 class="mb-0">
+                        <i class="fas fa-list text-primary me-2"></i>
+                        Kết quả tìm kiếm 
+                        @if (Model.Any())
+                        {
+                            <span class="text-muted">(@Model.Count() việc làm)</span>
+                        }
+                    </h4>
+                    <a href="@Url.Action("Search", "Job")" class="btn btn-outline-secondary btn-sm">
+                        <i class="fas fa-times me-1"></i>Xóa bộ lọc
+                    </a>
+                </div>
+
+                @if (Model.Any())
+                {
+                    <div class="row g-4">
+                        @foreach (var job in Model)
+                        {
+                            <div class="col-lg-6">
+                                <div class="card job-card h-100 shadow-sm border-0">
+                                    <div class="card-body">
+                                        <div class="d-flex justify-content-between align-items-start mb-3">
+                                            <div class="d-flex align-items-center">
+                                                <div class="company-logo bg-light rounded p-2 me-3">
+                                                    <i class="fas fa-building text-primary fa-2x"></i>
+                                                </div>
+                                                <div>
+                                                    <h5 class="card-title mb-1">
+                                                        <a href="@Url.Action("Details", "Job", new { id = job.MaTin })" class="text-decoration-none text-dark">
+                                                            @job.TieuDe
+                                                        </a>
+                                                    </h5>
+                                                    <p class="text-muted mb-0 small">
+                                                        <i class="fas fa-building me-1"></i>
+                                                        @(job.CongTy?.TenCongTy ?? "Công ty không xác định")
+                                                    </p>
+                                                </div>
+                                            </div>
+                                            <div class="text-end">
+                                                @if (job.NoiBat)
+                                                {
+                                                    <span class="badge bg-warning text-dark mb-1">
+                                                        <i class="fas fa-star me-1"></i>Nổi bật
+                                                    </span>
+                                                }
+                                                @if (job.GapTuyen)
+                                                {
+                                                    <span class="badge bg-danger mb-1">
+                                                        <i class="fas fa-exclamation-triangle me-1"></i>Gấp tuyển
+                                                    </span>
+                                                }
+                                                @if (ViewBag.MatchScores != null && ViewBag.MatchScores.ContainsKey(job.MaTin))
+                                                {
+                                                    <span class="badge bg-success mb-1">
+                                                        <i class="fas fa-percentage me-1"></i>Phù hợp: @ViewBag.MatchScores[job.MaTin]%
+                                                    </span>
+                                                }
+                                                <small class="text-muted d-block">
+                                                    <i class="fas fa-calendar me-1"></i>@GetTimeAgo(job.NgayTao)
+                                                </small>
+                                            </div>
+                                        </div>
+
+                                        <div class="row g-2 mb-3">
+                                            <div class="col-6">
+                                                <small class="text-muted">
+                                                    <i class="fas fa-map-marker-alt me-1"></i>
+                                                    @(job.DiaDiem ?? "Không xác định")
+                                                </small>
+                                            </div>
+                                            <div class="col-6">
+                                                <small class="text-muted">
+                                                    <i class="fas fa-briefcase me-1"></i>
+                                                    @(job.LoaiCongViec?.TenLoai ?? "Không xác định")
+                                                </small>
+                                            </div>
+                                            <div class="col-6">
+                                                <small class="text-muted">
+                                                    <i class="fas fa-layer-group me-1"></i>
+                                                    @(job.CapBacCongViec?.TenCapBac ?? "Không xác định")
+                                                </small>
+                                            </div>
+                                            <div class="col-6">
+                                                <small class="text-muted">
+                                                    <i class="fas fa-eye me-1"></i>
+                                                    @job.LuotXem.ToString("N0") lượt xem
+                                                </small>
+                                            </div>
+                                        </div>
+
+                                        @if (job.HienThiLuong && job.LuongTu.HasValue)
+                                        {
+                                            <p class="text-success fw-bold mb-3">
+                                                <i class="fas fa-money-bill-wave me-2"></i>
+                                                @job.LuongTu.Value.ToString("N0") - @(job.LuongDen?.ToString("N0") ?? "Thỏa thuận") @job.DonViTien
+                                            </p>
+                                        }
+
+                                        <div class="d-flex justify-content-between align-items-center mb-3">
+                                            <div>
+                                                <span class="badge bg-primary me-2">@(job.DanhMucCongViec?.TenDanhMuc ?? "Khác")</span>
+                                                @if (!string.IsNullOrEmpty(job.LoaiCongViec?.TenLoai))
+                                                {
+                                                    <span class="badge bg-light text-dark">@job.LoaiCongViec.TenLoai</span>
+                                                }
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="card-footer bg-transparent border-0">
+                                        <div class="d-flex gap-2">
+                                            <a href="@Url.Action("Details", "Job", new { id = job.MaTin })" class="btn btn-outline-primary flex-fill">
+                                                <i class="fas fa-eye me-1"></i>Xem chi tiết
+                                            </a>
+                                            <a href="@Url.Action("Apply", "Job", new { id = job.MaTin })" class="btn btn-success">
+                                                <i class="fas fa-paper-plane me-1"></i>Ứng tuyển
+                                            </a>
+                                            <button class="btn btn-outline-secondary" onclick="saveJob(@job.MaTin, this)" title="Lưu việc làm">
+                                                <i class="fas fa-bookmark"></i>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        }
+                    </div>
+                }
+                else
+                {
+                    <div class="text-center py-5">
+                        <i class="fas fa-search fa-3x text-muted mb-3"></i>
+                        <h4 class="text-muted">Không tìm thấy việc làm phù hợp</h4>
+                        <p class="text-muted">Hãy thử thay đổi từ khóa tìm kiếm hoặc bộ lọc để có kết quả tốt hơn.</p>
+                        <div class="mt-3">
+                            <a href="@Url.Action("Search", "Job")" class="btn btn-primary">
+                                <i class="fas fa-search me-2"></i>Tìm kiếm lại
+                            </a>
+                        </div>
+                    </div>
+                }
+            }
+            else
+            {
+                <!-- Popular Categories -->
+                <div class="row mb-5">
+                    <div class="col-12">
+                        <h4 class="mb-4">
+                            <i class="fas fa-th-large text-primary me-2"></i>
+                            Danh mục việc làm phổ biến
+                        </h4>
+                        <div class="row g-3">
+                            @{
+                                // Ép kiểu ViewBag.Categories sang danh sách strongly-typed để dùng được LINQ như Take()
+                                var categories = ViewBag.Categories as List<HeThongTuyenDung.Models.DanhMucCongViec>;
+                            }
+                            @if (categories != null && categories.Any())
+                            {
+                                foreach (var category in categories.Take(8))
+                                {
+                                    <div class="col-md-3 col-sm-6">
+                                        <a href="@Url.Action("Search", "Job", new { category = category.MaDanhMuc })" 
+                                           class="card category-card text-decoration-none h-100">
+                                            <div class="card-body text-center">
+                                                <i class="fas fa-briefcase fa-2x text-primary mb-2"></i>
+                                                <h6 class="card-title text-dark">@category.TenDanhMuc</h6>
+                                                <small class="text-muted">Xem việc làm</small>
+                                            </div>
+                                        </a>
+                                    </div>
+                                }
+                            }
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Recent Jobs -->
+                <div class="row">
+                    <div class="col-12">
+                        <h4 class="mb-4">
+                            <i class="fas fa-clock text-primary me-2"></i>
+                            Việc làm mới nhất
+                        </h4>
+                        <div class="text-center py-5">
+                            <i class="fas fa-clock fa-3x text-muted mb-3"></i>
+                            <h5 class="text-muted">Chưa có việc làm nào</h5>
+                            <p class="text-muted">Hãy sử dụng bộ tìm kiếm ở trên để tìm việc làm phù hợp.</p>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+</div>
+
+<style>
+.job-card {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.job-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 20px rgba(0,0,0,0.1) !important;
+}
+
+.category-card {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    border: 1px solid #e9ecef;
+}
+
+.category-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+}
+
+.company-logo {
+    width: 50px;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+</style>
+
+<script>
+function saveJob(jobId, button) {
+    // Disable button during request
+    button.disabled = true;
+    const icon = button.querySelector('i');
+    
+    fetch('@Url.Action("SaveJob", "Job")', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/x-www-form-urlencoded',
+        },
+        body: `jobId=${jobId}`
+    })
+    .then(response => response.json())
+    .then(data => {
+        if (data.success) {
+            // Update button appearance
+            if (data.saved) {
+                button.classList.remove('btn-outline-secondary');
+                button.classList.add('btn-secondary');
+                button.title = 'Đã lưu';
+            } else {
+                button.classList.remove('btn-secondary');
+                button.classList.add('btn-outline-secondary');
+                button.title = 'Lưu việc làm';
+            }
+            
+            // Show success message
+            showNotification(data.message, 'success');
+        } else {
+            showNotification(data.message, 'error');
+        }
+    })
+    .catch(error => {
+        console.error('Error:', error);
+        showNotification('Có lỗi xảy ra, vui lòng thử lại', 'error');
+    })
+    .finally(() => {
+        button.disabled = false;
+    });
+}
+
+function showNotification(message, type) {
+    // Create notification element
+    const notification = document.createElement('div');
+    notification.className = `alert alert-${type === 'success' ? 'success' : 'danger'} alert-dismissible fade show position-fixed`;
+    notification.style.cssText = 'top: 20px; right: 20px; z-index: 9999; min-width: 300px;';
+    notification.innerHTML = `
+        <i class="fas fa-${type === 'success' ? 'check-circle' : 'exclamation-circle'} me-2"></i>
+        ${message}
+        <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+    `;
+    
+    document.body.appendChild(notification);
+    
+    // Auto remove after 3 seconds
+    setTimeout(() => {
+        if (notification.parentNode) {
+            notification.remove();
+        }
+    }, 3000);
+}
+</script>
+
+@functions {
+    public string GetTimeAgo(DateTime dateTime)
+    {
+        var timeSpan = DateTime.Now - dateTime;
+        
+        if (timeSpan.TotalDays >= 1)
+        {
+            var days = (int)timeSpan.TotalDays;
+            if (days == 1)
+                return "1 ngày trước";
+            else if (days < 7)
+                return $"{days} ngày trước";
+            else
+                return dateTime.ToString("dd/MM/yyyy");
+        }
+        else if (timeSpan.TotalHours >= 1)
+        {
+            var hours = (int)timeSpan.TotalHours;
+            return $"{hours} giờ trước";
+        }
+        else if (timeSpan.TotalMinutes >= 1)
+        {
+            var minutes = (int)timeSpan.TotalMinutes;
+            return $"{minutes} phút trước";
+        }
+        else
+        {
+            return "Vừa xong";
+        }
+    }
+} 

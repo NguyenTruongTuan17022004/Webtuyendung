@@ -1,0 +1,226 @@
+@model TinTuyenDung
+@{
+    ViewData["Title"] = "Ứng tuyển - " + Model.TieuDe;
+}
+
+<div class="container mt-4">
+    <div class="row">
+        <div class="col-md-8">
+            <div class="card">
+                <div class="card-header bg-primary text-white">
+                    <h4 class="mb-0">
+                        <i class="fas fa-paper-plane me-2"></i>
+                        Đơn ứng tuyển - @Model.TieuDe
+                    </h4>
+                </div>
+                <div class="card-body">
+                    <form asp-action="Apply" asp-route-id="@Model.MaTin" method="post" enctype="multipart/form-data">
+                        @Html.AntiForgeryToken()
+                        
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="mb-3">
+                                    <label for="HoTen" class="form-label fw-bold">
+                                        <i class="fas fa-user me-1"></i>Họ và tên <span class="text-danger">*</span>
+                                    </label>
+                                    <input type="text" id="HoTen" name="HoTen" class="form-control" placeholder="Nhập họ và tên đầy đủ" required />
+                                    <span class="text-danger"></span>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="mb-3">
+                                    <label for="Email" class="form-label fw-bold">
+                                        <i class="fas fa-envelope me-1"></i>Email <span class="text-danger">*</span>
+                                    </label>
+                                    <input type="email" id="Email" name="Email" class="form-control" placeholder="example@email.com" required />
+                                    <span class="text-danger"></span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="mb-3">
+                                    <label for="SoDienThoai" class="form-label fw-bold">
+                                        <i class="fas fa-phone me-1"></i>Số điện thoại <span class="text-danger">*</span>
+                                    </label>
+                                    <input type="text" id="SoDienThoai" name="SoDienThoai" class="form-control" placeholder="0123456789" required />
+                                    <span class="text-danger"></span>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="mb-3">
+                                    <label for="DiaChi" class="form-label fw-bold">
+                                        <i class="fas fa-map-marker-alt me-1"></i>Địa chỉ
+                                    </label>
+                                    <input type="text" id="DiaChi" name="DiaChi" class="form-control" placeholder="Nhập địa chỉ hiện tại" />
+                                    <span class="text-danger"></span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="mb-3">
+                                    <label for="KinhNghiem" class="form-label fw-bold">
+                                        <i class="fas fa-briefcase me-1"></i>Kinh nghiệm
+                                    </label>
+                                    <select id="KinhNghiem" name="KinhNghiem" class="form-select">
+                                        <option value="">Chọn kinh nghiệm</option>
+                                        <option value="Chưa có kinh nghiệm">Chưa có kinh nghiệm</option>
+                                        <option value="Dưới 1 năm">Dưới 1 năm</option>
+                                        <option value="1-2 năm">1-2 năm</option>
+                                        <option value="2-3 năm">2-3 năm</option>
+                                        <option value="3-5 năm">3-5 năm</option>
+                                        <option value="5-10 năm">5-10 năm</option>
+                                        <option value="Trên 10 năm">Trên 10 năm</option>
+                                    </select>
+                                    <span class="text-danger"></span>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="mb-3">
+                                    <label for="HocVan" class="form-label fw-bold">
+                                        <i class="fas fa-graduation-cap me-1"></i>Học vấn
+                                    </label>
+                                    <select id="HocVan" name="HocVan" class="form-select">
+                                        <option value="">Chọn học vấn</option>
+                                        <option value="Trung học phổ thông">Trung học phổ thông</option>
+                                        <option value="Trung cấp">Trung cấp</option>
+                                        <option value="Cao đẳng">Cao đẳng</option>
+                                        <option value="Đại học">Đại học</option>
+                                        <option value="Thạc sĩ">Thạc sĩ</option>
+                                        <option value="Tiến sĩ">Tiến sĩ</option>
+                                    </select>
+                                    <span class="text-danger"></span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="MucTieu" class="form-label fw-bold">
+                                <i class="fas fa-bullseye me-1"></i>Mục tiêu nghề nghiệp
+                            </label>
+                            <textarea id="MucTieu" name="MucTieu" class="form-control" rows="3" 
+                                      placeholder="Mô tả mục tiêu nghề nghiệp của bạn trong 3-5 năm tới..."></textarea>
+                            <span class="text-danger"></span>
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="KyNang" class="form-label fw-bold">
+                                <i class="fas fa-tools me-1"></i>Kỹ năng chuyên môn
+                            </label>
+                            <textarea id="KyNang" name="KyNang" class="form-control" rows="3" 
+                                      placeholder="Liệt kê các kỹ năng chuyên môn, công nghệ bạn thành thạo..."></textarea>
+                            <span class="text-danger"></span>
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="KinhNghiemLamViec" class="form-label fw-bold">
+                                <i class="fas fa-history me-1"></i>Kinh nghiệm làm việc
+                            </label>
+                            <textarea id="KinhNghiemLamViec" name="KinhNghiemLamViec" class="form-control" rows="4" 
+                                      placeholder="Mô tả chi tiết kinh nghiệm làm việc, các vị trí đã từng đảm nhiệm..."></textarea>
+                            <span class="text-danger"></span>
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="DuAn" class="form-label fw-bold">
+                                <i class="fas fa-project-diagram me-1"></i>Dự án đã tham gia
+                            </label>
+                            <textarea id="DuAn" name="DuAn" class="form-control" rows="3" 
+                                      placeholder="Mô tả các dự án quan trọng bạn đã tham gia, vai trò và kết quả..."></textarea>
+                            <span class="text-danger"></span>
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="LyDoUngTuyen" class="form-label fw-bold">
+                                <i class="fas fa-question-circle me-1"></i>Lý do ứng tuyển <span class="text-danger">*</span>
+                            </label>
+                            <textarea id="LyDoUngTuyen" name="LyDoUngTuyen" class="form-control" rows="4" required
+                                      placeholder="Tại sao bạn muốn ứng tuyển vị trí này? Điều gì khiến bạn phù hợp với công ty chúng tôi?"></textarea>
+                            <span class="text-danger"></span>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="mb-3">
+                                    <label for="LuongMongMuon" class="form-label fw-bold">
+                                        <i class="fas fa-money-bill-wave me-1"></i>Mức lương mong muốn (VND)
+                                    </label>
+                                    <input type="number" id="LuongMongMuon" name="LuongMongMuon" class="form-control" 
+                                           placeholder="VD: 15000000" min="0" step="100000" />
+                                    <span class="text-danger"></span>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="mb-3">
+                                    <label for="ThoiGianBatDau" class="form-label fw-bold">
+                                        <i class="fas fa-calendar-alt me-1"></i>Thời gian có thể bắt đầu
+                                    </label>
+                                    <input type="date" id="ThoiGianBatDau" name="ThoiGianBatDau" class="form-control" />
+                                    <span class="text-danger"></span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="FileCV" class="form-label fw-bold">
+                                <i class="fas fa-file-upload me-1"></i>Upload CV/Resume
+                            </label>
+                            <input type="file" id="FileCV" name="FileCV" class="form-control" 
+                                   accept=".pdf,.doc,.docx" />
+                            <div class="form-text">
+                                <i class="fas fa-info-circle me-1"></i>
+                                Chấp nhận file PDF, DOC, DOCX. Kích thước tối đa 5MB.
+                            </div>
+                            <span class="text-danger"></span>
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="ThongTinBoSung" class="form-label fw-bold">
+                                <i class="fas fa-plus-circle me-1"></i>Thông tin bổ sung
+                            </label>
+                            <textarea id="ThongTinBoSung" name="ThongTinBoSung" class="form-control" rows="3" 
+                                      placeholder="Bất kỳ thông tin bổ sung nào khác bạn muốn chia sẻ..."></textarea>
+                            <span class="text-danger"></span>
+                        </div>
+
+                        <div class="d-flex justify-content-between">
+                            <a asp-action="Details" asp-route-id="@Model.MaTin" class="btn btn-secondary">
+                                <i class="fas fa-arrow-left me-1"></i>Quay lại
+                            </a>
+                            <button type="submit" class="btn btn-primary">
+                                <i class="fas fa-paper-plane me-1"></i>Gửi đơn ứng tuyển
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-4">
+            <div class="card">
+                <div class="card-header bg-info text-white">
+                    <h5 class="mb-0">
+                        <i class="fas fa-info-circle me-2"></i>Thông tin vị trí
+                    </h5>
+                </div>
+                <div class="card-body">
+                    <h6 class="card-title">@Model.TieuDe</h6>
+                    <p class="card-text">
+                        <strong>Công ty:</strong> @(Model.CongTy?.TenCongTy ?? "Không xác định")<br>
+                        <strong>Địa điểm:</strong> @Model.DiaDiem<br>
+                        <strong>Loại công việc:</strong> @Model.LoaiCongViec?.TenLoai<br>
+                        <strong>Hạn nộp:</strong> @(Model.HanNop?.ToString("dd/MM/yyyy") ?? "Không giới hạn")
+                    </p>
+                    
+                    <div class="alert alert-warning">
+                        <i class="fas fa-exclamation-triangle me-1"></i>
+                        <strong>Lưu ý:</strong> Vui lòng điền đầy đủ thông tin và kiểm tra kỹ trước khi gửi đơn ứng tuyển.
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div> 
